@@ -23,7 +23,16 @@
             Console.WriteLine("1. 공격");
             Console.WriteLine();
 
-            SelectAct();
+            int select = SelectAct();
+
+            switch (select)
+            {
+                case 1:
+                    // player 공격화면으로 넘어가기
+                    break;
+                default:
+                    break;
+            }
         }
 
         public int SelectAct()
