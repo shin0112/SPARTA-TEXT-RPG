@@ -6,5 +6,15 @@
         {
             // 입력 처리
         }
+
+
+        protected override void ShowMonsterInfo(List<object> monsters)
+        {
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                Console.WriteLine($"{i} {monsters[i]}");
+            }
+            Console.WriteLine();
+        }
     }
 }

@@ -13,5 +13,15 @@
                     break;
             }
         }
+
+
+        protected override void ShowMonsterInfo(List<object> monsters)
+        {
+            for (int i = 0; i < monsters.Count; i++)
+            {
+                Console.WriteLine($"{monsters[i]}");
+            }
+            Console.WriteLine();
+        }
     }
 }

@@ -4,7 +4,10 @@ namespace TEXT_RPG.Scenes.Battle
 {
     internal abstract class BattleSceneBase : SceneBase
     {
-        public virtual void Show()
+        protected abstract void ShowMonsterInfo(List<object> monsters);
+
+
+        public override void Show()
         {
             // player 정보 가져오기 (임시 데이터)
             int level = 1;
@@ -18,11 +21,7 @@ namespace TEXT_RPG.Scenes.Battle
             // todo: 몬스터 리스트
             BattleManager battleManager = BattleManager.Instance;
             battleManager.SpawnRandomMonsters();
-            for (int i = 0; i < battleManager.Monsters.Count; i++)
-            {
-                Console.WriteLine($"{battleManager.Monsters[i]}");
-            }
-            Console.WriteLine();
+            ShowMonsterInfo(battleManager.Monsters);
 
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv. {level} {name} ({job})");
