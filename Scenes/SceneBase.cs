@@ -2,7 +2,7 @@
 {
     internal abstract class SceneBase
     {
-        public virtual void Show() { }
-        protected virtual void HandleInput(int select) { }
+        public abstract void Show();
+        protected abstract void HandleInput(int select);
     }
 }
