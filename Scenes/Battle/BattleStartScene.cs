@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Scenes.Battle
+﻿using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Scenes.Battle
 {
     internal class BattleStartScene
     {
@@ -14,7 +16,13 @@
             Console.WriteLine("Battle!!\n");
 
             // todo: 몬스터 리스트
-            Console.WriteLine("몬스터 리스트 ...\n");
+            BattleManager battleManager = BattleManager.Instance;
+            SpawnRandomMonsters(battleManager);
+            for (int i = 0; i < battleManager.Monsters.Count; i++)
+            {
+                Console.WriteLine($"{battleManager.Monsters[i]}");
+            }
+            Console.WriteLine();
 
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv. {level} {name} ({job})");
@@ -34,6 +42,20 @@
                     break;
             }
         }
+
+
+        private void SpawnRandomMonsters(BattleManager manager)
+        {
+            Random random = new();
+            int monsterCount = random.Next(1, 5);
+
+            // 몬스터 랜덤으로 가져오기 (임시 데이터 사용)
+            for (int i = 0; i < monsterCount; i++)
+            {
+                manager.Monsters.Add(new object());
+            }
+        }
+
 
         public int SelectAct()
         {
