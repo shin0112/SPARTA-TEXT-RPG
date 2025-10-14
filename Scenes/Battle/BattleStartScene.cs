@@ -2,9 +2,16 @@
 {
     internal class BattleStartScene : BattleSceneBase
     {
-        protected override void HandleInput()
+        protected override void HandleInput(int select)
         {
-            // 입력 처리
+            switch (select)
+            {
+                case 1:
+                    // 플레이어 턴으로 이동함
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
