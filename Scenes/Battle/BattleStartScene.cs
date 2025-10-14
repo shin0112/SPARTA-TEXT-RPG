@@ -1,6 +1,6 @@
-﻿namespace TEXT_RPG.Scenes
+﻿namespace TEXT_RPG.Scenes.Battle
 {
-    internal class BattleScene
+    internal class BattleStartScene
     {
         public void Show()
         {
