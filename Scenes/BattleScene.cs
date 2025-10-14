@@ -23,9 +23,33 @@
             Console.WriteLine("1. 공격");
             Console.WriteLine();
 
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">> ");
-            Console.Read();
+            SelectAct();
+        }
+
+        public int SelectAct()
+        {
+            while (true)
+            {
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">> ");
+                bool isNumber = int.TryParse(Console.ReadLine(), out int select);
+
+                try
+                {
+                    if (!isNumber)
+                    {
+                        throw new Exception("숫자를 입력해주세요.");
+                    }
+                    else
+                    {
+                        return select;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
         }
     }
 }
