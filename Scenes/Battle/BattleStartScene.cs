@@ -17,7 +17,7 @@ namespace TEXT_RPG.Scenes.Battle
 
             // todo: 몬스터 리스트
             BattleManager battleManager = BattleManager.Instance;
-            SpawnRandomMonsters(battleManager);
+            battleManager.SpawnRandomMonsters();
             for (int i = 0; i < battleManager.Monsters.Count; i++)
             {
                 Console.WriteLine($"{battleManager.Monsters[i]}");
@@ -40,19 +40,6 @@ namespace TEXT_RPG.Scenes.Battle
                     break;
                 default:
                     break;
-            }
-        }
-
-
-        private void SpawnRandomMonsters(BattleManager manager)
-        {
-            Random random = new();
-            int monsterCount = random.Next(1, 5);
-
-            // 몬스터 랜덤으로 가져오기 (임시 데이터 사용)
-            for (int i = 0; i < monsterCount; i++)
-            {
-                manager.Monsters.Add(new object());
             }
         }
 
