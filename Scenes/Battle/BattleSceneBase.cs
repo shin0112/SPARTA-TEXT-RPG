@@ -32,14 +32,7 @@ namespace TEXT_RPG.Scenes.Battle
 
             int select = SelectAct();
 
-            switch (select)
-            {
-                case 1:
-                    // player 공격화면으로 넘어가기
-                    break;
-                default:
-                    break;
-            }
+            HandleInput(select);
         }
 
 
