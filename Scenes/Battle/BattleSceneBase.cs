@@ -6,6 +6,19 @@
 
         public override void Show()
         {
+
+            ShowMonsterInfo();
+            ShowPlayerInfo();
+
+            ShowSelections();
+
+            int select = SelectAct();
+
+            HandleInput(select);
+        }
+
+        protected virtual void ShowPlayerInfo()
+        {
             // Todo: player 정보 가져오기 (임시 데이터)
             int level = 1;
             string name = "이름";
@@ -13,17 +26,9 @@
             int currentHp = 100;
             int maxHp = 100;
 
-            ShowMonsterInfo();
-
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv. {level} {name} ({job})");
             Console.WriteLine($"체력 {currentHp}/{maxHp}\n");
-
-            ShowSelections();
-
-            int select = SelectAct();
-
-            HandleInput(select);
         }
 
         public int SelectAct()
