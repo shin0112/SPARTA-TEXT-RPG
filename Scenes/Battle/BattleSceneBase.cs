@@ -4,10 +4,9 @@
     {
         protected abstract void ShowMonsterInfo();
 
-
         public override void Show()
         {
-            // player 정보 가져오기 (임시 데이터)
+            // Todo: player 정보 가져오기 (임시 데이터)
             int level = 1;
             string name = "이름";
             string job = "직업";
@@ -27,7 +26,6 @@
             HandleInput(select);
         }
 
-
         public int SelectAct()
         {
             while (true)
@@ -35,6 +33,8 @@
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 Console.Write(">> ");
                 bool isNumber = int.TryParse(Console.ReadLine(), out int select);
+
+                // Todo: 선택지에서 벗어난 숫자 입력 시에도 예외 처리하기
 
                 if (!isNumber)
                 {

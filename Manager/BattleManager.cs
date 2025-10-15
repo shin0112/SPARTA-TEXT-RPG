@@ -6,7 +6,7 @@
         public static BattleManager Instance { get; } = _instance;
 
         public List<object> Monsters = [];
-
+        // Todo: plyaer 정보 담기
 
         public void SpawnRandomMonsters()
         {

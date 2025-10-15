@@ -19,7 +19,6 @@ namespace TEXT_RPG.Scenes.Battle
             Console.WriteLine("1. 싸우기");
         }
 
-
         protected override void HandleInput(int select)
         {
             switch (select)
@@ -32,7 +31,6 @@ namespace TEXT_RPG.Scenes.Battle
             }
         }
 
-
         protected override void ShowMonsterInfo()
         {
             List<object> monsters = BattleManager.Instance.Monsters;
@@ -43,8 +41,5 @@ namespace TEXT_RPG.Scenes.Battle
             }
             Console.WriteLine();
         }
-
-
-
     }
 }
