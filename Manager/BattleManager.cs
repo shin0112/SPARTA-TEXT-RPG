@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Manager
+﻿using TEXT_RPG.Repository;
+
+namespace TEXT_RPG.Manager
 {
     internal class BattleManager
     {
@@ -6,18 +8,20 @@
         public static BattleManager Instance { get; } = _instance;
 
         public List<object> Monsters = [];
+        private readonly MonsterRepository monsterRepository = new();
+
         public int MonsterNumber { get; set; } = 0;
         // Todo: plyaer 정보 담기
 
+        // Todo: 던전에 따라서 다른 몬스터 스폰
         public void SpawnRandomMonsters()
         {
             Random random = new();
-            int monsterCount = random.Next(1, 5);
+            int monsterCount = random.Next(1, 4);
 
-            // 몬스터 랜덤으로 가져오기 (임시 데이터 사용)
             for (int i = 0; i < monsterCount; i++)
             {
-                Monsters.Add(new object());
+                Monsters.Add(monsterRepository.MonstersNo1[random.Next(0, 3)]);
             }
         }
     }
