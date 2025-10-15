@@ -6,7 +6,6 @@
 
         public override void Show()
         {
-
             ShowMonsterInfo();
             ShowPlayerInfo();
             HandleSelections();
