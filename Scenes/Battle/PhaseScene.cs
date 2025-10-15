@@ -5,7 +5,7 @@ namespace TEXT_RPG.Scenes.Battle
     internal class PhaseScene : BattleSceneBase
     {
         // Todo: Monster 정보 저장하기 (임시 데이터)
-        private object monster = BattleManager.Instance.Monsters[BattleManager.Instance.MonsterNumber - 1];
+        private Monster monster = BattleManager.Instance.Monsters[BattleManager.Instance.MonsterNumber - 1];
 
         public override void Show()
         {
@@ -13,9 +13,10 @@ namespace TEXT_RPG.Scenes.Battle
 
             // Todo: player 정보 넣기
             Console.WriteLine($"{"플레이어"}의 공격!");
-            Console.WriteLine($"Lv. {3} {"공허충"} 을(를) 맞췄습니다.\n");
+            Console.WriteLine($"Lv. {monster.Level} {monster.Name} 을(를) 맞췄습니다.\n");
 
-
+            ShowMonsterInfo();
+            HandleSelections();
         }
 
         protected override void ShowSelections()
@@ -30,18 +31,18 @@ namespace TEXT_RPG.Scenes.Battle
 
         protected override void ShowMonsterInfo()
         {
-            Console.WriteLine($"Lv. {3} {"공허충"}");
+            Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
 
             // Todo: monster의 isDead로 변경
             // Todo: 실제 monster 체력으로 변경
             bool isDead = true;
             if (isDead)
             {
-                Console.WriteLine($"HP {10} → Dead");
+                Console.WriteLine($"HP {10} → Dead\n");
             }
             else
             {
-                Console.WriteLine($"HP {10} → {"나중 체력"}");
+                Console.WriteLine($"HP {10} → {"나중 체력"}\n");
             }
         }
     }
