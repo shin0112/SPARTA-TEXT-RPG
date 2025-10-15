@@ -8,6 +8,11 @@ namespace TEXT_RPG
 {
     public interface IAttack
     {
-        void Attack(IAttack target);
+        void Attack(IAttackable target);
+    }
+
+    public interface IAttackable
+    {
+        void TakeDamage(int damage);
     }
 }

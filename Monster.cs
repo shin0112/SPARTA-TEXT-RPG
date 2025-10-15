@@ -1,6 +1,6 @@
 ﻿namespace TEXT_RPG
 {
-    public class Monster : IAttack
+    public class Monster : IAttack, IAttackable
     {
         public string Name { get; set; }
         public int Level { get; set; }
@@ -15,7 +15,7 @@
             Stats = stats;
         }
 
-        public void Attack(IAttack target)
+        public void Attack(IAttackable target)
         {
             if (isDead)
             {
@@ -23,7 +23,19 @@
             }
             else
             {
-                
+                target.TakeDamage(Stats.Atk);
+            }
+        }
+        public void TakeDamage(int damage)
+        {
+            if (isDead)
+            {
+                Console.WriteLine("잘못된 선택입니다.");
+            }
+            else
+            {
+                Stats.TakeDamage(damage);
+                Console.WriteLine($"{Name} 이(가) {damage} 의 피해를 입었습니다.");
             }
         }
     }
