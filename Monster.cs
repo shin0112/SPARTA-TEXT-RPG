@@ -1,27 +1,28 @@
 ﻿namespace TEXT_RPG
 {
-    public class Monster
+    public class Monster : IAttack
     {
-        public string name;
-        public int level;
-        public int atk;
-        public int def;
-        public int hp;
-        public bool isDead;
+        public string Name { get; set; }
+        public int Level { get; set; }
+        public bool isDead { get; set; }
 
         public Monster(string name, int level)
         {
-            this.name = name;
-            this.level = level;
-            this.atk = level * 3;
-            this.def = 0;
-            this.hp = level * 5;
-            this.isDead = false;
+            Name = name;
+            Level = level;
+            isDead = false;
         }
 
-        public void Attack()
+        public void Attack(IAttack target)
         {
+            if (isDead)
+            {
+                return;
+            }
+            else
+            {
 
+            }
         }
     }
 }
