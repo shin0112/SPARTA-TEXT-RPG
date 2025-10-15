@@ -9,21 +9,10 @@
             Console.Clear();
             Console.WriteLine("던전 선택");
             Console.WriteLine();
-            //    for (int i = 0; i < stages.Length; i++)
-            //    {
-            //        if (플레이어 레벨이 n 이상일때)
-            //        {
-            //        Console.WriteLine($"{i + 1}. {stages[i]}");
-            //    }
-            //        else
-            //    {
-            //        Console.WriteLine($"{i + 1}. {stages[i]} (레벨 제한 {n})");
-            //    }
-            //}
-            Console.WriteLine("1. 취준하기");
-            Console.WriteLine("2. 면접 보기");
-            Console.WriteLine("3. 승진하기");
-            Console.WriteLine("4. 이직하기");
+            for (int i = 0; i < stages.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {stages[i]}");
+            }
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
             Console.WriteLine();
