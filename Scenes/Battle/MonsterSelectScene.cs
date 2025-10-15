@@ -40,7 +40,7 @@ namespace TEXT_RPG.Scenes.Battle
             for (int i = 0; i < monsters.Count; i++)
             {
                 var monster = monsters[i];
-                Console.WriteLine($"{i + 1}. Lv. {monster.Level} {monster.Name}");
+                Console.WriteLine($"{i + 1}. Lv. {monster.Level} {monster.Name} | {(monster.IsDead ? "DEAD" : "HP " + monster.Stats.Hp)}");
             }
             Console.WriteLine();
         }
