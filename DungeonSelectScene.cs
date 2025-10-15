@@ -51,6 +51,8 @@ namespace TEXT_RPG
                     //레벨 3 던전 이직
                     break;
                 default:
+                    Console.Clear();
+                    DungeonSelect();
                     Console.WriteLine("잘못된 입력입니다.");
                     break;
             }
