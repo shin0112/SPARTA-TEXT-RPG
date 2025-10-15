@@ -24,7 +24,7 @@ namespace TEXT_RPG.Scenes.Battle
             switch (select)
             {
                 case 1:
-                    new PlayerTurnScene().Show();
+                    new MonsterSelectScene().Show();
                     break;
                 default:
                     break;

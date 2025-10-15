@@ -2,7 +2,7 @@
 
 namespace TEXT_RPG.Scenes.Battle
 {
-    internal class PlayerTurnScene : BattleSceneBase
+    internal class MonsterSelectScene : BattleSceneBase
     {
         public override void Show()
         {
@@ -18,7 +18,11 @@ namespace TEXT_RPG.Scenes.Battle
 
         protected override void HandleInput(int select)
         {
-            // 입력 처리
+            // 선택한 몬스터 정보 저장하기
+            BattleManager battleManager = BattleManager.Instance;
+            battleManager.MonsterNumber = select;
+
+
         }
 
         protected override void ShowMonsterInfo()
