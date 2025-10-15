@@ -18,11 +18,16 @@ namespace TEXT_RPG.Manager
         public void SpawnRandomMonsters()
         {
             Random random = new();
-            int monsterCount = random.Next(1, 4);
+            int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
 
+            // 레벨 1 던전 몬스터
             for (int i = 0; i < monsterCount; i++)
             {
-                Monsters.Add(monsterRepository.MonstersNo1[random.Next(0, 3)]);
+                Monsters.Add(monsterRepository.MonstersNo1[random.Next(3)]);
+            }
+            if (random.Next(1000) == 0) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+            {
+                Monsters.Add(monsterRepository.SpecialMonsterNo1[random.Next(monsterRepository.SpecialMonsterNo1.Count)]);
             }
         }
     }
