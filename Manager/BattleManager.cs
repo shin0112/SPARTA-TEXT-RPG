@@ -7,7 +7,7 @@ namespace TEXT_RPG.Manager
         private static BattleManager _instance = new();
         public static BattleManager Instance { get; } = _instance;
 
-        public List<object> Monsters = [];
+        public List<Monster> Monsters = [];
         private readonly MonsterRepository monsterRepository = new();
 
         public int MonsterNumber { get; set; } = 0;

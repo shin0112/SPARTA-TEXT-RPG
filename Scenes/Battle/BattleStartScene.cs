@@ -33,11 +33,12 @@ namespace TEXT_RPG.Scenes.Battle
 
         protected override void ShowMonsterInfo()
         {
-            List<object> monsters = BattleManager.Instance.Monsters;
+            List<Monster> monsters = BattleManager.Instance.Monsters;
 
             for (int i = 0; i < monsters.Count; i++)
             {
-                Console.WriteLine($"{monsters[i]}");
+                var monster = monsters[i];
+                Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
             }
             Console.WriteLine();
         }
