@@ -1,6 +1,6 @@
-namespace TEXT_RPG;
+namespace TEXT_RPG.Scene;
 
-public class Spec
+public class SpecScene
 {
     public void Specification()
     {
@@ -11,11 +11,11 @@ public class Spec
             Console.WriteLine("캐릭터의 스펙이 표시됩니다.");
 
             Console.WriteLine($"level"); //캐릭터 스크립트랑 추후에 연결 후 코드 수정해야함
-            
+
             Console.WriteLine("0. 나가기");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
-            
+
             string input = Console.ReadLine();
 
             if (input == "1")
@@ -27,7 +27,7 @@ public class Spec
                 Console.Clear();
                 //스타트씬 스크립트와 연결
             }
-            
+
 
         }
     }

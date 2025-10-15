@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TEXT_RPG
+﻿namespace TEXT_RPG.Scene
 {
     internal class DungeonSelectScene
     {
@@ -14,17 +8,17 @@ namespace TEXT_RPG
         {
             Console.WriteLine("던전 선택");
             Console.WriteLine();
-        //    for (int i = 0; i < stages.Length; i++)
-        //    {
-        //        if (플레이어 레벨이 n 이상일때)
-        //        {
-        //        Console.WriteLine($"{i + 1}. {stages[i]}");
-        //    }
-        //        else
-        //    {
-        //        Console.WriteLine($"{i + 1}. {stages[i]} (레벨 제한 {n})");
-        //    }
-        //}
+            //    for (int i = 0; i < stages.Length; i++)
+            //    {
+            //        if (플레이어 레벨이 n 이상일때)
+            //        {
+            //        Console.WriteLine($"{i + 1}. {stages[i]}");
+            //    }
+            //        else
+            //    {
+            //        Console.WriteLine($"{i + 1}. {stages[i]} (레벨 제한 {n})");
+            //    }
+            //}
             Console.WriteLine("1. 취준하기");
             Console.WriteLine("2. 면접 보기");
             Console.WriteLine("3. 승진하기");
@@ -34,7 +28,7 @@ namespace TEXT_RPG
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
-            
+
             input = Console.ReadLine();
             switch (input)
             {
