@@ -8,6 +8,7 @@ namespace TEXT_RPG.Scene
         {
             while (true)
             {
+                Console.Clear();
                 Console.WriteLine("거친 정글에 뛰어든 건 나지만 힘들다..");
                 Console.WriteLine("나..무사히 취업 할 수 있는거냐..");
 
@@ -34,6 +35,7 @@ namespace TEXT_RPG.Scene
                 else if (input == "3")
                 {
                     Console.WriteLine("인벤토리를 선택했습니다.");
+                    new InventoryScene().Inventory();
                 }
                 else if (input == "4")
                 {
