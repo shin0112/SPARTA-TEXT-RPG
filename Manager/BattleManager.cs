@@ -16,6 +16,8 @@ namespace TEXT_RPG.Manager
         private int _deadCount = 0;
 
         public event Action? OnAllMonsterDead;
+        public bool IsVictory { get; private set; } = false;
+        public void ResetIsVictory() => IsVictory = false;
 
         // Todo: plyaer 정보 담기
 
@@ -48,6 +50,7 @@ namespace TEXT_RPG.Manager
 
             if (_deadCount == Monsters.Count)
             {
+                IsVictory = true;
                 OnAllMonsterDead?.Invoke();
             }
         }
