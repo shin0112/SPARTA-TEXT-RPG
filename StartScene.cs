@@ -31,6 +31,7 @@
                 else if (input == "2")
                 {
                     Console.WriteLine("사회에 뛰어들기를 선택했습니다");
+                    new BattleStartScene().Show();
                 }
                 else if (input == "3")
                 {
