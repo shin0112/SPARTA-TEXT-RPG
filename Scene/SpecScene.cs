@@ -25,10 +25,9 @@ public class SpecScene
             else if (input == "0")
             {
                 Console.Clear();
+                break;
                 //스타트씬 스크립트와 연결
             }
-
-
         }
     }
 }

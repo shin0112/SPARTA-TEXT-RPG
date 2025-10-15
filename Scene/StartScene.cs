@@ -22,6 +22,7 @@
                 if (input == "1")
                 {
                     Console.WriteLine("스펙보기를 선택했습니다.");
+                    new SpecScene().Specification();
                 }
                 else if (input == "2")
                 {
