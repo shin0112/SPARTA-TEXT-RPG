@@ -31,29 +31,33 @@
             Console.Write(">>");
 
             input = Console.ReadLine();
-            switch (input)
+
+            while (true)
             {
-                case "0":
-                    Console.Clear();
-                    break;
-                case "1":
-                    //레벨 1 던전 취준
-                    break;
-                case "2":
-                    //레벨 2 던전 면접
-                    break;
-                case "3":
-                    //레벨 3 던전 승진
-                    break;
-                case "4":
-                    //레벨 3 던전 이직
-                    break;
-                default:
-                    Console.Clear();
-                    DungeonSelect();
-                    Console.WriteLine("잘못된 입력입니다.");
-                    break;
+                switch (input)
+                {
+                    case "0":
+                        Console.Clear();
+                        return;
+                    case "1":
+                        //레벨 1 던전 취준
+                        return;
+                    case "2":
+                        //레벨 2 던전 면접
+                        return;
+                    case "3":
+                        //레벨 3 던전 승진
+                        return;
+                    case "4":
+                        //레벨 3 던전 이직
+                        return;
+                    default:
+                        Console.Clear();
+                        DungeonSelect();
+                        break;
+                }
             }
+
             //switch (input)
             //{
             //    case "1":
