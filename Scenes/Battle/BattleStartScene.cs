@@ -7,8 +7,6 @@ namespace TEXT_RPG.Scenes.Battle
     {
         public override void Show()
         {
-            Console.WriteLine("Battle!!\n");
-
             // todo: 몬스터 리스트
             BattleManager.Instance.SpawnRandomMonsters();
 
@@ -30,6 +28,7 @@ namespace TEXT_RPG.Scenes.Battle
                 default:
                     break;
             }
+            BattleManager.Instance.Monsters.Clear();
         }
 
         protected override void ShowMonsterInfo()

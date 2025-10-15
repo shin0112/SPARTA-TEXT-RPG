@@ -2,10 +2,12 @@
 {
     internal abstract class BattleSceneBase : SceneBase
     {
+        protected override string Title { get; } = "Battle!!";
         protected abstract void ShowMonsterInfo();
 
         public override void Show()
         {
+            ShowTitle();
             ShowMonsterInfo();
             ShowPlayerInfo();
             HandleSelections();

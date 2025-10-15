@@ -31,8 +31,13 @@ namespace TEXT_RPG.Scenes.Battle
         {
             while (!_battleEnded)
             {
-                Console.WriteLine("Battle!!\n");
                 base.Show();
+            }
+
+            if (BattleManager.Instance.IsVictory)
+            {
+                new VictoryScene().Show();
+                BattleManager.Instance.ResetIsVictory();
             }
         }
 

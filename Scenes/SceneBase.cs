@@ -2,9 +2,20 @@
 {
     internal abstract class SceneBase
     {
+        protected virtual string Title { get; } = "";
+        protected virtual int SelectionCount { get; } = 0;
         public abstract void Show();
         protected abstract void ShowSelections();
         protected abstract void HandleInput(int select);
+
+        protected void ShowTitle()
+        {
+            if (!string.IsNullOrEmpty(Title))
+            {
+                Console.WriteLine(Title);
+                Console.WriteLine();
+            }
+        }
 
         protected virtual void HandleSelections()
         {

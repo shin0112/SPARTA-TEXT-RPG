@@ -20,8 +20,7 @@ namespace TEXT_RPG.Scenes.Battle
 
         private void PlayerTurn()
         {
-            Console.WriteLine("Battle!\n");
-
+            ShowTitle();
             // Todo: player 정보 넣기
             Monster monster = monsters[BattleManager.Instance.MonsterNumber - 1];
 
@@ -34,8 +33,7 @@ namespace TEXT_RPG.Scenes.Battle
 
         private void MonsterTurn(Monster monster)
         {
-            Console.WriteLine("Battle!\n");
-
+            ShowTitle();
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
             Console.WriteLine($"{"플레이어"} 을(를) 맞췄습니다. [데미지:{monster.Stats.Atk}]");
 
