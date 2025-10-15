@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Repository
+﻿using TEXT_RPG.Core;
+
+namespace TEXT_RPG.Repository
 {
     internal class MonsterRepository
     {

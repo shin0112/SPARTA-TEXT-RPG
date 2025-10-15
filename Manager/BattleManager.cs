@@ -1,4 +1,5 @@
-﻿using TEXT_RPG.Repository;
+﻿using TEXT_RPG.Core;
+using TEXT_RPG.Repository;
 
 namespace TEXT_RPG.Manager
 {

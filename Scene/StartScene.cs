@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Scene
+﻿using TEXT_RPG.Scenes.Battle;
+
+namespace TEXT_RPG.Scene
 {
     public class StartScene
     {
