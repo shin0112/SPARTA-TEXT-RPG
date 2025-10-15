@@ -14,6 +14,11 @@ namespace TEXT_RPG.Scenes.Battle
             base.Show();
         }
 
+        protected override void ShowSelections()
+        {
+            Console.WriteLine("1. 싸우기");
+        }
+
 
         protected override void HandleInput(int select)
         {
@@ -38,5 +43,8 @@ namespace TEXT_RPG.Scenes.Battle
             }
             Console.WriteLine();
         }
+
+
+
     }
 }

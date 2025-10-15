@@ -12,6 +12,12 @@ namespace TEXT_RPG.Scenes.Battle
         }
 
 
+        protected override void ShowSelections()
+        {
+            Console.WriteLine("0. 도망가기");
+        }
+
+
         protected override void HandleInput(int select)
         {
             // 입력 처리

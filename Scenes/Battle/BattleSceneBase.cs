@@ -20,8 +20,7 @@
             Console.WriteLine($"Lv. {level} {name} ({job})");
             Console.WriteLine($"체력 {currentHp}/{maxHp}\n");
 
-            Console.WriteLine("1. 공격");
-            Console.WriteLine();
+            ShowSelections();
 
             int select = SelectAct();
 

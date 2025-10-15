@@ -3,6 +3,7 @@
     internal abstract class SceneBase
     {
         public abstract void Show();
+        protected abstract void ShowSelections();
         protected abstract void HandleInput(int select);
     }
 }
