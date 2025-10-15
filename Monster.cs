@@ -30,7 +30,7 @@
         {
             if (isDead)
             {
-                Console.WriteLine("잘못된 선택입니다.");
+                Console.WriteLine("잘못된 입력입니다.");
             }
             else
             {
