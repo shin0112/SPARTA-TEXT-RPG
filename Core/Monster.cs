@@ -4,8 +4,22 @@
     {
         public string Name { get; set; }
         public int Level { get; set; }
-        public bool IsDead { get; set; }
         public Stats Stats { get; set; }
+
+        public event Action<bool>? OnDeadChanged;
+        private bool _isDead;
+        public bool IsDead
+        {
+            get => _isDead;
+            set
+            {
+                if (_isDead != value)
+                {
+                    _isDead = value;
+                    OnDeadChanged?.Invoke(_isDead);
+                }
+            }
+        }
 
         public Monster(string name, int level, Stats stats)
         {
