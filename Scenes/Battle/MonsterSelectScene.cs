@@ -14,6 +14,19 @@ namespace TEXT_RPG.Scenes.Battle
 
         private void EndBattle() => _battleEnded = true;
 
+        protected override int SelectAct()
+        {
+            while (true)
+            {
+                Console.WriteLine("대상을 선택해주세요.");
+                (bool flowControl, int value) = GetSelectInput();
+                if (!flowControl)
+                {
+                    return value;
+                }
+            }
+        }
+
         public override void Show()
         {
             while (!_battleEnded)
