@@ -15,8 +15,10 @@
         }
 
 
-        protected override void ShowMonsterInfo(List<object> monsters)
+        protected override void ShowMonsterInfo()
         {
+            List<object> monsters = BattleManager.Instance.Monsters;
+
             for (int i = 0; i < monsters.Count; i++)
             {
                 Console.WriteLine($"{monsters[i]}");
