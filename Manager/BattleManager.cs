@@ -12,6 +12,11 @@ namespace TEXT_RPG.Manager
         private readonly MonsterRepository monsterRepository = new();
 
         public int MonsterNumber { get; set; } = 0;
+
+        private int _deadCount = 0;
+
+        public event Action? OnAllMonsterDead;
+
         // Todo: plyaer 정보 담기
 
         // Todo: 던전에 따라서 다른 몬스터 스폰
@@ -28,6 +33,22 @@ namespace TEXT_RPG.Manager
             if (random.Next(1000) == 0) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
             {
                 Monsters.Add(monsterRepository.SpecialMonsterNo1[random.Next(monsterRepository.SpecialMonsterNo1.Count)]);
+            }
+
+            foreach (var monster in Monsters)
+            {
+                monster.OnDeadChanged += OnMonsterDeadChanged;
+            }
+        }
+
+        private void OnMonsterDeadChanged(bool isDead)
+        {
+            if (isDead) _deadCount++;
+            else _deadCount--;
+
+            if (_deadCount == Monsters.Count)
+            {
+                OnAllMonsterDead?.Invoke();
             }
         }
     }
