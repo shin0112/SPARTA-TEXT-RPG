@@ -32,6 +32,9 @@
             input = Console.ReadLine();
             switch (input)
             {
+                case "0":
+                    Console.Clear();
+                    break;
                 case "1":
                     //레벨 1 던전 취준
                     break;
