@@ -1,7 +1,20 @@
-﻿namespace TEXT_RPG.Scenes.Battle
+﻿using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Scenes.Battle
 {
     internal class BattleStartScene : BattleSceneBase
     {
+        public override void Show()
+        {
+            Console.WriteLine("Battle!!\n");
+
+            // todo: 몬스터 리스트
+            BattleManager.Instance.SpawnRandomMonsters();
+
+            base.Show();
+        }
+
+
         protected override void HandleInput(int select)
         {
             switch (select)

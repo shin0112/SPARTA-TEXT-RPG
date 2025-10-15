@@ -1,7 +1,17 @@
-﻿namespace TEXT_RPG.Scenes.Battle
+﻿using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Scenes.Battle
 {
     internal class PlayerTurnScene : BattleSceneBase
     {
+        public override void Show()
+        {
+            Console.WriteLine("Battle!!\n");
+
+            base.Show();
+        }
+
+
         protected override void HandleInput(int select)
         {
             // 입력 처리

@@ -14,12 +14,7 @@
             int currentHp = 100;
             int maxHp = 100;
 
-            Console.WriteLine("Battle!!\n");
-
-            // todo: 몬스터 리스트
-            BattleManager battleManager = BattleManager.Instance;
-            battleManager.SpawnRandomMonsters();
-            ShowMonsterInfo(battleManager.Monsters);
+            ShowMonsterInfo();
 
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv. {level} {name} ({job})");
