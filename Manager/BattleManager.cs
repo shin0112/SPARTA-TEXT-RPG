@@ -2,8 +2,8 @@
 {
     internal class BattleManager
     {
-        private static BattleManager _instance;
-        public static BattleManager Instance { get; } = _instance ??= new BattleManager();
+        private static BattleManager _instance = new();
+        public static BattleManager Instance { get; } = _instance;
 
         public List<object> Monsters = [];
 
