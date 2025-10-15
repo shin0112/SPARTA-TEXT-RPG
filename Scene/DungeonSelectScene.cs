@@ -6,6 +6,7 @@
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
         public void DungeonSelect()
         {
+            Console.Clear();
             Console.WriteLine("던전 선택");
             Console.WriteLine();
             //    for (int i = 0; i < stages.Length; i++)
