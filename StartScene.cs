@@ -4,8 +4,9 @@
     {
         static void Main()
         {
-            
+            new StartScene().GameStart();
         }
+
         public void GameStart()
         {
             while (true)
