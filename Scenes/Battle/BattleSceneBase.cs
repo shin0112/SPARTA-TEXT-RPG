@@ -37,20 +37,13 @@
                 Console.Write(">> ");
                 bool isNumber = int.TryParse(Console.ReadLine(), out int select);
 
-                try
+                if (!isNumber)
                 {
-                    if (!isNumber)
-                    {
-                        throw new Exception("숫자를 입력해주세요.");
-                    }
-                    else
-                    {
-                        return select;
-                    }
+                    Console.WriteLine("숫자를 입력해주세요.");
                 }
-                catch (Exception e)
+                else
                 {
-                    Console.WriteLine(e.Message);
+                    return select;
                 }
             }
         }
