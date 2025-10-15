@@ -16,7 +16,7 @@
         public void TakeDamage(int damage)
         {
             int actualDamage = Math.Max(damage - Def, 0);
-            Hp = Math.Max(Hp-actualDamage, 0);
+            Hp = Math.Max(Hp - actualDamage, 0);
         }
     }
 }
