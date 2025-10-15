@@ -5,17 +5,14 @@ namespace TEXT_RPG.Scenes.Battle
 {
     internal class BattleStartScene : BattleSceneBase
     {
+        protected override string[] Selections => ["나가기", "싸우기"];
+
         public override void Show()
         {
             // todo: 몬스터 리스트
             BattleManager.Instance.SpawnRandomMonsters();
 
             base.Show();
-        }
-
-        protected override void ShowSelections()
-        {
-            Console.WriteLine("1. 싸우기");
         }
 
         protected override void HandleInput(int select)

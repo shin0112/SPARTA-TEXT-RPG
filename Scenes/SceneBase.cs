@@ -3,10 +3,21 @@
     internal abstract class SceneBase
     {
         protected virtual string Title { get; } = "";
-        protected virtual int SelectionCount { get; } = 0;
+        protected virtual string[] Selections => [];
+        protected virtual int SelectionCount => Selections.Length;
+
         public abstract void Show();
-        protected abstract void ShowSelections();
         protected abstract void HandleInput(int select);
+
+        protected virtual void ShowSelections()
+        {
+            for (int i = 1; i < Selections.Length; i++)
+            {
+                Console.WriteLine($"{i}. {Selections[i]}");
+            }
+            Console.WriteLine();
+            Console.WriteLine($"0. {Selections[0]}");
+        }
 
         protected void ShowTitle()
         {
@@ -45,9 +56,9 @@
 
             // Todo: 선택지에서 벗어난 숫자 입력 시에도 예외 처리하기
 
-            if (!isNumber)
+            if (!isNumber || select < 0 || SelectionCount <= select)
             {
-                Console.WriteLine("숫자를 입력해주세요.");
+                Console.WriteLine("잘못된 입력입니다.");
             }
             else
             {

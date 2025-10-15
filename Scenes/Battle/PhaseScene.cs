@@ -7,6 +7,7 @@ namespace TEXT_RPG.Scenes.Battle
     {
         // Todo: Monster 정보 저장하기 (임시 데이터)
         private List<Monster> monsters = BattleManager.Instance.Monsters;
+        protected override string[] Selections => ["다음"];
 
         public override void Show()
         {
@@ -39,11 +40,6 @@ namespace TEXT_RPG.Scenes.Battle
 
             ShowPlayerInfo();
             HandleSelections();
-        }
-
-        protected override void ShowSelections()
-        {
-            Console.WriteLine("0. 다음");
         }
 
         protected override void HandleInput(int select)

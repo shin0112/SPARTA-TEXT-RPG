@@ -5,6 +5,8 @@ namespace TEXT_RPG.Scenes.Battle
 {
     internal class MonsterSelectScene : BattleSceneBase
     {
+        protected override string[] Selections => ["도망가기"];
+        protected override int SelectionCount => Selections.Length + BattleManager.Instance.Monsters.Count;
         private bool _battleEnded = false;
 
         public MonsterSelectScene()
@@ -39,11 +41,6 @@ namespace TEXT_RPG.Scenes.Battle
                 new VictoryScene().Show();
                 BattleManager.Instance.ResetIsVictory();
             }
-        }
-
-        protected override void ShowSelections()
-        {
-            Console.WriteLine("0. 도망가기");
         }
 
         protected override void HandleInput(int select)
