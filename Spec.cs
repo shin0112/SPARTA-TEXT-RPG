@@ -1,4 +1,3 @@
-
 namespace TEXT_RPG;
 
 public class Spec
@@ -28,6 +27,8 @@ public class Spec
                 Console.Clear();
                 //스타트씬 스크립트와 연결
             }
+            
+
         }
     }
 }
