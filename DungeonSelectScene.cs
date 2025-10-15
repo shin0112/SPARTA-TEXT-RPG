@@ -54,6 +54,24 @@ namespace TEXT_RPG
                     Console.WriteLine("잘못된 입력입니다.");
                     break;
             }
+            //switch (input)
+            //{
+            //    case "1":
+            //        //레벨 1 던전 취준
+            //        break;
+            //    case "2" when 캐릭터레벨 >= n:
+            //        //레벨 2 던전 면접
+            //        break;
+            //    case "3" when 캐릭터레벨 >= n:
+            //        //레벨 3 던전 승진
+            //        break;
+            //    case "4" when 캐릭터레벨 >= n:
+            //        //레벨 3 던전 이직
+            //        break;
+            //    default:
+            //        Console.WriteLine("잘못된 입력입니다.");
+            //        break;
+            //}
         }
     }
 }
