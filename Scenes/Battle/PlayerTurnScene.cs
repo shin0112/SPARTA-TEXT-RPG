@@ -24,7 +24,7 @@ namespace TEXT_RPG.Scenes.Battle
 
             for (int i = 0; i < monsters.Count; i++)
             {
-                Console.WriteLine($"{i} {monsters[i]}");
+                Console.WriteLine($"{i + 1} {monsters[i]}");
             }
             Console.WriteLine();
         }
