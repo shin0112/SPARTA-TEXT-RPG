@@ -5,14 +5,21 @@ namespace TEXT_RPG.Scenes.Battle
 {
     internal class MonsterSelectScene : BattleSceneBase
     {
+        private bool _battleEnded = false;
+
+        public MonsterSelectScene()
+        {
+            BattleManager.Instance.OnAllMonsterDead += EndBattle;
+        }
+
+        private void EndBattle() => _battleEnded = true;
+
         public override void Show()
         {
-            while (true)
+            while (!_battleEnded)
             {
                 Console.WriteLine("Battle!!\n");
                 base.Show();
-
-
             }
         }
 
@@ -30,6 +37,7 @@ namespace TEXT_RPG.Scenes.Battle
             switch (select)
             {
                 case 0:
+                    EndBattle();
                     break;
                 default:
                     new PhaseScene().Show();
