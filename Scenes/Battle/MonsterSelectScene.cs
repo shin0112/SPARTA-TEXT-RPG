@@ -7,9 +7,13 @@ namespace TEXT_RPG.Scenes.Battle
     {
         public override void Show()
         {
-            Console.WriteLine("Battle!!\n");
+            while (true)
+            {
+                Console.WriteLine("Battle!!\n");
+                base.Show();
 
-            base.Show();
+
+            }
         }
 
         protected override void ShowSelections()
