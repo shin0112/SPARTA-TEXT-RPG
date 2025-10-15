@@ -22,7 +22,14 @@ namespace TEXT_RPG.Scenes.Battle
             BattleManager battleManager = BattleManager.Instance;
             battleManager.MonsterNumber = select;
 
-
+            switch (select)
+            {
+                case 0:
+                    break;
+                default:
+                    new PhaseScene().Show();
+                    break;
+            }
         }
 
         protected override void ShowMonsterInfo()
