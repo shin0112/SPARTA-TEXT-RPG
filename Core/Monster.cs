@@ -1,4 +1,4 @@
-﻿namespace TEXT_RPG
+﻿namespace TEXT_RPG.Core
 {
     public class Monster : IAttack, IAttackable
     {
@@ -21,7 +21,7 @@
             {
                 return;
             }
-                target.TakeDamage(Stats.Atk);
+            target.TakeDamage(Stats.Atk);
         }
         public void TakeDamage(int damage)
         {
