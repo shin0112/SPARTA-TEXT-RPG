@@ -1,9 +1,9 @@
-﻿namespace TEXT_RPG
+﻿namespace TEXT_RPG.Core
 {
     public class Stats
     {
-        public int Atk {  get; set; }
-        public int Def {  get; set; }
+        public int Atk { get; set; }
+        public int Def { get; set; }
         public int Hp { get; set; }
 
         public Stats(int atk, int def, int hp)

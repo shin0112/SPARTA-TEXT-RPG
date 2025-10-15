@@ -10,3 +10,13 @@ test: 테스트 코드 작성
 docs: readme 등 문서 작성 및 수정
 chore: 환경 설정 변경 (ex. .gitignore)
 ```
+
+## Project Structure
+```
+Core : 데이터 클래스
+Repository : 데이터 저장소
+Manager : 매니저 (ex. GameManager, SoundManager, BattleManager..)
+Scene : 화면
+UI : UI 관련
+...
+```
