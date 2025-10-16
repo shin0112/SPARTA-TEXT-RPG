@@ -2,6 +2,8 @@
 {
     public class Monster : IAttack, IAttackable
     {
+        Random random = new();
+
         public string Name { get; set; }
         public int Level { get; set; }
         public Stats Stats { get; set; }
@@ -45,6 +47,12 @@
             }
             else
             {
+                int evadeRate = random.Next(0, 100);
+                if (evadeRate <= 10)
+                {
+                    Console.WriteLine("공격이 빗나갔습니다.");
+                    return;
+                }
                 int actualDamage = Stats.TakeDamage(damage);
                 Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
                 IsDead = Stats.Hp <= 0;
