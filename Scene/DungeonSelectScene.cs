@@ -1,4 +1,5 @@
 ﻿using TEXT_RPG.Core;
+using TEXT_RPG.Scenes.Battle;
 
 namespace TEXT_RPG.Scene
 {
@@ -38,7 +39,8 @@ namespace TEXT_RPG.Scene
                         Console.Clear();
                         return;
                     case "1":
-                        //레벨 1 던전 취준
+                        Console.Clear();
+                        new BattleStartScene().Show();
                         return;
                     case "2":
                         if (player.Level <= 5)
@@ -46,15 +48,17 @@ namespace TEXT_RPG.Scene
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
                         }
-                        //레벨 2 던전 면접
+                        Console.Clear();
+                        new BattleStartScene().Show();
                         return;
                     case "3":
                         if (player.Level <= 10)
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
-                        }
-                        //레벨 3 던전 승진
+                        }                
+                        Console.Clear();
+                        new BattleStartScene().Show();
                         return;
                     case "4":
                         if (player.Level <= 15)
@@ -62,7 +66,8 @@ namespace TEXT_RPG.Scene
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
                         }
-                        //레벨 4 던전 이직
+                        Console.Clear();
+                        new BattleStartScene().Show();
                         return;
                     default:
                         break;
