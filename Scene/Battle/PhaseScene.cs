@@ -7,7 +7,7 @@ namespace TEXT_RPG.Scene.Battle
     {
         // Todo: Monster 정보 저장하기 (임시 데이터)
         private List<Monster> monsters = BattleManager.Instance.Monsters;
-        protected override string[] Selections => ["다음"];
+        protected override string[] Selections { get; } = ["다음"];
 
         public override void Show()
         {

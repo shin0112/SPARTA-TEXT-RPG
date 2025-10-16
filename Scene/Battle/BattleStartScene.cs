@@ -5,7 +5,7 @@ namespace TEXT_RPG.Scene.Battle
 {
     internal class BattleStartScene : BattleSceneBase
     {
-        protected override string[] Selections => ["나가기", "싸우기"];
+        protected override string[] Selections { get; } = ["나가기", "싸우기"];
 
         public override void Show()
         {
