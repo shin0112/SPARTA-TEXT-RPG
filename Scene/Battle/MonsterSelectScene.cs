@@ -33,10 +33,7 @@ namespace TEXT_RPG.Scene.Battle
 
         public override void Show()
         {
-            while (!_battleEnded)
-            {
-                base.Show();
-            }
+            base.Show();
 
             if (BattleManager.Instance.IsVictory)
             {
@@ -54,8 +51,8 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 0:
-                    EndBattle();
                     GameManager.Instance.SceneInfo = SceneType.Start;
+                    BattleManager.Instance.Monsters.Clear();
                     break;
                 default:
                     GameManager.Instance.PhaseScene.Show();

@@ -24,9 +24,9 @@ namespace TEXT_RPG.Scene.Battle
                     break;
                 default:
                     GameManager.Instance.SceneInfo = SceneType.Start;
+                    BattleManager.Instance.Monsters.Clear();
                     break;
             }
-            BattleManager.Instance.Monsters.Clear();
         }
 
         protected override void ShowMonsterInfo()
