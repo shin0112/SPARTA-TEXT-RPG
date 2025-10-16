@@ -17,8 +17,6 @@ namespace TEXT_RPG.Scene.Battle
             if (select == 0)
             {
                 GameManager.Instance.SceneInfo = SceneType.Start;
-                BattleManager.Instance.Monsters.Clear();
-                BattleManager.Instance.ResetIsVictory();
             }
         }
     }
