@@ -56,7 +56,7 @@ namespace TEXT_RPG.Scene.Battle
                     GameManager.Instance.SceneInfo = SceneType.Start;
                     break;
                 default:
-                    new PhaseScene().Show();
+                    GameManager.Instance.PhaseScene.Show();
                     break;
             }
         }
