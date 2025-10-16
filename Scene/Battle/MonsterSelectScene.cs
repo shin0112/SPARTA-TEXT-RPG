@@ -38,7 +38,7 @@ namespace TEXT_RPG.Scene.Battle
 
             if (BattleManager.Instance.IsVictory)
             {
-                new VictoryScene().Show();
+                GameManager.Instance.VictoryScene.Show();
                 BattleManager.Instance.ResetIsVictory();
             }
         }
