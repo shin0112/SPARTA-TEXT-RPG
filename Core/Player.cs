@@ -14,9 +14,7 @@
             Name = name;
             Job = job;
             Level = 1;
-            Stats.Atk = 10;
-            Stats.Def = 5;
-            Stats.Hp = 100;
+            Stats = new Stats(10, 5, 100);
             Gold = 1000;
             Exp = 0;
         }
