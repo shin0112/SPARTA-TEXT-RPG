@@ -5,7 +5,10 @@ namespace TEXT_RPG.Scene
     internal class DungeonSelectScene
     {
         string input;
+        Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
+
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
+        int[] recommenedLevel = { 0, 5, 10, 15 };
         public void DungeonSelect()
         {
             Console.Clear();
@@ -13,7 +16,12 @@ namespace TEXT_RPG.Scene
             Console.WriteLine();
             for (int i = 0; i < stages.Length; i++)
             {
-                Console.WriteLine($"{i + 1}. {stages[i]}");
+                if(recommenedLevel[i] <= player.Level)
+                {
+                    Console.WriteLine($"{i + 1}. {stages[i]}");
+                    continue;
+                }
+                Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {recommenedLevel[i]})");
             }
             Console.WriteLine();
             Console.WriteLine("0. 나가기");
@@ -21,7 +29,6 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
 
             while (true)
             {
@@ -56,7 +63,7 @@ namespace TEXT_RPG.Scene
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
                         }
-                        //레벨 3 던전 이직
+                        //레벨 4 던전 이직
                         return;
                     default:
                         Console.WriteLine("올바른 입력이 아닙니다.");
