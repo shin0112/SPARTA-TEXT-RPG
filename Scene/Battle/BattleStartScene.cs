@@ -9,7 +9,7 @@ namespace TEXT_RPG.Scene.Battle
 
         public override void Show()
         {
-            // todo: 몬스터 리스트
+            // 몬스터 랜덤 생성
             BattleManager.Instance.SpawnRandomMonsters();
 
             base.Show();
@@ -20,11 +20,11 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 1:
-                    GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
+                    GameManager.Instance.SceneInfo = SceneType.MonsterSelect; // 몬스터 선택 화면
                     break;
                 default:
-                    GameManager.Instance.SceneInfo = SceneType.Start;
-                    BattleManager.Instance.Monsters.Clear();
+                    GameManager.Instance.SceneInfo = SceneType.DungeonSelect; // 던전 선택 화면
+                    BattleManager.Instance.BattleEnd();
                     break;
             }
         }
