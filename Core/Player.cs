@@ -38,8 +38,8 @@
         }
         public void TakeDamage(int damage)
         {
-            Stats.TakeDamage(damage);
-            Console.WriteLine($"{Name} 이(가) {damage} 의 피해를 입었습니다.");
+            int actualDamage = Stats.TakeDamage(damage);
+            Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
         }
         public void GetExp(int exp)
         {
