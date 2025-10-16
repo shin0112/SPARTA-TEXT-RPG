@@ -11,27 +11,26 @@ namespace TEXT_RPG.Scene
         int[] recommenedLevel = { 0, 5, 10, 15 };
         public void DungeonSelect()
         {
-            Console.Clear();
-            Console.WriteLine("던전 선택");
-            Console.WriteLine();
-            for (int i = 0; i < stages.Length; i++)
-            {
-                if(recommenedLevel[i] <= player.Level)
-                {
-                    Console.WriteLine($"{i + 1}. {stages[i]}");
-                    continue;
-                }
-                Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {recommenedLevel[i]})");
-            }
-            Console.WriteLine();
-            Console.WriteLine("0. 나가기");
-            Console.WriteLine();
-            Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">>");
-
-
             while (true)
             {
+                Console.Clear();
+                Console.WriteLine("던전 선택");
+                Console.WriteLine();
+                for (int i = 0; i < stages.Length; i++)
+                {
+                    if (recommenedLevel[i] <= player.Level)
+                    {
+                        Console.WriteLine($"{i + 1}. {stages[i]}");
+                        continue;
+                    }
+                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {recommenedLevel[i]})");
+                }
+                Console.WriteLine();
+                Console.WriteLine("0. 나가기");
+                Console.WriteLine();
+                Console.WriteLine("원하시는 행동을 입력해주세요.");
+                Console.Write(">>");
+
                 input = Console.ReadLine();
                 switch (input)
                 {
@@ -66,7 +65,6 @@ namespace TEXT_RPG.Scene
                         //레벨 4 던전 이직
                         return;
                     default:
-                        Console.WriteLine("올바른 입력이 아닙니다.");
                         break;
                 }
             }
