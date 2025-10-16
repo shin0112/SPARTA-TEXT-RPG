@@ -1,4 +1,4 @@
-﻿namespace TEXT_RPG.Scenes
+﻿namespace TEXT_RPG.Scene
 {
     internal abstract class SceneBase
     {
@@ -21,6 +21,7 @@
 
         protected void ShowTitle()
         {
+            Console.Clear();
             if (!string.IsNullOrEmpty(Title))
             {
                 Console.WriteLine(Title);
