@@ -59,6 +59,9 @@ namespace TEXT_RPG.Manager
                     case SceneType.ShopBuy: // 장비 장착
                         ShopBuyScene.DisplayShopBuy();
                         break;
+                    case SceneType.MonsterSelect:
+                        MonsterSelect.Show();
+                        break;
                 }
                 // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.
             }

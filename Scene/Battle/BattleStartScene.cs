@@ -20,7 +20,7 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 1:
-                    GameManager.Instance.MonsterSelectScene.Show();
+                    GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
                     break;
                 default:
                     GameManager.Instance.SceneInfo = SceneType.Start;
