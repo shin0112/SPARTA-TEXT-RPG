@@ -10,6 +10,7 @@
         public Stats Stats { get; set; }
         public int Gold { get; set; }
         public int Exp { get; set; }
+        public int RequiredExp { get; set; }
 
         public Player(string name, string job)
         { 
@@ -37,6 +38,13 @@
         {
             Stats.TakeDamage(damage);
             Console.WriteLine($"{Name} 이(가) {damage} 의 피해를 입었습니다.");
+        }
+        public void LevelUp()
+        {
+            Level++;
+            Stats.Atk += 1;
+            Stats.Def += 1;
+            Stats.Hp = Stats.MaxHp;
         }
     }
 }
