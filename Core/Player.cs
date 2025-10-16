@@ -44,7 +44,7 @@
         public void GetExp(int exp)
         {
             Exp += exp;
-            if (Exp >= RequiredExp)
+            while (Exp >= RequiredExp)
             {
                 LevelUp();
             }
@@ -53,6 +53,7 @@
         {
             Level++;
             Exp -= RequiredExp;
+            if (Exp < 0) { Exp = 0; }
             RequiredExp = requiredExpList[Level];
 
             Stats.Atk += Level;
