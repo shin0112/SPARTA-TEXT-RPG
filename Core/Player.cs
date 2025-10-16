@@ -20,6 +20,7 @@
             Stats = new Stats(10, 5, 100);
             Gold = 1000;
             Exp = 0;
+            RequiredExp = 10;
         }
 
         public void Attack(IAttackable target)
@@ -39,9 +40,15 @@
             Stats.TakeDamage(damage);
             Console.WriteLine($"{Name} 이(가) {damage} 의 피해를 입었습니다.");
         }
+        public void GetExp(int exp)
+        {
+            Exp += exp;
+        }
         public void LevelUp()
         {
             Level++;
+            Exp -= RequiredExp;
+
             Stats.Atk += 1;
             Stats.Def += 1;
             Stats.Hp = Stats.MaxHp;

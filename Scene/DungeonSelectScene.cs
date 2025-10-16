@@ -12,66 +12,63 @@ namespace TEXT_RPG.Scene
         int[] requiredLevel = { 0, 5, 10, 15 };
         public void DungeonSelect()
         {
-            while (true)
+            Console.Clear();
+            Console.WriteLine("던전 선택");
+            Console.WriteLine();
+            for (int i = 0; i < stages.Length; i++)
             {
-                Console.Clear();
-                Console.WriteLine("던전 선택");
-                Console.WriteLine();
-                for (int i = 0; i < stages.Length; i++)
+                if (requiredLevel[i] <= player.Level)
                 {
-                    if (requiredLevel[i] <= player.Level)
-                    {
-                        Console.WriteLine($"{i + 1}. {stages[i]}");
-                        continue;
-                    }
-                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {requiredLevel[i]})");
+                    Console.WriteLine($"{i + 1}. {stages[i]}");
+                    continue;
                 }
-                Console.WriteLine();
-                Console.WriteLine("0. 나가기");
-                Console.WriteLine();
-                Console.WriteLine("원하시는 행동을 입력해주세요.");
-                Console.Write(">>");
+                Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {requiredLevel[i]})");
+            }
+            Console.WriteLine();
+            Console.WriteLine("0. 나가기");
+            Console.WriteLine();
+            Console.WriteLine("원하시는 행동을 입력해주세요.");
+            Console.Write(">>");
 
-                input = Console.ReadLine();
-                switch (input)
-                {
-                    case "0":
-                        Console.Clear();
-                        return;
-                    case "1":
-                        Console.Clear();
-                        new BattleStartScene().Show();
-                        return;
-                    case "2":
-                        if (player.Level <= requiredLevel[1])
-                        {
-                            Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
-                            break;
-                        }
-                        Console.Clear();
-                        new BattleStartScene().Show();
-                        return;
-                    case "3":
-                        if (player.Level <= requiredLevel[2])
-                        {
-                            Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
-                            break;
-                        }                
-                        Console.Clear();
-                        new BattleStartScene().Show();
-                        return;
-                    case "4":
-                        if (player.Level <= requiredLevel[3])
-                        {
-                            Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
-                            break;
-                        }
-                        Console.Clear();
-                        new BattleStartScene().Show();
-                        return;
-                    default:
+            input = Console.ReadLine();
+            switch (input)
+            {
+                case "0":
+                    Console.Clear();
+                    return;
+                case "1":
+                    Console.Clear();
+                    new BattleStartScene().Show();
+                    return;
+                case "2":
+                    if (player.Level <= requiredLevel[1])
+                    {
+                        Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                         break;
-                }
+                    }
+                    Console.Clear();
+                    new BattleStartScene().Show();
+                    return;
+                case "3":
+                    if (player.Level <= requiredLevel[2])
+                    {
+                        Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
+                        break;
+                    }
+                    Console.Clear();
+                    new BattleStartScene().Show();
+                    return;
+                case "4":
+                    if (player.Level <= requiredLevel[3])
+                    {
+                        Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
+                        break;
+                    }
+                    Console.Clear();
+                    new BattleStartScene().Show();
+                    return;
+                default:
+                    break;
             }
         }
     }
