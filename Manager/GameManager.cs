@@ -1,9 +1,11 @@
-﻿using TEXT_RPG.Scene;
+﻿using ConsoleRPG;
+using TEXT_RPG.Scene;
 
 namespace TEXT_RPG.Manager
 {
     internal class GameManager
     {
+        public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
 
@@ -11,6 +13,7 @@ namespace TEXT_RPG.Manager
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
+            new Intro().StartIntro();
             new StartScene().GameStart();
         }
     }
