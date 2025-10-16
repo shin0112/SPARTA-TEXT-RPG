@@ -8,14 +8,17 @@ namespace TEXT_RPG.Manager
         private static BattleManager _instance = new();
         public static BattleManager Instance { get; } = _instance;
 
-        public List<Monster> Monsters = [];
         private readonly MonsterRepository monsterRepository = new();
 
+        // 몬스터 리스트 정보
+        public List<Monster> Monsters = [];
         public int MonsterNumber { get; set; } = 0;
 
+        // 몬스터 사망 관리
+        public event Action? OnAllMonsterDead;
         private int _deadCount = 0;
 
-        public event Action? OnAllMonsterDead;
+        // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
         public void ResetIsVictory() => IsVictory = false;
 
