@@ -44,6 +44,10 @@
         public void GetExp(int exp)
         {
             Exp += exp;
+            if (Exp >= RequiredExp)
+            {
+                LevelUp();
+            }
         }
         public void LevelUp()
         {
@@ -51,8 +55,8 @@
             Exp -= RequiredExp;
             RequiredExp = requiredExpList[Level];
 
-            Stats.Atk += 1;
-            Stats.Def += 1;
+            Stats.Atk += Level;
+            Stats.Def += Level;
             Stats.Hp = Stats.MaxHp;
         }
     }
