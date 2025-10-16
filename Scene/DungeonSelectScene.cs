@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Scene
+﻿using TEXT_RPG.Core;
+
+namespace TEXT_RPG.Scene
 {
     internal class DungeonSelectScene
     {
@@ -19,10 +21,11 @@
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>");
 
-            input = Console.ReadLine();
+            Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
 
             while (true)
             {
+                input = Console.ReadLine();
                 switch (input)
                 {
                     case "0":
@@ -32,17 +35,31 @@
                         //레벨 1 던전 취준
                         return;
                     case "2":
+                        if (player.Level <= 5)
+                        {
+                            Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
+                            break;
+                        }
                         //레벨 2 던전 면접
                         return;
                     case "3":
+                        if (player.Level <= 10)
+                        {
+                            Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
+                            break;
+                        }
                         //레벨 3 던전 승진
                         return;
                     case "4":
+                        if (player.Level <= 15)
+                        {
+                            Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
+                            break;
+                        }
                         //레벨 3 던전 이직
                         return;
                     default:
-                        Console.Clear();
-                        DungeonSelect();
+                        Console.WriteLine("올바른 입력이 아닙니다.");
                         break;
                 }
             }
