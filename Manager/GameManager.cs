@@ -26,6 +26,7 @@ namespace TEXT_RPG.Manager
         public MonsterSelectScene MonsterSelect { get; } = new();
         public PhaseScene PhaseScene { get; } = new();
         public VictoryScene VictoryScene { get; } = new();
+        public DungeonSelectScene DungeonSelect { get; } = new();
 
 
         // 게임 시작하는 함수
@@ -61,6 +62,9 @@ namespace TEXT_RPG.Manager
                         break;
                     case SceneType.MonsterSelect:
                         MonsterSelect.Show();
+                        break;
+                    case SceneType.DungeonSelect:
+                        DungeonSelect.Show();
                         break;
                 }
                 // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.
