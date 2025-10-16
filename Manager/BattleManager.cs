@@ -35,8 +35,13 @@ namespace TEXT_RPG.Manager
             {
                 Monsters.Add(monsterRepository.MonstersNo1[random.Next(3)]);
             }
-            if (random.Next(1000) == 0) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+
+            if (random.Next(1000) > 900) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
             {
+                if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                {
+                    Monsters.RemoveAt(3);
+                }
                 Monsters.Add(monsterRepository.SpecialMonsterNo1[random.Next(monsterRepository.SpecialMonsterNo1.Count)]);
             }
 
