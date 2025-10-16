@@ -1,7 +1,7 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
-namespace TEXT_RPG.Scenes.Battle
+namespace TEXT_RPG.Scene.Battle
 {
     internal class MonsterSelectScene : BattleSceneBase
     {
@@ -53,6 +53,7 @@ namespace TEXT_RPG.Scenes.Battle
             {
                 case 0:
                     EndBattle();
+                    GameManager.Instance.SceneInfo = SceneType.Start;
                     break;
                 default:
                     new PhaseScene().Show();

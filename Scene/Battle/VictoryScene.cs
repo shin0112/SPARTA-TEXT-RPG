@@ -1,4 +1,7 @@
-﻿namespace TEXT_RPG.Scenes.Battle
+﻿using TEXT_RPG.Core;
+using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Scene.Battle
 {
     internal class VictoryScene : BattleSceneBase
     {
@@ -11,7 +14,12 @@
 
         protected override void HandleInput(int select)
         {
-            if (select == 0) return;
+            if (select == 0)
+            {
+                GameManager.Instance.SceneInfo = SceneType.Start;
+                BattleManager.Instance.Monsters.Clear();
+                BattleManager.Instance.ResetIsVictory();
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using TEXT_RPG.Core;
-using TEXT_RPG.Scenes.Battle;
+using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Scene
 {
@@ -56,7 +56,7 @@ namespace TEXT_RPG.Scene
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
-                        }                
+                        }
                         Console.Clear();
                         new BattleStartScene().Show();
                         return;

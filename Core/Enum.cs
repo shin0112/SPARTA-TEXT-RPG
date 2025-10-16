@@ -1,11 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TEXT_RPG.Core
+﻿namespace TEXT_RPG.Core
 {
+    public enum SceneType
+    {
+        Start,
+        Spec,
+        Inven,
+        Shop,
+        Equip,
+        Battle,
+        MonsterSelect,
+        Phase,
+        Victory,
+    }
+
     public enum ItemType
     {
         Weapon,

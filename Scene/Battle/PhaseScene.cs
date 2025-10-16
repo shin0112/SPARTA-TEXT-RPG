@@ -1,7 +1,7 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
-namespace TEXT_RPG.Scenes.Battle
+namespace TEXT_RPG.Scene.Battle
 {
     internal class PhaseScene : BattleSceneBase
     {
