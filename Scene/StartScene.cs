@@ -8,9 +8,8 @@ namespace TEXT_RPG.Scene
         {
             while (true)
             {
-                Console.Clear();
-                Console.WriteLine("거친 정글에 뛰어든 건 나지만 힘들다..");
-                Console.WriteLine("나..무사히 취업 할 수 있는거냐..");
+                Console.WriteLine("지금부터 취업준비를 해볼까?");
+                Console.WriteLine("무사히 취업 할 수 있을까..");
 
                 Console.WriteLine("1.스펙보기");
                 Console.WriteLine("2.사회에 뛰어들기");
@@ -24,12 +23,11 @@ namespace TEXT_RPG.Scene
 
                 if (input == "1")
                 {
-                    Console.WriteLine("스펙보기를 선택했습니다.");
+                    
                     new SpecScene().Specification();
                 }
                 else if (input == "2")
                 {
-                    Console.WriteLine("사회에 뛰어들기를 선택했습니다");
                     new BattleStartScene().Show();
                 }
                 else if (input == "3")
@@ -40,11 +38,18 @@ namespace TEXT_RPG.Scene
                 else if (input == "4")
                 {
                     Console.WriteLine("상점으로 이동합니다.");
+                    //ShopScene 주석처리 사라지면 그때 이어붙이기
+                }
+                else if (input == "0")
+                {
+                    Console.WriteLine("집이 아직 없습니다.");
                 }
                 else
                 {
                     Console.WriteLine("잘못 입력하셨습니다.");
+                    Console.Clear();
                 }
+                //여기
             }
         }
     }
