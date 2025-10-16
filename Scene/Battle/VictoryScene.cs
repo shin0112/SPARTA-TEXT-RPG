@@ -1,4 +1,4 @@
-﻿namespace TEXT_RPG.Scenes.Battle
+﻿namespace TEXT_RPG.Scene.Battle
 {
     internal class VictoryScene : BattleSceneBase
     {
