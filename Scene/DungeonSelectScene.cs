@@ -9,7 +9,7 @@ namespace TEXT_RPG.Scene
         Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
 
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
-        int[] recommenedLevel = { 0, 5, 10, 15 };
+        int[] requiredLevel = { 0, 5, 10, 15 };
         public void DungeonSelect()
         {
             while (true)
@@ -19,12 +19,12 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine();
                 for (int i = 0; i < stages.Length; i++)
                 {
-                    if (recommenedLevel[i] <= player.Level)
+                    if (requiredLevel[i] <= player.Level)
                     {
                         Console.WriteLine($"{i + 1}. {stages[i]}");
                         continue;
                     }
-                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {recommenedLevel[i]})");
+                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {requiredLevel[i]})");
                 }
                 Console.WriteLine();
                 Console.WriteLine("0. 나가기");
