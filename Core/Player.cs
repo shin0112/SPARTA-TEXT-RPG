@@ -46,7 +46,10 @@
             Exp += exp;
             while (Exp >= RequiredExp)
             {
-                LevelUp();
+                if(Level < 5)
+                {
+                    LevelUp();
+                }
             }
         }
         public void LevelUp()
