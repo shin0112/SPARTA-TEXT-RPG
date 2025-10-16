@@ -42,6 +42,7 @@ namespace TEXT_RPG.Scene
             else if (input == "4")
             {
                 Console.WriteLine("상점으로 이동합니다.");
+                GameManager.Instance.SceneInfo = SceneType.Shop;
             }
             else
             {

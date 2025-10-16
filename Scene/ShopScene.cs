@@ -1,43 +1,145 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TEXT_RPG.Core;
+using TEXT_RPG.Manager;
+using TEXT_RPG.Repository;
 
 namespace TEXT_RPG.Scene
 {
     internal class ShopScene
     {
-        bool isBuy = false;
+        public static List<Item> shopItem = ItemRepository.ShopItem;
 
-        public string shopIntroText = @"
+
+        bool isBuy = false; 
+
+
+        public string shopIntroText1 = @$"
 [상점]
-사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고?
+인자한 모습의 할아버지가 미소 지으며 반겨준다. 
+
+""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
+
+
 
 [보유 골드]
-{Gold} G
+비둘기 한 마리, 소주 반 병
 
-[아이템 목록]
-//{List} 삽입
 
-//- 열공 머리띠    | 방어력 +3  | 취준의 결연한 의지를 드러내는 머리띠.    |  700 G
-//- 버티컬 마우스  | 방어력 +10  |  손목터널증후군은 안 된다...                |  1500 G
-//- 험언 밀러 의자    | 방어력 +20  |   허리 수술 2,000만 원                    |  3000 G
+[아이템 목록]";
 
-//- 제뜨스트림 볼펜    | 공격력 +5  | 부드러운 볼펜으로 필기감이 뛰어나다.       |  1000 G
-//- 기계식 키보드 | 공격력 +15 | 두 손으로 잡고 힘껏 휘두르면 타격감이 좋다    |  2500 G
-//- 전임자의 비밀노트   | 공격력 +30  |  대기업으로 이직한 전임자의 메모가..?! |  5000 G
+
+        public string shopIntroText2 = @$"
 
 
 1. 아이템 구매
 2. 아이템 판매
 0. 나가기
 
-멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~
->>
-";
 
 
+멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~";  //보유 골드는 플레이어와 이어야 함 G
 
+
+        public static void ShopItemList()
+        {
+            string ability = "오류";
+            string isPercent = "";
+            string remainingItems = "[남은 수량: 1]";
+
+            foreach (var item in shopItem)
+            {
+                if(item.IsBuy == true)
+                {
+                    remainingItems = "Sold Out";
+                }
+
+                switch (item.Type)
+                {
+                    case ItemType.Weapon:
+                        ability = "공격력";
+                        isPercent = "";
+                        break;
+
+                    case ItemType.Armor:
+                        ability = "방어력";
+                        isPercent = "";
+                        break;
+                    case ItemType.HP:
+                        ability = "체력 회복";
+                        isPercent = "%";
+                        break;
+                    case ItemType.Stamina:
+                        ability = "스태미너 회복";
+                        isPercent = "";
+                        break;
+                    default:
+                        Console.WriteLine("오류 발생 확인 필요");
+                        break;
+                }
+
+                switch (item.Name)
+                {
+                    case "열공 머리띠":
+                    case "천하장사 소시지":
+                    case "빠워에이드":
+                        Console.WriteLine();
+                        break;
+                }
+
+                Console.WriteLine($"- {remainingItems} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
+            }
+        }
+
+
+        public void ShopSceneSelect() // 이동 방식 결정에 따라 코드 수정
+        {
+            while (true)
+            {
+                int inputInt;
+                string inputStr = Console.ReadLine();
+                int.TryParse(inputStr, out inputInt);
+
+                if (inputInt == 1)
+                {
+                    //아이템 구매로 이동
+                    GameManager.Instance.SceneInfo = SceneType.ShopBuy;
+                    break;
+                }
+                else if (inputInt == 2)
+                {
+                    //아이템 판매로 이동
+                    Console.WriteLine("아이템 판매로 이동");
+                }
+                else if (inputInt == 0)
+                {
+                    //메인 화면으로 이동
+                    GameManager.Instance.SceneInfo = SceneType.Start;
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 확인해주세요.");
+                }
+            }
+
+        }
+        // 오늘의 추천 메뉴 추후 추가
+        //public void RandomRecommend()  
+        //{
+        //    Random random = new();
+
+        //    string randomFood = "";
+
+        //    Console.WriteLine("오늘은 이걸 먹어보는 게 어떻겠나?");
+        //    Console.WriteLine($">> {randomFood} <<");
+        //}
+
+        public void DisplayShop()
+        {
+            Console.Clear();
+            Console.WriteLine(shopIntroText1);
+            ShopItemList();
+            Console.WriteLine(shopIntroText2);
+            Console.Write(">> ");
+            ShopSceneSelect();
+        }              
     }
 }

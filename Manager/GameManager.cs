@@ -18,6 +18,7 @@ namespace TEXT_RPG.Manager
         public StartScene StartScene { get; } = new();
         public SpecScene SpecScene { get; } = new();
         public ShopScene ShopScene { get; } = new();
+        public ShopBuyScene ShopBuyScene { get; } = new();
         public MonsterSelectScene MonsterSelectScene { get; } = new();
         public InventoryScene InventoryScene { get; } = new();
         public EquipManagementScene EquipManagementScene { get; } = new();
@@ -51,6 +52,12 @@ namespace TEXT_RPG.Manager
                         break;
                     case SceneType.Equip: // 장비 장착
                         EquipManagementScene.EquipManagement();
+                        break;
+                    case SceneType.Shop: // 장비 장착
+                        ShopScene.DisplayShop();
+                        break;
+                    case SceneType.ShopBuy: // 장비 장착
+                        ShopBuyScene.DisplayShopBuy();
                         break;
                 }
                 // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.

@@ -6,6 +6,7 @@
         Spec,
         Inven,
         Shop,
+        ShopBuy,
         Equip,
         Battle,
         MonsterSelect,
