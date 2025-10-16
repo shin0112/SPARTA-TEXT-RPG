@@ -2,6 +2,8 @@
 {
     public class Player : IAttack, IAttackable
     {
+        Random random = new Random();
+
         public string Name { get; set; }
         public string Job { get; set; }
         public int Level { get; set; }
@@ -21,6 +23,14 @@
 
         public void Attack(IAttackable target)
         {
+            Console.WriteLine($"{Name}의 공격!");
+            int criticalRate = random.Next(0, 100);
+            if (criticalRate <= 15)
+            {
+                Console.WriteLine("치명타 발생!");
+                target.TakeDamage((int)Math.Ceiling(Stats.Atk * 1.6f));
+                return;
+            }
             target.TakeDamage(Stats.Atk);
         }
         public void TakeDamage(int damage)
