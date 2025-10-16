@@ -52,7 +52,7 @@
                 }
             }
         }
-        public void LevelUp()
+        private void LevelUp()
         {
             Level++;
             Exp -= RequiredExp;
