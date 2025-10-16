@@ -34,7 +34,7 @@
         }
 
         // 색상 텍스트 메서드 (줄바꿈 X)
-        static void ColorWrite(string text, string colorName)
+        public static void ColorWrite(string text, string colorName)
         {
             if (Enum.TryParse(colorName, true, out ConsoleColor color))
             {
