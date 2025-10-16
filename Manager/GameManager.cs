@@ -1,5 +1,7 @@
 ﻿using ConsoleRPG;
+using TEXT_RPG.Core;
 using TEXT_RPG.Scene;
+using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Manager
 {
@@ -8,13 +10,52 @@ namespace TEXT_RPG.Manager
         public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
+        public Player? Player { get; set; }
+        public SceneType SceneInfo { get; set; } = SceneType.Start;
+
+        // 모든 씬 생성하기
+        // 씬이 추가될 때마다 여기에 추가해주세요.
+        public StartScene StartScene { get; } = new();
+        public SpecScene SpecScene { get; } = new();
+        public ShopScene ShopScene { get; } = new();
+        public MonsterSelectScene MonsterSelectScene { get; } = new();
+        public InventoryScene InventoryScene { get; } = new();
+        public EquipManagementScene EquipManagementScene { get; } = new();
+        public BattleStartScene BattleStartScene { get; } = new();
+        public MonsterSelectScene MonsterSelect { get; } = new();
+        public PhaseScene PhaseScene { get; } = new();
+        public VictoryScene VictoryScene { get; } = new();
+
 
         // 게임 시작하는 함수
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
-            new Intro().StartIntro();
-            new StartScene().GameStart();
+            //new Intro().StartIntro();
+            while (true)
+            {
+                // 2. 1에서 저장된 정보가 아직 유지되고 있습니다!
+                switch (SceneInfo)
+                {
+                    case SceneType.Start: // 시작
+                        StartScene.GameStart();
+                        break;
+                    case SceneType.Battle: // 전투
+                        BattleStartScene.Show();
+                        break;
+                    case SceneType.Spec: // 스펙
+                        SpecScene.Specification();
+                        break;
+                    case SceneType.Inven: // 인벤토리
+                        InventoryScene.Inventory();
+                        break;
+                    case SceneType.Equip: // 장비 장착
+                        EquipManagementScene.EquipManagement();
+                        break;
+                }
+                // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.
+            }
         }
     }
+
 }
