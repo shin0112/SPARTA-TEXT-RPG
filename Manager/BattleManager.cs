@@ -22,8 +22,6 @@ namespace TEXT_RPG.Manager
         public bool IsVictory { get; private set; } = false;
         public void ResetIsVictory() => IsVictory = false;
 
-        // Todo: plyaer 정보 담기
-
         // Todo: 던전에 따라서 다른 몬스터 스폰
         public void SpawnRandomMonsters()
         {
