@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.Scenes.Battle;
 
 namespace TEXT_RPG.Scene.Battle
 {
