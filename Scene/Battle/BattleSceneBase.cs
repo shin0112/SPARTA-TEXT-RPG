@@ -1,4 +1,7 @@
-﻿namespace TEXT_RPG.Scene.Battle
+using TEXT_RPG.Core;
+using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Scene.Battle
 {
     internal abstract class BattleSceneBase : SceneBase
     {
@@ -16,15 +19,13 @@
         protected virtual void ShowPlayerInfo()
         {
             // Todo: player 정보 가져오기 (임시 데이터)
-            int level = 1;
-            string name = "이름";
-            string job = "직업";
-            int currentHp = 100;
-            int maxHp = 100;
+            Player player = GameManager.Instance.Player ??= new("아무개", "백수");
 
             Console.WriteLine("[내 정보]");
-            Console.WriteLine($"Lv. {level} {name} ({job})");
-            Console.WriteLine($"체력 {currentHp}/{maxHp}\n");
+            Console.WriteLine($"Lv. {player.Level} {player.Name} ({player.Job})");
+            // Todo: 플레이어 레벨 업 hp 확정하기
+            // 1 레벨업 당 hp 가 0 늘어난다고 가정
+            Console.WriteLine($"체력 {player.Stats.Hp}/{100 + (player.Level - 1) * 5}\n");
         }
     }
 }

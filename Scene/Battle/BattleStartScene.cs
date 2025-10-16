@@ -23,6 +23,7 @@ namespace TEXT_RPG.Scene.Battle
                     new MonsterSelectScene().Show();
                     break;
                 default:
+                    GameManager.Instance.SceneInfo = SceneType.Start;
                     break;
             }
             BattleManager.Instance.Monsters.Clear();
