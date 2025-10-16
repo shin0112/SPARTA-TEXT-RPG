@@ -11,7 +11,7 @@ namespace TEXT_RPG.Scene
 
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
         int[] requiredLevel = { 0, 5, 10, 15 };
-        public void DungeonSelect()
+        public void Show()
         {
             while (true)
             {
