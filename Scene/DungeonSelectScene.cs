@@ -9,7 +9,7 @@ namespace TEXT_RPG.Scene
         Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
 
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
-        int[] recommenedLevel = { 0, 5, 10, 15 };
+        int[] requiredLevel = { 0, 5, 10, 15 };
         public void DungeonSelect()
         {
             while (true)
@@ -19,12 +19,12 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine();
                 for (int i = 0; i < stages.Length; i++)
                 {
-                    if (recommenedLevel[i] <= player.Level)
+                    if (requiredLevel[i] <= player.Level)
                     {
                         Console.WriteLine($"{i + 1}. {stages[i]}");
                         continue;
                     }
-                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {recommenedLevel[i]})");
+                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {requiredLevel[i]})");
                 }
                 Console.WriteLine();
                 Console.WriteLine("0. 나가기");
@@ -43,7 +43,7 @@ namespace TEXT_RPG.Scene
                         new BattleStartScene().Show();
                         return;
                     case "2":
-                        if (player.Level <= 5)
+                        if (player.Level <= requiredLevel[1])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
@@ -52,7 +52,7 @@ namespace TEXT_RPG.Scene
                         new BattleStartScene().Show();
                         return;
                     case "3":
-                        if (player.Level <= 10)
+                        if (player.Level <= requiredLevel[2])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
@@ -61,7 +61,7 @@ namespace TEXT_RPG.Scene
                         new BattleStartScene().Show();
                         return;
                     case "4":
-                        if (player.Level <= 15)
+                        if (player.Level <= requiredLevel[3])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
