@@ -43,7 +43,7 @@ namespace TEXT_RPG.Scene
                         new BattleStartScene().Show();
                         return;
                     case "2":
-                        if (player.Level <= 5)
+                        if (player.Level <= requiredLevel[1])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
@@ -52,7 +52,7 @@ namespace TEXT_RPG.Scene
                         new BattleStartScene().Show();
                         return;
                     case "3":
-                        if (player.Level <= 10)
+                        if (player.Level <= requiredLevel[2])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
@@ -61,7 +61,7 @@ namespace TEXT_RPG.Scene
                         new BattleStartScene().Show();
                         return;
                     case "4":
-                        if (player.Level <= 15)
+                        if (player.Level <= requiredLevel[3])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
