@@ -1,4 +1,5 @@
 ﻿using TEXT_RPG.Core;
+using TEXT_RPG.Manager;
 using TEXT_RPG.Repository;
 
 namespace TEXT_RPG.Scene
@@ -7,7 +8,7 @@ namespace TEXT_RPG.Scene
     {
         public static List<Item> shopItem = ItemRepository.ShopItem;
 
-        string remainingItems = "[남은 수량: 1]";
+
         bool isBuy = false; 
 
 
@@ -40,12 +41,16 @@ namespace TEXT_RPG.Scene
 
         public static void ShopItemList()
         {
-
             string ability = "오류";
             string isPercent = "";
+            string remainingItems = "[남은 수량: 1]";
 
             foreach (var item in shopItem)
             {
+                if(item.IsBuy == true)
+                {
+                    remainingItems = "Sold Out";
+                }
 
                 switch (item.Type)
                 {
@@ -80,8 +85,8 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"-  {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
-            } //{remainingItems} 넣기
+                Console.WriteLine($"- {remainingItems} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
+            }
         }
 
 
@@ -89,22 +94,25 @@ namespace TEXT_RPG.Scene
         {
             while (true)
             {
-                string input = Console.ReadLine();
+                int inputInt;
+                string inputStr = Console.ReadLine();
+                int.TryParse(inputStr, out inputInt);
 
-                if (input == "1")
+                if (inputInt == 1)
                 {
                     //아이템 구매로 이동
-                    Console.WriteLine("아이템 구매로 이동");
+                    GameManager.Instance.SceneInfo = SceneType.ShopBuy;
+                    break;
                 }
-                else if (input == "2")
+                else if (inputInt == 2)
                 {
                     //아이템 판매로 이동
                     Console.WriteLine("아이템 판매로 이동");
                 }
-                else if (input == "0")
+                else if (inputInt == 0)
                 {
                     //메인 화면으로 이동
-                    Console.WriteLine("메인으로 이동");
+                    GameManager.Instance.SceneInfo = SceneType.Start;
                 }
                 else
                 {
