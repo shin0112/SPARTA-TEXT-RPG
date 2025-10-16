@@ -38,21 +38,27 @@
         }
         public void TakeDamage(int damage)
         {
-            Stats.TakeDamage(damage);
-            Console.WriteLine($"{Name} 이(가) {damage} 의 피해를 입었습니다.");
+            int evadeRate = random.Next(0, 100);
+            if (evadeRate <= 10)
+            {
+                Console.WriteLine("공격이 빗나갔습니다.");
+                return;
+            }
+            int actualDamage = Stats.TakeDamage(damage);
+            Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
         }
         public void GetExp(int exp)
         {
             Exp += exp;
             while (Exp >= RequiredExp)
             {
-                if(Level < 5)
+                if(Level < requiredExpList.Length)
                 {
                     LevelUp();
                 }
             }
         }
-        public void LevelUp()
+        private void LevelUp()
         {
             Level++;
             Exp -= RequiredExp;
