@@ -21,6 +21,7 @@
 
         protected void ShowTitle()
         {
+            Console.Clear();
             if (!string.IsNullOrEmpty(Title))
             {
                 Console.WriteLine(Title);
