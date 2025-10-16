@@ -65,7 +65,6 @@ namespace TEXT_RPG.Scene.Battle
             {
                 Console.WriteLine($"HP {beforeHp} → {monster.Stats.Hp}\n");
             }
-
         }
     }
 }
