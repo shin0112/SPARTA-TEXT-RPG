@@ -10,7 +10,7 @@ namespace TEXT_RPG.Manager
         public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
-        public Player? Player { get; set; }
+        public Player? Player { get; set; } = new("아무개", "백수");
         public SceneType SceneInfo { get; set; } = SceneType.Start;
 
         // 모든 씬 생성하기
@@ -26,7 +26,7 @@ namespace TEXT_RPG.Manager
         public MonsterSelectScene MonsterSelect { get; } = new();
         public PhaseScene PhaseScene { get; } = new();
         public VictoryScene VictoryScene { get; } = new();
-        public DungeonSelectScene DungeonSelect {  get; } = new();
+        public DungeonSelectScene DungeonSelect { get; } = new();
 
 
         // 게임 시작하는 함수
@@ -59,6 +59,9 @@ namespace TEXT_RPG.Manager
                         break;
                     case SceneType.ShopBuy: // 장비 장착
                         ShopBuyScene.DisplayShopBuy();
+                        break;
+                    case SceneType.MonsterSelect:
+                        MonsterSelect.Show();
                         break;
                     case SceneType.DungeonSelect:
                         DungeonSelect.Show();
