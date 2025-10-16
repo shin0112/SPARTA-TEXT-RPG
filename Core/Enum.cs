@@ -12,6 +12,7 @@
         MonsterSelect,
         Phase,
         Victory,
+        DungeonSelect,
     }
 
     public enum ItemType

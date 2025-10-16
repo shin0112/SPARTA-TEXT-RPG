@@ -10,7 +10,7 @@ namespace TEXT_RPG.Scene
         Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
 
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
-        int[] requiredLevel = { 0, 1, 3, 5 };
+        int[] requiredLevel = { 1, 2, 3, 5 };
         public void Show()
         {
             while (true)
@@ -25,7 +25,7 @@ namespace TEXT_RPG.Scene
                         Console.WriteLine($"{i + 1}. {stages[i]}");
                         continue;
                     }
-                    Console.WriteLine($"{i + 1}. {stages[i]} (권장 레벨: {requiredLevel[i]})");
+                    UIHelper.ColorWriteLine($"{i + 1}. {stages[i]} (권장 레벨: {requiredLevel[i]})", "DarkGray");
                 }
                 Console.WriteLine();
                 Console.WriteLine("0. 나가기");
