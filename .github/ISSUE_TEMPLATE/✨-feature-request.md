@@ -2,7 +2,7 @@
 name: "✨ Feature request"
 about: 기능 개발
 title: "[Feat] "
-labels: "\U0001F528 Refactor"
+labels: "✨ Feature"
 assignees: ''
 
 ---
