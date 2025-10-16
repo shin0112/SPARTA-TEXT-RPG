@@ -10,7 +10,7 @@ namespace TEXT_RPG.Scene
         Player player = new Player("Player", "백수"); //임시 플레이어. 추후 삭제
 
         string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
-        int[] requiredLevel = { 0, 5, 10, 15 };
+        int[] requiredLevel = { 0, 1, 3, 5 };
         public void Show()
         {
             while (true)
