@@ -10,7 +10,7 @@ namespace TEXT_RPG.Manager
         public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
-        public Player? Player { get; set; }
+        public Player? Player { get; set; } = new("아무개", "백수");
         public SceneType SceneInfo { get; set; } = SceneType.Start;
 
         // 모든 씬 생성하기
