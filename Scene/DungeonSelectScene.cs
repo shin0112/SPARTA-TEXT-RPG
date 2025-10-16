@@ -1,4 +1,5 @@
 ﻿using TEXT_RPG.Core;
+using TEXT_RPG.Manager;
 using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Scene
@@ -40,7 +41,7 @@ namespace TEXT_RPG.Scene
                         return;
                     case "1":
                         Console.Clear();
-                        new BattleStartScene().Show();
+                        GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     case "2":
                         if (player.Level <= requiredLevel[1])
@@ -49,7 +50,7 @@ namespace TEXT_RPG.Scene
                             break;
                         }
                         Console.Clear();
-                        new BattleStartScene().Show();
+                        GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     case "3":
                         if (player.Level <= requiredLevel[2])
@@ -58,7 +59,7 @@ namespace TEXT_RPG.Scene
                             break;
                         }
                         Console.Clear();
-                        new BattleStartScene().Show();
+                        GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     case "4":
                         if (player.Level <= requiredLevel[3])
@@ -67,7 +68,7 @@ namespace TEXT_RPG.Scene
                             break;
                         }
                         Console.Clear();
-                        new BattleStartScene().Show();
+                        GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     default:
                         break;
