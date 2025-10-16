@@ -10,7 +10,7 @@ namespace TEXT_RPG.Scene
         {
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리", "Yellow");
-            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n\n");
+            Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
             Console.WriteLine("[아이템 목록]\n");
 
             // 아이템 리스트 나열 반복문
@@ -36,7 +36,7 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine($" - {paddedName} | {paddedStat} | {item.Description}");
             }
 
-            UIHelper.ColorWriteLine("\n1. 장착 관리\n0. 나가기\n", "Cyan");
+            UIHelper.ColorWriteLine("\n1. 아이템 관리\n0. 나가기\n", "Cyan");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>> ");
 
