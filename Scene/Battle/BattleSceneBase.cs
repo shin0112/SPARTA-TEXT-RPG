@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Scenes.Battle
+﻿using TEXT_RPG.Scene;
+
+namespace TEXT_RPG.Scene.Battle
 {
     internal abstract class BattleSceneBase : SceneBase
     {

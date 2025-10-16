@@ -1,4 +1,4 @@
-﻿namespace TEXT_RPG.Scenes
+﻿namespace TEXT_RPG.Scene
 {
     internal abstract class SceneBase
     {
