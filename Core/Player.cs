@@ -2,7 +2,7 @@
 {
     public class Player : IAttack, IAttackable
     {
-        Random random = new Random();
+        Random random = new();
 
         public string Name { get; set; }
         public string Job { get; set; }
