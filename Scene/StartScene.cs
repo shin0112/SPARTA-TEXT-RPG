@@ -1,4 +1,4 @@
-﻿using TEXT_RPG.Scenes.Battle;
+﻿using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Scene
 {
