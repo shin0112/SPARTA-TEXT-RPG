@@ -36,7 +36,11 @@ namespace TEXT_RPG.Scene.Battle
         {
             ShowTitle();
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
-            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{monster.Stats.Atk}]");
+
+            int actualDamage = monster.Stats.Atk - player.Stats.Def;
+            if (actualDamage < 0) actualDamage = 0;
+
+            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{actualDamage}]");
 
             monster.Attack(player);
 
