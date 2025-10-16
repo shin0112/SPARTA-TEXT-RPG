@@ -46,7 +46,7 @@
             Exp += exp;
             while (Exp >= RequiredExp)
             {
-                if(Level < 5)
+                if(Level < requiredExpList.Length)
                 {
                     LevelUp();
                 }
