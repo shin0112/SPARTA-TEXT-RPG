@@ -3,6 +3,7 @@
     public class Player : IAttack, IAttackable
     {
         Random random = new();
+        private int[] requiredExpList = { 0, 10, 35, 65, 100 };
 
         public string Name { get; set; }
         public string Job { get; set; }
@@ -20,7 +21,7 @@
             Stats = new Stats(10, 5, 100);
             Gold = 1000;
             Exp = 0;
-            RequiredExp = 10;
+            RequiredExp = requiredExpList[1];
         }
 
         public void Attack(IAttackable target)
@@ -48,6 +49,7 @@
         {
             Level++;
             Exp -= RequiredExp;
+            RequiredExp = requiredExpList[Level];
 
             Stats.Atk += 1;
             Stats.Def += 1;
