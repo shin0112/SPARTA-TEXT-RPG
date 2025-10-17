@@ -33,6 +33,7 @@ namespace TEXT_RPG.Manager
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
+            ShopScene.Init();
             //new Intro().StartIntro();
             while (true)
             {
