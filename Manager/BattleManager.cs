@@ -25,7 +25,7 @@ namespace TEXT_RPG.Manager
         public void ResetIsVictory() => IsVictory = false;
         public event Action? OnDefeat;
 
-        public SceneType CurrentBattleScene => GameManager.Instance.SceneInfo;
+        public SceneType CurrentScene => GameManager.Instance.SceneInfo;
 
         private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
 
@@ -56,8 +56,8 @@ namespace TEXT_RPG.Manager
             while (true)
             {
                 // 화면 관리
-                if (GameManager.Instance.SceneInfo == SceneType.Start) break;
-                else if (GameManager.Instance.SceneInfo == SceneType.DungeonSelect) break;
+                if (CurrentScene == SceneType.Start) break;
+                else if (CurrentScene == SceneType.DungeonSelect) break;
 
                 // 플레이어 사망 체크
                 if (GameManager.Instance.Player!.IsDead)
@@ -71,7 +71,7 @@ namespace TEXT_RPG.Manager
                     GameManager.Instance.SceneInfo = SceneType.Result;
                 }
 
-                _battleScenes[CurrentBattleScene].Show();
+                _battleScenes[CurrentScene].Show();
             }
             BattleEnd();
         }
