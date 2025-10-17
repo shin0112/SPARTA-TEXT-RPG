@@ -22,6 +22,7 @@ namespace TEXT_RPG.Core
                 if (index >= 0 && index < itemRepository.MonsterItem.Count)
                 {
                     DropItem.Add(itemRepository.MonsterItem[index]);
+                    //DropItem.Add(InventoryManager.Instance.itemRepository.MonsterItem[index]);
                 }
                 else
                 {
