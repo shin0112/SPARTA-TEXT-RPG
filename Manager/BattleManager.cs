@@ -14,6 +14,7 @@ namespace TEXT_RPG.Manager
         // 몬스터 리스트 정보
         public List<Monster> Monsters = [];
         public int MonsterNumber { get; set; } = 0;
+        private int _dungeonNumber = 0;
 
         // 몬스터 사망 관리
         public event Action? OnAllMonsterDead;
@@ -74,6 +75,16 @@ namespace TEXT_RPG.Manager
                 _battleScenes[CurrentScene].Show();
             }
             BattleEnd();
+        }
+
+        public void SelectDungeon(string? input)
+        {
+            bool isNumber = int.TryParse(input, out int dungeonNumber);
+
+            if (isNumber)
+            {
+                _dungeonNumber = dungeonNumber;
+            }
         }
 
         private bool CheckVictoryAndDefeat()
