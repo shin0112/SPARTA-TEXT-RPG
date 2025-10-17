@@ -6,11 +6,11 @@ namespace TEXT_RPG.Scene
 {
     internal class ShopScene
     {
-        public static List<Item> ShopItem = InventoryManager.Instance.ShopItem;
+        public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
 
         public bool isBuyingScene = false;
 
-        int itemNumber = 1;
+        int _itemNumber = 1;
 
         public string shopIntroText1;
 
@@ -23,7 +23,7 @@ namespace TEXT_RPG.Scene
 
 
 
-멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~";
+""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~""";
 
         public void Init()
         {
@@ -46,7 +46,7 @@ namespace TEXT_RPG.Scene
        public bool ToggleBuyingScene()
         {
             isBuyingScene = !isBuyingScene;
-            itemNumber = 1;
+            _itemNumber = 1;
             return isBuyingScene;
         }
 
@@ -55,7 +55,7 @@ namespace TEXT_RPG.Scene
         {
             string ability = "오류";
             string isPercent = "";
-            itemNumber = 1;
+            _itemNumber = 1;
 
             foreach (var item in ShopItem)
             {
@@ -103,8 +103,8 @@ namespace TEXT_RPG.Scene
         {
             if (isBuyingScene == true)
             {
-                this.itemNumber++;
-                return $"{itemNumber - 1}번 | ";
+                this._itemNumber++;
+                return $"{_itemNumber - 1}번 | ";
             }
             else
             {
@@ -135,9 +135,9 @@ namespace TEXT_RPG.Scene
                 }
                 else if (inputInt == 2)
                 {
-                    //아이템 판매로 이동
-                    Console.WriteLine("아이템 판매로 이동");
-                }
+                //아이템 판매로 이동
+                GameManager.Instance.SceneInfo = SceneType.ShopSell;
+            }
                 else if (inputInt == 0)
                 {
                     //메인 화면으로 이동
