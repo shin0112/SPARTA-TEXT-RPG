@@ -8,8 +8,8 @@ namespace TEXT_RPG.Scene
         public void GameStart()
         {
             Console.Clear();
-            Console.WriteLine("이제부터 시작이야!");
-            Console.WriteLine("강해져서 최고의 개발자가 되겠어");
+            UIHelper.ColorWriteLine("이제부터 시작이야!","DarkBlue");
+            UIHelper.ColorWriteLine("강해져서 최고의 개발자가 되겠어","DarkBlue");
             Console.WriteLine();
             Console.WriteLine("1.스펙보기");
             Console.WriteLine("2.사회에 뛰어들기");
@@ -35,11 +35,11 @@ namespace TEXT_RPG.Scene
             {
                 Console.WriteLine("인벤토리를 선택했습니다.");
                 GameManager.Instance.SceneInfo = SceneType.Inven;
-                //new InventoryScene().Inventory();
             }
             else if (input == "4")
             {
                 Console.WriteLine("상점으로 이동합니다.");
+                 //상점
             }
             else if (input == "0")
             {
@@ -49,7 +49,7 @@ namespace TEXT_RPG.Scene
             }
             else
             {
-                Console.WriteLine("잘못 입력하셨습니다.");
+                UIHelper.ColorWriteLine("잘못 입력하셨습니다.", "Red");
                 Console.ReadKey();
             }
         }

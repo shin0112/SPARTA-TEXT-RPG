@@ -10,11 +10,12 @@ namespace TEXT_RPG.Manager
         public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
-        public Player? Player { get; set; }
+        public Player? Player { get; set; } = new Player("아무개", "백수");
         public SceneType SceneInfo { get; set; } = SceneType.Start;
 
         // 모든 씬 생성하기
         // 씬이 추가될 때마다 여기에 추가해주세요.
+       
         public StartScene StartScene { get; } = new();
         public SpecScene SpecScene { get; } = new();
         public ShopScene ShopScene { get; } = new();
@@ -31,7 +32,7 @@ namespace TEXT_RPG.Manager
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
-            //new Intro().StartIntro();
+           // new Intro().StartIntro();
             while (true)
             {
                 // 2. 1에서 저장된 정보가 아직 유지되고 있습니다!
