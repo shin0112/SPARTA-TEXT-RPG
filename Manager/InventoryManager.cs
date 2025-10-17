@@ -22,5 +22,20 @@ namespace TEXT_RPG.Manager
             ShopItem = itemRepository.ShopItem;
         }
 
+        // 각 타입별로 하나씩만 장착할 수 있는 슬롯
+        public Dictionary<ItemType, int> equippedItems = new();
+
+        // 아이템 장착
+        public void Equip(Item item, int number)
+        {
+            if (equippedItems.ContainsKey(item.Type) && equippedItems[item.Type] == number)
+            {
+                equippedItems.Remove(item.Type);
+            }
+            else
+            {
+                equippedItems[item.Type] = number;
+            }
+        }
     }
 }

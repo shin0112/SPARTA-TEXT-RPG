@@ -18,7 +18,7 @@ namespace TEXT_RPG.Scene
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
             {
-                string prefix = item[i].IsEquipped ? "[E] " : "";
+                string prefix = InventoryManager.Instance.equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
                 string displayName = prefix + item[i].Name;
 
                 string statType = item[i].Type switch
@@ -52,7 +52,7 @@ namespace TEXT_RPG.Scene
                 }
                 else if (intCheck && (1 <= number && number <= item.Count)) // 장비 장착 또는 해제
                 {
-                    item[number - 1].IsEquipped = !item[number - 1].IsEquipped;
+                    InventoryManager.Instance.Equip(item[number - 1], number - 1);
                 }
             }
         }
