@@ -63,7 +63,7 @@
 
         public Monster Clone()
         {
-            return new Monster(Name, Level, new Stats(Stats.Hp, Stats.Atk, Stats.Def), Reward);
+            return new Monster(Name, Level, new Stats(Stats.Atk, Stats.Def, Stats.Hp), Reward);
         }
     }
 }
