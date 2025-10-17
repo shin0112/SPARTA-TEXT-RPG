@@ -46,6 +46,7 @@
             }
             int actualDamage = Stats.TakeDamage(damage);
             Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
+            IsDead = Stats.Hp <= 0;
         }
         public void GetExp(int exp)
         {
@@ -68,6 +69,21 @@
             Stats.Atk += Level;
             Stats.Def += Level;
             Stats.Hp = Stats.MaxHp;
+        }
+
+        public event Action<bool>? OnDeadChanged;
+        private bool _isDead = false;
+        public bool IsDead
+        {
+            get => _isDead;
+            set
+            {
+                if (_isDead != value)
+                {
+                    _isDead = value;
+                    OnDeadChanged?.Invoke(_isDead);
+                }
+            }
         }
     }
 }

@@ -12,7 +12,7 @@
         Battle,
         MonsterSelect,
         Phase,
-        Victory,
+        Result,
         DungeonSelect,
     }
 
