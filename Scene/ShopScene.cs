@@ -8,24 +8,9 @@ namespace TEXT_RPG.Scene
     {
         public static List<Item> shopItem = ItemRepository.ShopItem;
 
+        bool isBuy = false;
 
-        bool isBuy = false; 
-
-
-        public string shopIntroText1 = @$"
-[상점]
-인자한 모습의 할아버지가 미소 지으며 반겨준다. 
-
-""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
-
-
-
-[보유 골드]
-비둘기 한 마리, 소주 반 병
-
-
-[아이템 목록]";
-
+        public string shopIntroText1;
 
         public string shopIntroText2 = @$"
 
@@ -38,6 +23,22 @@ namespace TEXT_RPG.Scene
 
 멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~";
 
+        public void Init()
+        {
+            shopIntroText1 = @$"       
+[상점]
+인자한 모습의 할아버지가 미소 지으며 반겨준다. 
+
+""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
+
+
+
+[보유 골드]
+{GameManager.Instance.Player.Gold} G
+
+
+[아이템 목록]";
+        }
 
         public static void ShopItemList()
         {
