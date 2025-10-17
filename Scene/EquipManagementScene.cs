@@ -13,7 +13,7 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("장비를 장착 또는 해제하거나, 소모품을 사용하세요.\n");
             Console.WriteLine("[아이템 목록]\n");
 
-            List<Item> item = ItemRepository.InventoryItem;
+            List<Item> item = InventoryManager.Instance.InventoryItem;
 
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
