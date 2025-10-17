@@ -16,6 +16,8 @@ namespace TEXT_RPG.Manager
         public List<Item> InventoryItem;
         public List<Item> ShopItem;
         public List<Item> MonsterItem;
+        // 각 타입별로 하나씩만 장착할 수 있는 슬롯
+        public Dictionary<ItemType, int> equippedItems = new();
 
         private InventoryManager()
         {
@@ -23,9 +25,6 @@ namespace TEXT_RPG.Manager
             ShopItem = itemRepository.ShopItem;
             MonsterItem = itemRepository.MonsterItem;
         }
-
-        // 각 타입별로 하나씩만 장착할 수 있는 슬롯
-        public Dictionary<ItemType, int> equippedItems = new();
 
         // 아이템 장착
         public void Equip(Item item, int number)
@@ -40,9 +39,23 @@ namespace TEXT_RPG.Manager
             }
         }
 
+        public int equipValue(ItemType type)
+        {
+            int equipValue = 0;
+            bool EquipCheck = equippedItems.ContainsKey(type);
+            
+            if (EquipCheck)
+            {
+                int i = equippedItems[type];
+                equipValue = InventoryItem[i].Value;
+            }
+
+            return equipValue;
+        }
+
         public string IventoryListShow(Item item, int i)
         {
-            string prefix = InventoryManager.Instance.equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
+            string prefix = equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
             string displayName = prefix + item.Name;
 
             string statType = item.Type switch
