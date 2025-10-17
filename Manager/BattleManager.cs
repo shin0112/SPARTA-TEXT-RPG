@@ -62,5 +62,23 @@ namespace TEXT_RPG.Manager
                 OnAllMonsterDead?.Invoke();
             }
         }
+
+        public void BattleEnd()
+        {
+            Monsters.Clear();
+            MonsterNumber = 0;
+            IsVictory = false;
+            _deadCount = 0;
+        }
+
+        public void BattleInfo()
+        {
+            Console.WriteLine("=== 전투 정보 ===");
+            Console.WriteLine($"총 몬스터 수: {Monsters.Count}");
+            Console.WriteLine($"죽은 몬스터 수: {_deadCount}");
+            Console.WriteLine($"승리 상태: {IsVictory}");
+
+            Console.WriteLine();
+        }
     }
 }
