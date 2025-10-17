@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene.Battle
 {
@@ -12,7 +13,7 @@ namespace TEXT_RPG.Scene.Battle
         {
             ShowTitle();
             Console.WriteLine($"{(BattleManager.Instance.IsVictory ? "Victory" : "You Lose")}\n");
-            ShowPlayerInfo();
+            BattleUI.ShowPlayerInfo();
             HandleSelections();
         }
 

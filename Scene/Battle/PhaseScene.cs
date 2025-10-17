@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene.Battle
 {
@@ -57,7 +58,7 @@ namespace TEXT_RPG.Scene.Battle
             monster.Attack(player);
 
             Console.WriteLine();
-            ShowPlayerInfo();
+            BattleUI.ShowPlayerInfo();
             HandleSelections();
         }
 
