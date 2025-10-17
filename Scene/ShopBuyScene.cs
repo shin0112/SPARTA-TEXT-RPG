@@ -77,19 +77,30 @@ namespace TEXT_RPG.Scene
             return ShopItem[i]; // <- 객체 그대로 반환
         }
 
-        string input;
-        int i = 0;
+
 
         public void DisplayShopBuy()
         {
-            Console.Clear();
-            Console.WriteLine(shopIntroText1);
-            ShopItemList();
-            Console.WriteLine(shopIntroText2);
-            Console.Write(">><< ");
-            input = Console.ReadLine();
-            int.TryParse(input, out i);
-            SelectBuyItem(input);
+            ToggleBuyingScene();
+
+                Console.Clear();
+                Console.WriteLine(shopIntroText1);
+                ShopItemList();
+                Console.WriteLine(shopIntroText3);
+                Console.Write(">> ");
+            while (true)
+            {
+                input = "0";
+                input = Console.ReadLine();
+                int.TryParse(input, out i);
+                if (i == 0)
+                {
+                break;
+                }
+                SelectBuyItem(input);
+            }
+            ToggleBuyingScene();
+            GameManager.Instance.SceneInfo = SceneType.Shop;
         }
 
 
