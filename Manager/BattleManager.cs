@@ -50,13 +50,39 @@ namespace TEXT_RPG.Manager
             };
         }
 
+        public bool CheckVictoryAndDefeat()
+        {
+            bool flag = IsVictory || IsDefeat;
+
+            if (flag)
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            }
+
+            return flag;
+        }
+
         public void Battle()
         {
             SpawnRandomMonsters();
             while (true)
             {
+                // 화면 관리
                 if (GameManager.Instance.SceneInfo == SceneType.Start) break;
                 else if (GameManager.Instance.SceneInfo == SceneType.DungeonSelect) break;
+
+                // 플레이어 사망 체크
+                if (GameManager.Instance.Player!.IsDead)
+                {
+                    Defeat();
+                }
+
+                // 승리/패배 체크
+                if (CheckVictoryAndDefeat())
+                {
+                    GameManager.Instance.SceneInfo = SceneType.Result;
+                }
+
                 _battleScenes[CurrentBattleScene].Show();
             }
             BattleEnd();
