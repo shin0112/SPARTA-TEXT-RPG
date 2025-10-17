@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Repository;
+using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Manager
 {
@@ -20,7 +21,46 @@ namespace TEXT_RPG.Manager
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
+        public bool IsDefeat { get; private set; } = false;
         public void ResetIsVictory() => IsVictory = false;
+        public event Action? OnDefeat;
+
+        public SceneType CurrentBattleScene => GameManager.Instance.SceneInfo;
+
+        private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
+
+        public void InitScenes(GameManager game)
+        {
+            _battleScenes = new()
+            {
+                { SceneType.Battle, game.BattleStartScene },
+                { SceneType.MonsterSelect, game.MonsterSelect },
+                { SceneType.Phase, game.PhaseScene },
+                { SceneType.Result, game.ResultScene }
+            };
+
+            OnDefeat += () =>
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            };
+            OnAllMonsterDead += () =>
+            {
+                IsVictory = true;
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            };
+        }
+
+        public void Battle()
+        {
+            SpawnRandomMonsters();
+            while (true)
+            {
+                if (GameManager.Instance.SceneInfo == SceneType.Start) break;
+                else if (GameManager.Instance.SceneInfo == SceneType.DungeonSelect) break;
+                _battleScenes[CurrentBattleScene].Show();
+            }
+            BattleEnd();
+        }
 
         // Todo: 던전에 따라서 다른 몬스터 스폰
         public void SpawnRandomMonsters()
