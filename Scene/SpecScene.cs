@@ -31,19 +31,22 @@ public class SpecScene
         var player = GameManager.Instance.Player;
         
         Console.WriteLine("==============");
-        
-        WriteColoredStat("이름:", GameManager.Instance.Player?.Name,ConsoleColor.DarkGreen); 
-        WriteColoredStat("직업:", GameManager.Instance.Player?.Job,ConsoleColor.DarkGreen);
-        WriteColoredStat("레벨:", GameManager.Instance.Player?.Level.ToString(),ConsoleColor.DarkGreen);
-        WriteColoredStat("체력:", GameManager.Instance.Player?.Stats.Hp.ToString(),ConsoleColor.Cyan);
-        WriteColoredStat("공격력:",GameManager.Instance.Player?.Stats.Atk.ToString(),ConsoleColor.Cyan);
-        WriteColoredStat("방어력:",GameManager.Instance.Player?.Stats.Def.ToString(),ConsoleColor.Cyan);
+
+        int equipAtk = InventoryManager.Instance.equipValue(ItemType.Weapon);
+        int equipDef = InventoryManager.Instance.equipValue(ItemType.Armor);
+
+        WriteColoredStat("이름:", player?.Name,ConsoleColor.DarkGreen); 
+        WriteColoredStat("직업:", player?.Job,ConsoleColor.DarkGreen);
+        WriteColoredStat("레벨:", player?.Level.ToString(),ConsoleColor.DarkGreen);
+        WriteColoredStat("체력:", player?.Stats.Hp.ToString(),ConsoleColor.Cyan);
+        WriteColoredStat("공격력:",$"{(player?.Stats.Atk + equipAtk).ToString()} (+{equipAtk})",ConsoleColor.Cyan);
+        WriteColoredStat("방어력:", $"{(player?.Stats.Def + equipDef).ToString()} (+{equipDef})",ConsoleColor.Cyan);
         
         Console.WriteLine("==============");
         Console.WriteLine();
-        WriteColoredStat("경험치:", GameManager.Instance.Player?.Exp.ToString(),ConsoleColor.DarkCyan);
-        WriteColoredStat("획득경험치:", GameManager.Instance.Player?.RequiredExp.ToString(),ConsoleColor.DarkCyan);
-        WriteColoredStat("골드:",GameManager.Instance.Player?.Gold.ToString(),ConsoleColor.Yellow);
+        WriteColoredStat("경험치:", player?.Exp.ToString(),ConsoleColor.DarkCyan);
+        WriteColoredStat("획득경험치:", player?.RequiredExp.ToString(),ConsoleColor.DarkCyan);
+        WriteColoredStat("골드:", player?.Gold.ToString(),ConsoleColor.Yellow);
         Console.WriteLine();
         Console.WriteLine("==============");
         
