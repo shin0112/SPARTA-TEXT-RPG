@@ -1,6 +1,5 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
-using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Scene
 {
@@ -33,6 +32,7 @@ namespace TEXT_RPG.Scene
                 Console.Write(">>");
 
                 input = Console.ReadLine();
+                if (GameManager.Instance.Player!.IsDead) input = "-1";
                 switch (input)
                 {
                     case "0":
@@ -69,6 +69,9 @@ namespace TEXT_RPG.Scene
                         }
                         Console.Clear();
                         GameManager.Instance.SceneInfo = SceneType.Battle;
+                        return;
+                    case "-1":
+                        Console.WriteLine("체력이 없어 던전을 돌지 못합니다.");
                         return;
                     default:
                         break;

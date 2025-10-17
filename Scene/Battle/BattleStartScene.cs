@@ -7,14 +7,6 @@ namespace TEXT_RPG.Scene.Battle
     {
         protected override string[] Selections { get; } = ["나가기", "싸우기"];
 
-        public override void Show()
-        {
-            // 몬스터 랜덤 생성
-            BattleManager.Instance.SpawnRandomMonsters();
-
-            base.Show();
-        }
-
         protected override void HandleInput(int select)
         {
             switch (select)
@@ -24,7 +16,6 @@ namespace TEXT_RPG.Scene.Battle
                     break;
                 default:
                     GameManager.Instance.SceneInfo = SceneType.DungeonSelect; // 던전 선택 화면
-                    BattleManager.Instance.BattleEnd();
                     break;
             }
         }

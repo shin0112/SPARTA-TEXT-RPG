@@ -1,12 +1,13 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Repository;
+using TEXT_RPG.Scene.Battle;
 
 namespace TEXT_RPG.Manager
 {
     internal class BattleManager
     {
         private static BattleManager _instance = new();
-        public static BattleManager Instance { get; } = _instance;
+        public static BattleManager Instance => _instance;
 
         private readonly MonsterRepository monsterRepository = new();
 
@@ -20,10 +21,75 @@ namespace TEXT_RPG.Manager
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
+        public bool IsDefeat { get; private set; } = false;
         public void ResetIsVictory() => IsVictory = false;
+        public event Action? OnDefeat;
+
+        public SceneType CurrentScene => GameManager.Instance.SceneInfo;
+
+        private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
+
+        public void InitScenes(GameManager game)
+        {
+            _battleScenes = new()
+            {
+                { SceneType.Battle, game.BattleStartScene },
+                { SceneType.MonsterSelect, game.MonsterSelect },
+                { SceneType.Phase, game.PhaseScene },
+                { SceneType.Result, game.ResultScene }
+            };
+
+            OnDefeat += () =>
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            };
+            OnAllMonsterDead += () =>
+            {
+                IsVictory = true;
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            };
+        }
+
+        public void Battle()
+        {
+            SpawnRandomMonsters();
+            while (true)
+            {
+                // 화면 관리
+                if (CurrentScene == SceneType.Start) break;
+                else if (CurrentScene == SceneType.DungeonSelect) break;
+
+                // 플레이어 사망 체크
+                if (GameManager.Instance.Player!.IsDead)
+                {
+                    Defeat();
+                }
+
+                // 승리/패배 체크
+                if (CheckVictoryAndDefeat())
+                {
+                    GameManager.Instance.SceneInfo = SceneType.Result;
+                }
+
+                _battleScenes[CurrentScene].Show();
+            }
+            BattleEnd();
+        }
+
+        private bool CheckVictoryAndDefeat()
+        {
+            bool flag = IsVictory || IsDefeat;
+
+            if (flag)
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            }
+
+            return flag;
+        }
 
         // Todo: 던전에 따라서 다른 몬스터 스폰
-        public void SpawnRandomMonsters()
+        private void SpawnRandomMonsters()
         {
             Random random = new();
             int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
@@ -63,12 +129,25 @@ namespace TEXT_RPG.Manager
             }
         }
 
-        public void BattleEnd()
+        public void Defeat()
+        {
+            if (IsDefeat) return;
+            IsDefeat = true;
+            OnDefeat?.Invoke();
+        }
+
+        private void BattleEnd()
         {
             Monsters.Clear();
             MonsterNumber = 0;
             IsVictory = false;
+            IsDefeat = false;
             _deadCount = 0;
+        }
+
+        public void TurnEnd()
+        {
+            GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
         }
 
         public void BattleInfo()
