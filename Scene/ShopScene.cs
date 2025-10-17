@@ -36,7 +36,7 @@ namespace TEXT_RPG.Scene
 
 
 
-멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~";  //보유 골드는 플레이어와 이어야 함 G
+멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~";
 
 
         public static void ShopItemList()
@@ -44,6 +44,7 @@ namespace TEXT_RPG.Scene
             string ability = "오류";
             string isPercent = "";
             string remainingItems = "[남은 수량: 1]";
+            int itemNumber = 1;
 
             foreach (var item in shopItem)
             {
@@ -85,7 +86,8 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {remainingItems} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
+                Console.WriteLine($"- {itemNumber}번 | {remainingItems} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
+                itemNumber ++;
             }
         }
 
