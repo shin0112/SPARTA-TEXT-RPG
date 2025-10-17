@@ -52,13 +52,33 @@ namespace TEXT_RPG.Manager
         private void OnMonsterDeadChanged(bool isDead)
         {
             if (isDead) _deadCount++;
-            else _deadCount--;
 
+            // 모든 몬스터가 죽었는지 확인
             if (_deadCount == Monsters.Count)
             {
                 IsVictory = true;
+                _deadCount = 0;
+                Monsters.Clear();
                 OnAllMonsterDead?.Invoke();
             }
+        }
+
+        public void BattleEnd()
+        {
+            Monsters.Clear();
+            MonsterNumber = 0;
+            IsVictory = false;
+            _deadCount = 0;
+        }
+
+        public void BattleInfo()
+        {
+            Console.WriteLine("=== 전투 정보 ===");
+            Console.WriteLine($"총 몬스터 수: {Monsters.Count}");
+            Console.WriteLine($"죽은 몬스터 수: {_deadCount}");
+            Console.WriteLine($"승리 상태: {IsVictory}");
+
+            Console.WriteLine();
         }
     }
 }

@@ -5,7 +5,7 @@ namespace TEXT_RPG.Scene.Battle
 {
     internal class MonsterSelectScene : BattleSceneBase
     {
-        protected override string[] Selections => ["도망가기"];
+        protected override string[] Selections { get; } = ["도망가기"];
         protected override int SelectionCount => Selections.Length + BattleManager.Instance.Monsters.Count;
         private bool _battleEnded = false;
 
@@ -22,23 +22,22 @@ namespace TEXT_RPG.Scene.Battle
             {
                 Console.WriteLine("대상을 선택해주세요.");
                 (bool flowControl, int value) = GetSelectInput();
-                if (!flowControl)
+                if (value == 0) return value;
+                if (!flowControl && !BattleManager.Instance.Monsters[value - 1].IsDead)
                 {
                     return value;
                 }
+                Console.Write("잘못된 대상입니다. 다른 ");
             }
         }
 
         public override void Show()
         {
-            while (!_battleEnded)
-            {
-                base.Show();
-            }
+            base.Show();
 
             if (BattleManager.Instance.IsVictory)
             {
-                new VictoryScene().Show();
+                GameManager.Instance.VictoryScene.Show();
                 BattleManager.Instance.ResetIsVictory();
             }
         }
@@ -52,11 +51,11 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 0:
-                    EndBattle();
-                    GameManager.Instance.SceneInfo = SceneType.Start;
+                    GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
+                    BattleManager.Instance.BattleEnd();
                     break;
                 default:
-                    new PhaseScene().Show();
+                    GameManager.Instance.PhaseScene.Show();
                     break;
             }
         }

@@ -5,11 +5,11 @@ namespace TEXT_RPG.Scene.Battle
 {
     internal class BattleStartScene : BattleSceneBase
     {
-        protected override string[] Selections => ["나가기", "싸우기"];
+        protected override string[] Selections { get; } = ["나가기", "싸우기"];
 
         public override void Show()
         {
-            // todo: 몬스터 리스트
+            // 몬스터 랜덤 생성
             BattleManager.Instance.SpawnRandomMonsters();
 
             base.Show();
@@ -20,13 +20,13 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 1:
-                    new MonsterSelectScene().Show();
+                    GameManager.Instance.SceneInfo = SceneType.MonsterSelect; // 몬스터 선택 화면
                     break;
                 default:
-                    GameManager.Instance.SceneInfo = SceneType.Start;
+                    GameManager.Instance.SceneInfo = SceneType.DungeonSelect; // 던전 선택 화면
+                    BattleManager.Instance.BattleEnd();
                     break;
             }
-            BattleManager.Instance.Monsters.Clear();
         }
 
         protected override void ShowMonsterInfo()

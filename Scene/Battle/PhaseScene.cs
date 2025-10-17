@@ -7,37 +7,44 @@ namespace TEXT_RPG.Scene.Battle
     {
         // Todo: Monster 정보 저장하기 (임시 데이터)
         private List<Monster> monsters = BattleManager.Instance.Monsters;
-        protected override string[] Selections => ["다음"];
+        protected override string[] Selections { get; } = ["다음"];
 
         public override void Show()
         {
-            PlayerTurn();
+            Player player = GameManager.Instance.Player!;
+            PlayerTurn(player);
             foreach (var monster in monsters)
             {
                 if (monster.IsDead) continue;
-                MonsterTurn(monster);
+                MonsterTurn(monster, player);
             }
         }
 
-        private void PlayerTurn()
+        private void PlayerTurn(Player player)
         {
             ShowTitle();
-            // Todo: player 정보 넣기
             Monster monster = monsters[BattleManager.Instance.MonsterNumber - 1];
 
-            Console.WriteLine($"{"플레이어"}의 공격!");
+            Console.WriteLine($"{player.Name}의 공격!");
             Console.WriteLine($"Lv. {monster.Level} {monster.Name} 을(를) 맞췄습니다.\n");
 
             ShowMonsterInfo();
             HandleSelections();
         }
 
-        private void MonsterTurn(Monster monster)
+        private void MonsterTurn(Monster monster, Player player)
         {
             ShowTitle();
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
-            Console.WriteLine($"{"플레이어"} 을(를) 맞췄습니다. [데미지:{monster.Stats.Atk}]");
 
+            int actualDamage = monster.Stats.Atk - player.Stats.Def;
+            if (actualDamage < 0) actualDamage = 0;
+
+            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{actualDamage}]");
+
+            monster.Attack(player);
+
+            Console.WriteLine();
             ShowPlayerInfo();
             HandleSelections();
         }
@@ -48,13 +55,14 @@ namespace TEXT_RPG.Scene.Battle
 
         protected override void ShowMonsterInfo()
         {
+            // 몬스터 정보 가져오기
             Monster monster = monsters[BattleManager.Instance.MonsterNumber - 1];
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
 
-            // Todo: 플레이어 공격력 가져오기
-            int playerAtk = 10;
+            int playerAtk = GameManager.Instance.Player!.Stats.Atk;
             int beforeHp = monster.Stats.Hp;
 
+            // 몬스터 공격하기
             monster.TakeDamage(playerAtk);
 
             if (monster.IsDead)
@@ -65,7 +73,6 @@ namespace TEXT_RPG.Scene.Battle
             {
                 Console.WriteLine($"HP {beforeHp} → {monster.Stats.Hp}\n");
             }
-
         }
     }
 }
