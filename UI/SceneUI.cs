@@ -9,12 +9,21 @@ namespace TEXT_RPG.UI
 
     internal static class BattleSceneUI
     {
-        public static void ShowPlayerInfo()
+        public static void ShowPlayerInfo(Player? player = null, TextWriter? output = null)
         {
-            Player player = GameManager.Instance.Player!;
-            Console.WriteLine("[내 정보]");
-            Console.WriteLine($"Lv. {player.Level} {player.Name} ({player.Job})");
-            Console.WriteLine($"체력 {player.Stats.Hp}/{player.Stats.MaxHp}\n");
+            player ??= GameManager.Instance.Player;
+            output ??= Console.Out;
+
+            if (player is null)
+            {
+                output.WriteLine("[내 정보]");
+                output.WriteLine("플레이어 정보가 없습니다.\n");
+                return;
+            }
+
+            output.WriteLine("[내 정보]");
+            output.WriteLine($"Lv. {player.Level} {player.Name} ({player.Job})");
+            output.WriteLine($"체력 {player.Stats.Hp}/{player.Stats.MaxHp}\n");
         }
     }
 }
