@@ -5,7 +5,6 @@ namespace TEXT_RPG.Core
 {
     internal class Reward
     {
-        ItemRepository itemRepository = new();
 
         public int Exp { get; private set; }
         public int Gold { get; private set; }
@@ -19,14 +18,12 @@ namespace TEXT_RPG.Core
 
             foreach (int index in dropIndex)
             {
-                if (index >= 0 && index < itemRepository.MonsterItem.Count)
+                if (index >= 0 && index < InventoryManager.Instance.MonsterItem.Count)
                 {
-                    DropItem.Add(itemRepository.MonsterItem[index]);
-                    //DropItem.Add(InventoryManager.Instance.itemRepository.MonsterItem[index]);
+                    DropItem.Add(InventoryManager.Instance.MonsterItem[index]);
                 }
                 else
                 {
-                    Console.WriteLine("잘못된 인덱스입니다.");
                 }
             }
         }
