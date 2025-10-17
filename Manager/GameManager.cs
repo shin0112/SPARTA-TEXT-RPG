@@ -25,7 +25,7 @@ namespace TEXT_RPG.Manager
         public BattleStartScene BattleStartScene { get; } = new();
         public MonsterSelectScene MonsterSelect { get; } = new();
         public PhaseScene PhaseScene { get; } = new();
-        public VictoryScene VictoryScene { get; } = new();
+        public ResultScene ResultScene { get; } = new();
         public DungeonSelectScene DungeonSelect { get; } = new();
 
 
@@ -33,6 +33,7 @@ namespace TEXT_RPG.Manager
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
+            BattleManager.Instance.InitScenes(this);
             //new Intro().StartIntro();
             while (true)
             {
@@ -43,7 +44,7 @@ namespace TEXT_RPG.Manager
                         StartScene.GameStart();
                         break;
                     case SceneType.Battle: // 전투
-                        BattleStartScene.Show();
+                        BattleManager.Instance.Battle();
                         break;
                     case SceneType.Spec: // 스펙
                         SpecScene.Specification();
