@@ -25,18 +25,6 @@ namespace TEXT_RPG.Scene.Battle
             }
         }
 
-        public override void Show()
-        {
-
-            if (BattleManager.Instance.IsVictory || BattleManager.Instance.IsDefeat)
-            {
-                GameManager.Instance.SceneInfo = SceneType.Result;
-                return;
-            }
-
-            base.Show();
-        }
-
         protected override void HandleInput(int select)
         {
             // 선택한 몬스터 정보 저장하기
