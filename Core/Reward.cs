@@ -12,19 +12,27 @@ namespace TEXT_RPG.Core
         {
             Exp = exp;
             Gold = gold;
-            DropItem = drop;
+            DropItem = new List<Item>(drop);
         }
 
         public void Add(Reward other)
         {
             Exp += other.Exp;
             Gold += other.Gold;
-            
+            DropItem.AddRange(other.DropItem);
         }
 
         public void Get(Player player)
         {
+            player.GetExp(Exp);
+            player.Gold += Gold;
+            ItemRepository.InventoryItem.AddRange(DropItem);
 
+            Console.WriteLine($"{Exp} 경험치와 {Gold} G를 획득했습니다.");
+            foreach (Item item in DropItem) 
+            { 
+                Console.WriteLine($"{item.Name} 을(를) 획득했습니다.");
+            }
         }
     }
 }

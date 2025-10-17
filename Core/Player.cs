@@ -1,6 +1,6 @@
 ﻿namespace TEXT_RPG.Core
 {
-    public class Player : IAttack, IAttackable
+    internal class Player : IAttack, IAttackable
     {
         Random random = new();
         private int[] requiredExpList = { 0, 10, 35, 65, 100 };
@@ -12,6 +12,7 @@
         public int Gold { get; set; }
         public int Exp { get; set; }
         public int RequiredExp { get; set; }
+        public List<Item> Inventory { get; set; }
 
         public Player(string name, string job)
         { 
@@ -22,6 +23,7 @@
             Gold = 1000;
             Exp = 0;
             RequiredExp = requiredExpList[1];
+            Inventory = new List<Item>();
         }
 
         public void Attack(IAttackable target)
