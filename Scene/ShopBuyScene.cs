@@ -1,35 +1,26 @@
 ﻿using System;
 using TEXT_RPG.Core;
-using TEXT_RPG.Repository;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene
 {
-
-
     internal class ShopBuyScene : ShopScene
     {
-        public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
 
-        public int ShopItemNumber { get; set; } = 0;
+        public int ShopItemNumber { get; set; } = 0; // 현재 안 쓰는 코드
 
-        public bool hasEnoughGold = false;
+        public bool hasEnoughGold = false;  //현재 안 쓰는 코드
 
         string input;
 
         int i = 0;
 
-        public string shopIntroText3 = @$"
-
-
+        public string shopBuyText = $@"
 구매할 아이템의 번호를 입력하세요. ex) '2' 입력 시 '기계식 키보드'을(를) 구매합니다.
 
 0. 뒤로가기
 
-
-
-""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~""
-"; // 아이템 리스트 변경 시 예시 체크 필요
+""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~"""; // 아이템 리스트 변경 시 예시 체크 필요
 
 
 
@@ -60,7 +51,7 @@ namespace TEXT_RPG.Scene
                 return null;
             }
 
-            Console.WriteLine("정말 구매하시겠습니까?");
+            Console.WriteLine("정말 구매하시겠습니까?\n");
             Console.WriteLine("1. 예");
             Console.WriteLine("2. 조금만 더 고민해보자...\n");
             inputBuyCheck = Console.ReadLine();
@@ -88,9 +79,10 @@ namespace TEXT_RPG.Scene
             ToggleBuyingScene();
 
             Console.Clear();
+            Init();
             Console.WriteLine(shopIntroText1);
             ShopItemList();
-            Console.WriteLine(shopIntroText3);
+            Console.WriteLine(shopBuyText);
             while (true)
             {
                 Console.Write(">> ");
