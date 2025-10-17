@@ -16,8 +16,14 @@ namespace TEXT_RPG.Scene.Battle
             foreach (var monster in monsters)
             {
                 if (monster.IsDead) continue;
+                if (player.IsDead)
+                {
+                    BattleManager.Instance.Defeat();
+                    return;
+                }
                 MonsterTurn(monster, player);
             }
+            BattleManager.Instance.TurnEnd();
         }
 
         private void PlayerTurn(Player player)
@@ -51,6 +57,10 @@ namespace TEXT_RPG.Scene.Battle
 
         protected override void HandleInput(int select)
         {
+            if (BattleManager.Instance.IsVictory || BattleManager.Instance.IsDefeat)
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            }
         }
 
         protected override void ShowMonsterInfo()
