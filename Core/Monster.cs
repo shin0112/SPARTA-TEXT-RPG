@@ -7,6 +7,7 @@
         public string Name { get; set; }
         public int Level { get; set; }
         public Stats Stats { get; set; }
+        internal Reward Reward { get; set; }
 
         public event Action<bool>? OnDeadChanged;
         private bool _isDead;
@@ -23,12 +24,13 @@
             }
         }
 
-        public Monster(string name, int level, Stats stats)
+        internal Monster(string name, int level, Stats stats, Reward reward)
         {
             Name = name;
             Level = level;
             IsDead = false;
             Stats = stats;
+            Reward = reward;
         }
 
         public void Attack(IAttackable target)

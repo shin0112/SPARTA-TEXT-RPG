@@ -5,15 +5,29 @@ namespace TEXT_RPG.Core
 {
     internal class Reward
     {
+        ItemRepository itemRepository = new();
+
         public int Exp { get; private set; }
         public int Gold { get; private set; }
         public List<Item> DropItem { get; private set; }
 
-        public Reward(int exp, int gold, List<Item> drop)
+        public Reward(int exp, int gold, List<int> dropIndex)
         {
             Exp = exp;
             Gold = gold;
-            DropItem = new List<Item>(drop);
+            DropItem = new List<Item>();
+
+            foreach (int index in dropIndex)
+            {
+                if (index >= 0 && index < itemRepository.MonsterItem.Count)
+                {
+                    DropItem.Add(itemRepository.MonsterItem[index]);
+                }
+                else
+                {
+                    Console.WriteLine("잘못된 인덱스입니다.");
+                }
+            }
         }
 
         public void Add(Reward other)
