@@ -12,12 +12,24 @@ namespace TEXT_RPG.Scene.Battle
         public override void Show()
         {
             Player player = GameManager.Instance.Player!;
+
+            // 플레이어 턴
             PlayerTurn(player);
+
+            // 몬스터 턴 
             foreach (var monster in monsters)
             {
-                if (monster.IsDead) continue;
+                if (monster.IsDead) continue; // 죽은 몬스터인 경우 스킵
+                if (player.IsDead) // 플레이어 죽는 경우 패배 처리
+                {
+                    BattleManager.Instance.Defeat();
+                    return;
+                }
                 MonsterTurn(monster, player);
             }
+
+            // 한 턴 종료
+            BattleManager.Instance.TurnEnd();
         }
 
         private void PlayerTurn(Player player)
@@ -51,6 +63,10 @@ namespace TEXT_RPG.Scene.Battle
 
         protected override void HandleInput(int select)
         {
+            if (BattleManager.Instance.IsVictory || BattleManager.Instance.IsDefeat)
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            }
         }
 
         protected override void ShowMonsterInfo()
@@ -67,11 +83,11 @@ namespace TEXT_RPG.Scene.Battle
 
             if (monster.IsDead)
             {
-                Console.WriteLine($"HP {beforeHp} → Dead\n");
+                Console.WriteLine($"HP {beforeHp} →  Dead\n");
             }
             else
             {
-                Console.WriteLine($"HP {beforeHp} → {monster.Stats.Hp}\n");
+                Console.WriteLine($"HP {beforeHp} →  {monster.Stats.Hp}\n");
             }
         }
     }
