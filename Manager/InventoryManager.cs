@@ -15,11 +15,13 @@ namespace TEXT_RPG.Manager
 
         public List<Item> InventoryItem;
         public List<Item> ShopItem;
+        public List<Item> MonsterItem;
 
         private InventoryManager()
         {
             InventoryItem = itemRepository.InventoryItem;
             ShopItem = itemRepository.ShopItem;
+            MonsterItem = itemRepository.MonsterItem;
         }
 
         // 각 타입별로 하나씩만 장착할 수 있는 슬롯
