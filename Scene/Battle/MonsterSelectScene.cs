@@ -22,12 +22,14 @@ namespace TEXT_RPG.Scene.Battle
             {
                 Console.WriteLine("대상을 선택해주세요.");
                 (bool flowControl, int value) = GetSelectInput();
-                if (value == 0) return value;
-                if (!flowControl && !BattleManager.Instance.Monsters[value - 1].IsDead)
-                {
+
+                if (flowControl) continue; // 잘못된 입력
+
+                if (value == 0) return value; // 도망가기
+
+                var monsters = BattleManager.Instance.Monsters;
+                if (!monsters[value - 1].IsDead)
                     return value;
-                }
-                Console.Write("잘못된 대상입니다. 다른 ");
             }
         }
 
