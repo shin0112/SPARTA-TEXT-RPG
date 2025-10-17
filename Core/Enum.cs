@@ -7,6 +7,7 @@
         Inven,
         Shop,
         ShopBuy,
+        ShopSell,
         Equip,
         Battle,
         MonsterSelect,
