@@ -28,6 +28,12 @@
         {
             Console.WriteLine($"{Name}의 공격!");
             int criticalRate = random.Next(0, 100);
+            int evadeRate = random.Next(0, 100);
+            if(evadeRate <= 10)
+            {
+                Console.WriteLine("공격이 빗나갔습니다.");
+                return;
+            }
             if (criticalRate <= 15)
             {
                 Console.WriteLine("치명타 발생!");
@@ -38,12 +44,6 @@
         }
         public void TakeDamage(int damage)
         {
-            int evadeRate = random.Next(0, 100);
-            if (evadeRate <= 10)
-            {
-                Console.WriteLine("공격이 빗나갔습니다.");
-                return;
-            }
             int actualDamage = Stats.TakeDamage(damage);
             Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
             IsDead = Stats.Hp <= 0;
