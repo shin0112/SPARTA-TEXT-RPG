@@ -50,18 +50,6 @@ namespace TEXT_RPG.Manager
             };
         }
 
-        public bool CheckVictoryAndDefeat()
-        {
-            bool flag = IsVictory || IsDefeat;
-
-            if (flag)
-            {
-                GameManager.Instance.SceneInfo = SceneType.Result;
-            }
-
-            return flag;
-        }
-
         public void Battle()
         {
             SpawnRandomMonsters();
@@ -88,8 +76,20 @@ namespace TEXT_RPG.Manager
             BattleEnd();
         }
 
+        private bool CheckVictoryAndDefeat()
+        {
+            bool flag = IsVictory || IsDefeat;
+
+            if (flag)
+            {
+                GameManager.Instance.SceneInfo = SceneType.Result;
+            }
+
+            return flag;
+        }
+
         // Todo: 던전에 따라서 다른 몬스터 스폰
-        public void SpawnRandomMonsters()
+        private void SpawnRandomMonsters()
         {
             Random random = new();
             int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
@@ -136,7 +136,7 @@ namespace TEXT_RPG.Manager
             OnDefeat?.Invoke();
         }
 
-        public void BattleEnd()
+        private void BattleEnd()
         {
             Monsters.Clear();
             MonsterNumber = 0;

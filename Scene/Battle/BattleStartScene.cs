@@ -16,7 +16,6 @@ namespace TEXT_RPG.Scene.Battle
                     break;
                 default:
                     GameManager.Instance.SceneInfo = SceneType.DungeonSelect; // 던전 선택 화면
-                    BattleManager.Instance.BattleEnd();
                     break;
             }
         }
