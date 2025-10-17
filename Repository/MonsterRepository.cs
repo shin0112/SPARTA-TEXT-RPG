@@ -12,7 +12,7 @@ namespace TEXT_RPG.Repository
             new Monster("C# 심화", 3, new Stats(9, 3, 10)),
         ];
 
-        public List<Monster> SpecialMonsterNo1 { get; } = [
+        public List<Monster> SpecialMonstersNo1 { get; } = [
             new Monster("김영호 튜터", 5, new Stats(5, 5, 20)),
             new Monster("신찬용 튜터", 5, new Stats(5, 5, 20)),
             new Monster("이재현 튜터", 5, new Stats(5, 5, 20)),
@@ -29,12 +29,14 @@ namespace TEXT_RPG.Repository
             new Monster("막말하는 면접관", 6, new Stats(6, 6, 30)),
         ];
 
+        public List<Monster> SpecialMonstersNo2 { get; } = [];
+
         public MonsterRepository()
         {
             DungeonMonsters = new Dictionary<int, List<List<Monster>>>
             {
-                { 1, new() { MonstersNo1, SpecialMonsterNo1 } },
-                { 2, new() { MonstersNo2 } }
+                { 1, new() { MonstersNo1, SpecialMonstersNo1 } },
+                { 2, new() { MonstersNo2, SpecialMonstersNo2 } }
             };
         }
     }
