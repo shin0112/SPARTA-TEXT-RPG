@@ -7,14 +7,6 @@ namespace TEXT_RPG.Scene.Battle
     {
         protected override string[] Selections { get; } = ["도망가기"];
         protected override int SelectionCount => Selections.Length + BattleManager.Instance.Monsters.Count;
-        private bool _battleEnded = false;
-
-        public MonsterSelectScene()
-        {
-            BattleManager.Instance.OnAllMonsterDead += EndBattle;
-        }
-
-        private void EndBattle() => _battleEnded = true;
 
         protected override int SelectAct()
         {
