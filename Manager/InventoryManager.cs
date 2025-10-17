@@ -42,7 +42,7 @@ namespace TEXT_RPG.Manager
 
         public string IventoryListShow(Item item, int i)
         {
-            string prefix = InventoryManager.Instance.equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
+            string prefix = equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
             string displayName = prefix + item.Name;
 
             string statType = item.Type switch
