@@ -6,7 +6,7 @@ namespace TEXT_RPG.Scene
 {
     internal class ShopScene
     {
-        public static List<Item> shopItem = ItemRepository.ShopItem;
+        public static List<Item> shopItem = InventoryManager.Instance.ShopItem;
 
 
         bool isBuy = false; 
