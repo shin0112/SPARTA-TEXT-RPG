@@ -14,7 +14,7 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("[아이템 목록]\n");
 
             // 아이템 리스트 나열 반복문
-            foreach (var item in ItemRepository.InventoryItem)
+            foreach (var item in InventoryManager.Instance.InventoryItem)
             {
                 string prefix = item.IsEquipped ? "[E] " : "";
                 string displayName = prefix + item.Name;
