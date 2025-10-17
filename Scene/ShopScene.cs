@@ -6,9 +6,11 @@ namespace TEXT_RPG.Scene
 {
     internal class ShopScene
     {
-        public static List<Item> shopItem = ItemRepository.ShopItem;
+        public static List<Item> ShopItem = ItemRepository.ShopItem;
 
-        bool isBuy = false;
+        public bool isBuyingScene = false;
+
+        int itemNumber = 1;
 
         public string shopIntroText1;
 
@@ -40,19 +42,24 @@ namespace TEXT_RPG.Scene
 [아이템 목록]";
         }
 
-        public static void ShopItemList()
+
+       public bool ToggleBuyingScene()
+        {
+            isBuyingScene = !isBuyingScene;
+            itemNumber = 1;
+            return isBuyingScene;
+        }
+
+
+        public void ShopItemList()
         {
             string ability = "오류";
             string isPercent = "";
-            string remainingItems = "[남은 수량: 1]";
-            int itemNumber = 1;
+            itemNumber = 1;
 
-            foreach (var item in shopItem)
+            foreach (var item in ShopItem)
             {
-                if(item.IsBuy == true)
-                {
-                    remainingItems = "Sold Out";
-                }
+                string remaining = item.IsBuy ? "Sold Out" : "[남은 수량: 1]"; //foreach 밖에 놓는 방법 찾기
 
                 switch (item.Type)
                 {
@@ -87,25 +94,44 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {itemNumber}번 | {remainingItems} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
-                itemNumber ++;
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
             }
         }
 
 
+        public string DisplayItemNumber()
+        {
+            if (isBuyingScene == true)
+            {
+                this.itemNumber++;
+                return $"{itemNumber - 1}번 | ";
+            }
+            else
+            {
+                return "";
+            }
+        }
+
         public void ShopSceneSelect() // 이동 방식 결정에 따라 코드 수정
         {
-            while (true)
+                int inputInt = -1;
+                string inputStr;
+
+            while (inputInt != 1 || inputInt != 2 || inputInt != 0)
             {
-                int inputInt;
-                string inputStr = Console.ReadLine();
+                inputStr = Console.ReadLine();
                 int.TryParse(inputStr, out inputInt);
+                if (inputInt == 1 || inputInt == 2 || inputInt == 0)
+                {
+                    break;
+                }
+                Console.WriteLine("잘못된 입력입니다. 숫자를 확인해주세요.\n>> ");
+            }
 
                 if (inputInt == 1)
                 {
                     //아이템 구매로 이동
                     GameManager.Instance.SceneInfo = SceneType.ShopBuy;
-                    break;
                 }
                 else if (inputInt == 2)
                 {
@@ -116,12 +142,7 @@ namespace TEXT_RPG.Scene
                 {
                     //메인 화면으로 이동
                     GameManager.Instance.SceneInfo = SceneType.Start;
-                }
-                else
-                {
-                    Console.WriteLine("잘못된 입력입니다. 숫자를 확인해주세요.");
-                }
-            }
+                }                         
 
         }
         // 오늘의 추천 메뉴 추후 추가
