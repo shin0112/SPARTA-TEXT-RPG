@@ -17,12 +17,9 @@ namespace TEXT_RPG.Scene
 
         public string shopIntroText2 = @$"
 
-
 1. 아이템 구매
 2. 아이템 판매
 0. 나가기
-
-
 
 ""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~""";
 
@@ -31,14 +28,10 @@ namespace TEXT_RPG.Scene
             shopIntroText1 = @$"       
 [상점]
 인자한 모습의 할아버지가 미소 지으며 반겨준다. 
-
 ""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
-
-
 
 [보유 골드]
 {GameManager.Instance.Player.Gold} G
-
 
 [아이템 목록]";
         }
@@ -76,10 +69,12 @@ namespace TEXT_RPG.Scene
                     case ItemType.HP:
                         ability = "체력 회복";
                         isPercent = "%";
+                        remaining = "";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
                         isPercent = "";
+                        remaining = "";
                         break;
                     default:
                         Console.WriteLine("오류 발생 확인 필요");
@@ -160,6 +155,7 @@ namespace TEXT_RPG.Scene
         public void DisplayShop()
         {
             Console.Clear();
+            Init();
             Console.WriteLine(shopIntroText1);
             ShopItemList();
             Console.WriteLine(shopIntroText2);
