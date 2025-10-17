@@ -15,12 +15,51 @@ namespace TEXT_RPG.Manager
 
         public List<Item> InventoryItem;
         public List<Item> ShopItem;
+        public List<Item> MonsterItem;
 
         private InventoryManager()
         {
             InventoryItem = itemRepository.InventoryItem;
             ShopItem = itemRepository.ShopItem;
+            MonsterItem = itemRepository.MonsterItem;
         }
 
+        // 각 타입별로 하나씩만 장착할 수 있는 슬롯
+        public Dictionary<ItemType, int> equippedItems = new();
+
+        // 아이템 장착
+        public void Equip(Item item, int number)
+        {
+            if (equippedItems.ContainsKey(item.Type) && equippedItems[item.Type] == number)
+            {
+                equippedItems.Remove(item.Type);
+            }
+            else
+            {
+                equippedItems[item.Type] = number;
+            }
+        }
+
+        public string IventoryListShow(Item item, int i)
+        {
+            string prefix = InventoryManager.Instance.equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
+            string displayName = prefix + item.Name;
+
+            string statType = item.Type switch
+            {
+                ItemType.Weapon => "공격력 +",
+                ItemType.Armor => "방어력 +",
+                ItemType.HP => "체력회복 +",
+                ItemType.Stamina => "스태미너 +",
+
+                _ => ""
+            };
+            string displayStat = statType + item.Value;
+
+            string paddedName = UIHelper.GetPaddedString(displayName, 24);
+            string paddedStat = UIHelper.GetPaddedString(displayStat, 12);
+
+            return $"{ paddedName} | { paddedStat} | { item.Description}";
+        }
     }
 }
