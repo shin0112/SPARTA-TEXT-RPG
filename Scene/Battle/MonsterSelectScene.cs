@@ -35,13 +35,14 @@ namespace TEXT_RPG.Scene.Battle
 
         public override void Show()
         {
-            base.Show();
 
-            if (BattleManager.Instance.IsVictory)
+            if (BattleManager.Instance.IsVictory || BattleManager.Instance.IsDefeat)
             {
-                GameManager.Instance.VictoryScene.Show();
-                BattleManager.Instance.ResetIsVictory();
+                GameManager.Instance.SceneInfo = SceneType.Result;
+                return;
             }
+
+            base.Show();
         }
 
         protected override void HandleInput(int select)
@@ -54,10 +55,9 @@ namespace TEXT_RPG.Scene.Battle
             {
                 case 0:
                     GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
-                    BattleManager.Instance.BattleEnd();
                     break;
                 default:
-                    GameManager.Instance.PhaseScene.Show();
+                    GameManager.Instance.SceneInfo = SceneType.Phase;
                     break;
             }
         }
