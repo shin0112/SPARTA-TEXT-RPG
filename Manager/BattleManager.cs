@@ -120,7 +120,7 @@ namespace TEXT_RPG.Manager
             // 던전 일반 몬스터 스폰 
             for (int i = 0; i < monsterCount; i++)
             {
-                Monsters.Add(monsters[0][random.Next(monsters[0].Count)]);
+                Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
             }
 
             if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
@@ -129,7 +129,7 @@ namespace TEXT_RPG.Manager
                 {
                     Monsters.RemoveAt(3);
                 }
-                Monsters.Add(monsters[1][random.Next(monsters[1].Count)]);
+                Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
             }
 
             foreach (var monster in Monsters)
