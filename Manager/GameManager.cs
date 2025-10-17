@@ -19,6 +19,7 @@ namespace TEXT_RPG.Manager
         public SpecScene SpecScene { get; } = new();
         public ShopScene ShopScene { get; } = new();
         public ShopBuyScene ShopBuyScene { get; } = new();
+        public ShopSellScene ShopSellScene { get; } = new();
         public MonsterSelectScene MonsterSelectScene { get; } = new();
         public InventoryScene InventoryScene { get; } = new();
         public EquipManagementScene EquipManagementScene { get; } = new();
@@ -55,11 +56,14 @@ namespace TEXT_RPG.Manager
                     case SceneType.Equip: // 장비 장착
                         EquipManagementScene.EquipManagement();
                         break;
-                    case SceneType.Shop: // 장비 장착
+                    case SceneType.Shop: // 상점
                         ShopScene.DisplayShop();
                         break;
-                    case SceneType.ShopBuy: // 장비 장착
+                    case SceneType.ShopBuy: // 상점 아이템 구매
                         ShopBuyScene.DisplayShopBuy();
+                        break;
+                    case SceneType.ShopSell: // 상점 아이템 판매
+                        ShopSellScene.DisplayShopSell();
                         break;
                     case SceneType.MonsterSelect:
                         MonsterSelect.Show();
