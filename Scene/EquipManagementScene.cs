@@ -18,24 +18,9 @@ namespace TEXT_RPG.Scene
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
             {
-                string prefix = InventoryManager.Instance.equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
-                string displayName = prefix + item[i].Name;
+                string itemString = InventoryManager.Instance.IventoryListShow(item[i], i);
 
-                string statType = item[i].Type switch
-                {
-                    ItemType.Weapon => "공격력 +",
-                    ItemType.Armor => "방어력 +",
-                    ItemType.HP => "체력회복 +",
-                    ItemType.Stamina => "스태미너 +",
-
-                    _ => ""
-                };
-                string displayStat = statType + item[i].Value;
-
-                string paddedName = UIHelper.GetPaddedString(displayName, 24);
-                string paddedStat = UIHelper.GetPaddedString(displayStat, 12);
-
-                UIHelper.ColorWriteLine($"{i + 1}. {paddedName} | {paddedStat} | {item[i].Description}", "Cyan");
+                UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
             }
 
             UIHelper.ColorWriteLine("\n0. 나가기\n", "Cyan");
