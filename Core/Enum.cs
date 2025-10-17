@@ -6,11 +6,13 @@
         Spec,
         Inven,
         Shop,
+        ShopBuy,
         Equip,
         Battle,
         MonsterSelect,
         Phase,
         Victory,
+        DungeonSelect,
     }
 
     public enum ItemType

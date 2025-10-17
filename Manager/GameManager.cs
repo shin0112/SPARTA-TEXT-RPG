@@ -10,15 +10,15 @@ namespace TEXT_RPG.Manager
         public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
-        public Player? Player { get; set; } = new Player("아무개", "백수");
+        public Player? Player { get; set; } = new("아무개", "백수");
         public SceneType SceneInfo { get; set; } = SceneType.Start;
 
         // 모든 씬 생성하기
         // 씬이 추가될 때마다 여기에 추가해주세요.
-       
         public StartScene StartScene { get; } = new();
         public SpecScene SpecScene { get; } = new();
         public ShopScene ShopScene { get; } = new();
+        public ShopBuyScene ShopBuyScene { get; } = new();
         public MonsterSelectScene MonsterSelectScene { get; } = new();
         public InventoryScene InventoryScene { get; } = new();
         public EquipManagementScene EquipManagementScene { get; } = new();
@@ -26,13 +26,14 @@ namespace TEXT_RPG.Manager
         public MonsterSelectScene MonsterSelect { get; } = new();
         public PhaseScene PhaseScene { get; } = new();
         public VictoryScene VictoryScene { get; } = new();
+        public DungeonSelectScene DungeonSelect { get; } = new();
 
 
         // 게임 시작하는 함수
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
-           // new Intro().StartIntro();
+            //new Intro().StartIntro();
             while (true)
             {
                 // 2. 1에서 저장된 정보가 아직 유지되고 있습니다!
@@ -52,6 +53,18 @@ namespace TEXT_RPG.Manager
                         break;
                     case SceneType.Equip: // 장비 장착
                         EquipManagementScene.EquipManagement();
+                        break;
+                    case SceneType.Shop: // 장비 장착
+                        ShopScene.DisplayShop();
+                        break;
+                    case SceneType.ShopBuy: // 장비 장착
+                        ShopBuyScene.DisplayShopBuy();
+                        break;
+                    case SceneType.MonsterSelect:
+                        MonsterSelect.Show();
+                        break;
+                    case SceneType.DungeonSelect:
+                        DungeonSelect.Show();
                         break;
                 }
                 // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.

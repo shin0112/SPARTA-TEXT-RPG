@@ -52,11 +52,13 @@ namespace TEXT_RPG.Manager
         private void OnMonsterDeadChanged(bool isDead)
         {
             if (isDead) _deadCount++;
-            else _deadCount--;
 
+            // 모든 몬스터가 죽었는지 확인
             if (_deadCount == Monsters.Count)
             {
                 IsVictory = true;
+                _deadCount = 0;
+                Monsters.Clear();
                 OnAllMonsterDead?.Invoke();
             }
         }

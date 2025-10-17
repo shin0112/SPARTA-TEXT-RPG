@@ -3,7 +3,7 @@
     internal abstract class SceneBase
     {
         protected virtual string Title { get; } = "";
-        protected virtual string[] Selections => [];
+        protected virtual string[] Selections { get; } = [];
         protected virtual int SelectionCount => Selections.Length;
 
         public abstract void Show();

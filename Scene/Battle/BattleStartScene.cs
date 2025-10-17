@@ -5,7 +5,7 @@ namespace TEXT_RPG.Scene.Battle
 {
     internal class BattleStartScene : BattleSceneBase
     {
-        protected override string[] Selections => ["나가기", "싸우기"];
+        protected override string[] Selections { get; } = ["나가기", "싸우기"];
 
         public override void Show()
         {
@@ -20,13 +20,13 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 1:
-                    new MonsterSelectScene().Show();
+                    GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
                     break;
                 default:
                     GameManager.Instance.SceneInfo = SceneType.Start;
+                    BattleManager.Instance.Monsters.Clear();
                     break;
             }
-            BattleManager.Instance.Monsters.Clear();
         }
 
         protected override void ShowMonsterInfo()

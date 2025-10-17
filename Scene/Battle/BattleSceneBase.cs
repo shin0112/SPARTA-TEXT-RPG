@@ -23,9 +23,7 @@ namespace TEXT_RPG.Scene.Battle
 
             Console.WriteLine("[내 정보]");
             Console.WriteLine($"Lv. {player.Level} {player.Name} ({player.Job})");
-            // Todo: 플레이어 레벨 업 hp 확정하기
-            // 1 레벨업 당 hp 가 0 늘어난다고 가정
-            Console.WriteLine($"체력 {player.Stats.Hp}/{100 + (player.Level - 1) * 5}\n");
+            Console.WriteLine($"체력 {player.Stats.Hp}/{player.Stats.MaxHp}\n");
         }
     }
 }
