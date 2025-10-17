@@ -14,6 +14,7 @@ namespace TEXT_RPG.Manager
         // 몬스터 리스트 정보
         public List<Monster> Monsters = [];
         public int MonsterNumber { get; set; } = 0;
+        private int _dungeonNumber = 0;
 
         // 몬스터 사망 관리
         public event Action? OnAllMonsterDead;
@@ -76,6 +77,16 @@ namespace TEXT_RPG.Manager
             BattleEnd();
         }
 
+        public void SelectDungeon(string? input)
+        {
+            bool isNumber = int.TryParse(input, out int dungeonNumber);
+
+            if (isNumber)
+            {
+                _dungeonNumber = dungeonNumber;
+            }
+        }
+
         private bool CheckVictoryAndDefeat()
         {
             bool flag = IsVictory || IsDefeat;
@@ -88,25 +99,37 @@ namespace TEXT_RPG.Manager
             return flag;
         }
 
-        // Todo: 던전에 따라서 다른 몬스터 스폰
         private void SpawnRandomMonsters()
         {
+            List<List<Monster>> monsters;
+            try
+            {
+                // monsters[0] : 일반 몬스터, monsters[1] : 특수 몬스터
+                monsters = monsterRepository.DungeonMonsters[_dungeonNumber];
+            }
+            catch (KeyNotFoundException e)
+            {
+                Console.WriteLine("던전 정보를 찾을 수 없습니다.");
+                GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
+                return;
+            }
+
             Random random = new();
             int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
 
-            // 레벨 1 던전 몬스터
+            // 던전 일반 몬스터 스폰 
             for (int i = 0; i < monsterCount; i++)
             {
-                Monsters.Add(monsterRepository.MonstersNo1[random.Next(3)]);
+                Monsters.Add(monsters[0][random.Next(monsters[0].Count)]);
             }
 
-            if (random.Next(1000) > 900) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+            if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
             {
                 if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
                 {
                     Monsters.RemoveAt(3);
                 }
-                Monsters.Add(monsterRepository.SpecialMonsterNo1[random.Next(monsterRepository.SpecialMonsterNo1.Count)]);
+                Monsters.Add(monsters[1][random.Next(monsters[1].Count)]);
             }
 
             foreach (var monster in Monsters)

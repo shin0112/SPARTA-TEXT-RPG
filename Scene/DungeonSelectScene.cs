@@ -32,6 +32,7 @@ namespace TEXT_RPG.Scene
                 Console.Write(">>");
 
                 input = Console.ReadLine();
+                BattleManager.Instance.SelectDungeon(input);
                 if (GameManager.Instance.Player!.IsDead) input = "-1";
                 switch (input)
                 {
