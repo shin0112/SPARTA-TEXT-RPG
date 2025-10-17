@@ -4,13 +4,13 @@ namespace TEXT_RPG.Repository
 {
     internal class ItemRepository
     {
-        public static List<Item> InventoryItem = [
+        public List<Item> InventoryItem = [
             //기본장착 아이템
             new Item("게이밍 슈트", 1, ItemType.Armor, "게임에 특화된 반팔 티셔츠. 목부분이 살짝 늘어나있다.", 200),
             new Item("수학의 정석", 2, ItemType.Weapon, "먼지가 켜켜이 쌓여 있다. 중고로 팔아도 쏠쏠할 듯.", 500),
     ];
 
-        public static List<Item> ShopItem = [
+        public List<Item> ShopItem = [
             //공격 아이템
             new Item("제뜨스트림 볼펜", 5, ItemType.Weapon, "부드러운 볼펜으로 필기감이 뛰어나다.", 800),
             new Item("기계식 키보드", 20, ItemType.Weapon, "두 손으로 잡고 힘껏 휘두르면 타격감이 좋다.", 2800),
@@ -31,7 +31,7 @@ namespace TEXT_RPG.Repository
             new Item("핫세븐", 70, ItemType.Stamina, "오늘은 이거 마시고 죽는 거다..!", 200),
             ];
 
-        public static List<Item> MonsterItem = [
+        public List<Item> MonsterItem = [
             // 제뜨스트림 볼펜    | 공격력 +5  | 부드러운 볼펜으로 필기감이 뛰어나다.       |  800 G
             new Item("제뜨스트림 볼펜", 5, ItemType.Weapon, "부드러운 볼펜으로 필기감이 뛰어나다.", 800),
             new Item("C# 참고서", 10, ItemType.Weapon, "알 것 같다! 모르겠다... 알 것 같다!!! 모르겠다...", 1500),
