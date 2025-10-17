@@ -11,20 +11,20 @@ namespace TEXT_RPG.Repository
         ];
 
         public List<Monster> SpecialMonsterNo1 => [
-            new Monster("김영호 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("신찬용 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("이재현 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("진우원 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("하승우 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("나영웅 매니저", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("류은지 매니저", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
-            new Monster("진수인 매니저", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{ })),
+            new Monster("김영호 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("신찬용 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("이재현 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("진우원 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("하승우 튜터", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("나영웅 매니저", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{8})),
+            new Monster("류은지 매니저", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{8})),
+            new Monster("진수인 매니저", 5, new Stats(5, 5, 20), new Reward(5, 50, new List<int>{8})),
         ];
 
         public List<Monster> MonstersNo2 => [
-            new Monster("머리 까진 면접관", 4, new Stats(4, 4, 20), new Reward(4, 20, new List<int>{ })),
-            new Monster("내가 말하는데 조는 면접관", 5, new Stats(5, 5, 25), new Reward(5, 20, new List<int>{ })),
-            new Monster("막말하는 면접관", 6, new Stats(6, 6, 30), new Reward(6, 20, new List<int>{ })),
+            new Monster("머리 까진 면접관", 4, new Stats(4, 4, 20), new Reward(4, 40, new List<int>{ })),
+            new Monster("내가 말하는데 조는 면접관", 5, new Stats(5, 5, 25), new Reward(5, 50, new List<int>{ })),
+            new Monster("막말하는 면접관", 6, new Stats(6, 6, 30), new Reward(6, 60, new List<int>{ })),
         ];
     }
 }
