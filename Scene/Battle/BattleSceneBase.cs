@@ -13,6 +13,9 @@ namespace TEXT_RPG.Scene.Battle
             ShowTitle();
             ShowMonsterInfo();
             ShowPlayerInfo();
+
+            //BattleManager.Instance.BattleInfo();
+
             HandleSelections();
         }
 

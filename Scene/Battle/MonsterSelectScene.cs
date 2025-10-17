@@ -51,8 +51,8 @@ namespace TEXT_RPG.Scene.Battle
             switch (select)
             {
                 case 0:
-                    GameManager.Instance.SceneInfo = SceneType.Start;
-                    BattleManager.Instance.Monsters.Clear();
+                    GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
+                    BattleManager.Instance.BattleEnd();
                     break;
                 default:
                     GameManager.Instance.PhaseScene.Show();
