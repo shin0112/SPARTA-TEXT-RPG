@@ -26,6 +26,7 @@ namespace TEXT_RPG.Scene
             this.input = input;
             int.TryParse(input, out int i);
             i -= 1;
+            int itemPrice = InventoryItem[i].Price;
 
             string inputSellCheck;
 
@@ -47,8 +48,13 @@ namespace TEXT_RPG.Scene
             }
             else
             {
+                //if(GameManager.Instance.Player.IsEquipped == true)
+                //{
+
+                //}
                 //인벤토리에서 아이템 하나 빠지는 코드 필요
-                Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐준 거라고!\"");
+                GameManager.Instance.Player.Gold = (int)Math.Ceiling(itemPrice * 0.8f);
+                Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐준 거라고!\"\n");
             }
 
             return ShopItem[i]; //골드 반환 코드 필요
