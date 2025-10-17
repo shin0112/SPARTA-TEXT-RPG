@@ -75,11 +75,10 @@ namespace TEXT_RPG.Scene.Battle
             Monster monster = monsters[BattleManager.Instance.MonsterNumber - 1];
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
 
-            int playerAtk = GameManager.Instance.Player!.Stats.Atk;
             int beforeHp = monster.Stats.Hp;
 
             // 몬스터 공격하기
-            monster.TakeDamage(playerAtk);
+            GameManager.Instance.Player!.Attack(monster);
 
             if (monster.IsDead)
             {
