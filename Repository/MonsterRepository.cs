@@ -5,9 +5,9 @@ namespace TEXT_RPG.Repository
     internal class MonsterRepository
     {
         public List<Monster> MonstersNo1 => [
-            new Monster("Unity 훑어보기", 1, new Stats(5, 5, 5)),
-            new Monster("C# 기본", 2, new Stats(7, 7, 10)),
-            new Monster("C# 심화", 3, new Stats(9, 9, 10)),
+            new Monster("Unity 훑어보기", 1, new Stats(5, 1, 5)),
+            new Monster("C# 기본", 2, new Stats(7, 2, 10)),
+            new Monster("C# 심화", 3, new Stats(9, 3, 10)),
         ];
 
         public List<Monster> SpecialMonsterNo1 => [
