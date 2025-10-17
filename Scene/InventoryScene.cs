@@ -14,11 +14,13 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
             Console.WriteLine("[아이템 목록]\n");
 
-            List<Item> item = InventoryManager.Instance.InventoryItem;
+            var invenManager = InventoryManager.Instance;
+            List<Item> item = invenManager.InventoryItem;
+
             // 아이템 리스트 나열 반복문
             for (int i = 0; i < item.Count; i++)
             {
-                string itemString = InventoryManager.Instance.IventoryListShow(item[i], i);
+                string itemString = invenManager.IventoryListShow(item[i], i);
 
                 Console.WriteLine($" - {itemString}");
             }

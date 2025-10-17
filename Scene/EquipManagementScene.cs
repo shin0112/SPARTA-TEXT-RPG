@@ -13,12 +13,13 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("장비를 장착 또는 해제하거나, 소모품을 사용하세요.\n");
             Console.WriteLine("[아이템 목록]\n");
 
-            List<Item> item = InventoryManager.Instance.InventoryItem;
+            var invenManager = InventoryManager.Instance;
+            List<Item> item = invenManager.InventoryItem;
 
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
             {
-                string itemString = InventoryManager.Instance.IventoryListShow(item[i], i);
+                string itemString = invenManager.IventoryListShow(item[i], i);
 
                 UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
             }
@@ -37,7 +38,7 @@ namespace TEXT_RPG.Scene
                 }
                 else if (intCheck && (1 <= number && number <= item.Count)) // 장비 장착 또는 해제
                 {
-                    InventoryManager.Instance.Equip(item[number - 1], number - 1);
+                    invenManager.Equip(item[number - 1], number - 1);
                 }
             }
         }
