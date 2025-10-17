@@ -30,7 +30,7 @@ namespace TEXT_RPG.Scene
             {
                 Console.WriteLine("사회에 뛰어들기를 선택했습니다");
                 GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
-                //new BattleStartScene().Show();
+                
             }
             else if (input == "3")
             {
