@@ -3,7 +3,11 @@ using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.UI
 {
-    internal static class BattleUI
+    internal class SceneCommonUI
+    {
+    }
+
+    internal static class BattleSceneUI
     {
         public static void ShowPlayerInfo()
         {

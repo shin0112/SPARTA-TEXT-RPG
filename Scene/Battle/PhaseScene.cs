@@ -58,7 +58,7 @@ namespace TEXT_RPG.Scene.Battle
             monster.Attack(player);
 
             Console.WriteLine();
-            BattleUI.ShowPlayerInfo();
+            BattleSceneUI.ShowPlayerInfo();
             HandleSelections();
         }
 

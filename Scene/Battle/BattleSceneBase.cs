@@ -11,7 +11,7 @@ namespace TEXT_RPG.Scene.Battle
         {
             ShowTitle();
             ShowMonsterInfo();
-            BattleUI.ShowPlayerInfo();
+            BattleSceneUI.ShowPlayerInfo();
 
             //BattleManager.Instance.BattleInfo();
 
