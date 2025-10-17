@@ -7,7 +7,7 @@ namespace TEXT_RPG.Manager
     internal class BattleManager
     {
         private static BattleManager _instance = new();
-        public static BattleManager Instance { get; } = _instance;
+        public static BattleManager Instance => _instance;
 
         private readonly MonsterRepository monsterRepository = new();
 
