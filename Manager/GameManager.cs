@@ -25,7 +25,7 @@ namespace TEXT_RPG.Manager
         public BattleStartScene BattleStartScene { get; } = new();
         public MonsterSelectScene MonsterSelect { get; } = new();
         public PhaseScene PhaseScene { get; } = new();
-        public VictoryScene VictoryScene { get; } = new();
+        public ResultScene ResultScene { get; } = new();
         public DungeonSelectScene DungeonSelect { get; } = new();
 
 
