@@ -64,9 +64,34 @@ namespace TEXT_RPG.Scene
 
             if (ShopItem[i].IsBuy == false)
             {
-                ShopItem[i].IsBuy = true;
-                GameManager.Instance.Player.Gold -= ShopItem[i].Price;
-                Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
+                string inputQuantity = "";
+
+
+                if (ShopItem[i].Type is 0 or (ItemType)1)
+                {
+                    ShopItem[i].IsBuy = true;
+                    GameManager.Instance.Player.Gold -= ShopItem[i].Price;
+                    Init();
+
+                    Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
+                }
+                else
+                {
+                    Console.WriteLine("몇 개 사시겠습니까?");
+                    Console.Write(">> ");
+                    inputQuantity = Console.ReadLine();
+                    int.TryParse(inputQuantity, out int buyQuantity);
+
+                    GameManager.Instance.Player.Gold -= ShopItem[i].Price * buyQuantity;
+                    Init();
+
+                    if (buyQuantity > 4)
+                    {
+                        Console.WriteLine("\"자네, 그거 정말 다 먹을 수 있나..?\"");
+                    }
+                    Console.WriteLine("\"맛있게 먹게나.\"\n");
+                }
+
             }
 
             return ShopItem[i]; // <- 객체 그대로 반환
