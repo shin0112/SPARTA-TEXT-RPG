@@ -43,7 +43,7 @@ namespace TEXT_RPG.Scene
         }
 
 
-       public bool ToggleBuyingScene()
+        public bool ToggleBuyingScene()
         {
             isBuyingScene = !isBuyingScene;
             _itemNumber = 1;
@@ -59,7 +59,7 @@ namespace TEXT_RPG.Scene
 
             foreach (var item in ShopItem)
             {
-                string remaining = item.IsBuy ? "Sold Out" : "[남은 수량: 1]"; //foreach 밖에 놓는 방법 찾기
+                string remaining = item.IsBuy ? "[Sold Out]" : "[남은 수량: 1]"; //foreach 밖에 놓는 방법 찾기
 
                 switch (item.Type)
                 {
@@ -114,8 +114,8 @@ namespace TEXT_RPG.Scene
 
         public void ShopSceneSelect() // 이동 방식 결정에 따라 코드 수정
         {
-                int inputInt = -1;
-                string inputStr;
+            int inputInt = -1;
+            string inputStr;
 
             while (inputInt != 1 || inputInt != 2 || inputInt != 0)
             {
@@ -128,21 +128,21 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine("잘못된 입력입니다. 숫자를 확인해주세요.\n>> ");
             }
 
-                if (inputInt == 1)
-                {
-                    //아이템 구매로 이동
-                    GameManager.Instance.SceneInfo = SceneType.ShopBuy;
-                }
-                else if (inputInt == 2)
-                {
+            if (inputInt == 1)
+            {
+                //아이템 구매로 이동
+                GameManager.Instance.SceneInfo = SceneType.ShopBuy;
+            }
+            else if (inputInt == 2)
+            {
                 //아이템 판매로 이동
                 GameManager.Instance.SceneInfo = SceneType.ShopSell;
             }
-                else if (inputInt == 0)
-                {
-                    //메인 화면으로 이동
-                    GameManager.Instance.SceneInfo = SceneType.Start;
-                }                         
+            else if (inputInt == 0)
+            {
+                //메인 화면으로 이동
+                GameManager.Instance.SceneInfo = SceneType.Start;
+            }
 
         }
         // 오늘의 추천 메뉴 추후 추가
@@ -164,6 +164,6 @@ namespace TEXT_RPG.Scene
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();
-        }              
+        }
     }
 }

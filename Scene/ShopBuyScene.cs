@@ -28,7 +28,8 @@ namespace TEXT_RPG.Scene
 
 
 
-""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~"""; // 아이템 리스트 변경 시 예시 체크 필요
+""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~""
+"; // 아이템 리스트 변경 시 예시 체크 필요
 
 
 
@@ -40,7 +41,7 @@ namespace TEXT_RPG.Scene
 
             string inputBuyCheck;
 
-            if(i < 0 || i >= ShopItem.Count)
+            if (i < 0 || i >= ShopItem.Count)
             {
                 Console.WriteLine("잘못된 입력입니다. 번호를 확인해주세요.");
                 return null;
@@ -48,25 +49,25 @@ namespace TEXT_RPG.Scene
 
             if (ShopItem[i].IsBuy == true)
             {
-                Console.WriteLine("\"그 장비는 이미 판매되었다네!\""); // 추후 구매화면에서 즉시 구매가 안 되게 처리하면 else문 삭제 예정
+                Console.WriteLine("\"그 장비는 이미 판매되었다네!\"\n"); // 추후 구매화면에서 즉시 구매가 안 되게 처리하면 else문 삭제 예정
                 return null;
             }
 
-                if (ShopItem[i].Price > GameManager.Instance.Player.Gold)
+            if (ShopItem[i].Price > GameManager.Instance.Player.Gold)
             {
                 Console.WriteLine("\"자네... 돈은 있지? 아니, 이걸로 되겠어? 참.\"");
-                Console.WriteLine("돈을 더 벌어오자.");
+                Console.WriteLine("돈을 더 벌어오자.\n");
                 return null;
             }
 
             Console.WriteLine("정말 구매하시겠습니까?");
             Console.WriteLine("1. 예");
-            Console.WriteLine("2. 조금만 더 고민해보자...");
+            Console.WriteLine("2. 조금만 더 고민해보자...\n");
             inputBuyCheck = Console.ReadLine();
 
             if (inputBuyCheck != "1")
             {
-                Console.WriteLine("아이템을 구매하지 않습니다.");
+                Console.WriteLine("아이템을 구매하지 않습니다.\n");
                 return null;
             }
 
@@ -74,7 +75,7 @@ namespace TEXT_RPG.Scene
             {
                 ShopItem[i].IsBuy = true;
                 GameManager.Instance.Player.Gold -= ShopItem[i].Price;
-                Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"");
+                Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
             }
 
             return ShopItem[i]; // <- 객체 그대로 반환
@@ -86,19 +87,19 @@ namespace TEXT_RPG.Scene
         {
             ToggleBuyingScene();
 
-                Console.Clear();
-                Console.WriteLine(shopIntroText1);
-                ShopItemList();
-                Console.WriteLine(shopIntroText3);
-                Console.Write(">> ");
+            Console.Clear();
+            Console.WriteLine(shopIntroText1);
+            ShopItemList();
+            Console.WriteLine(shopIntroText3);
             while (true)
             {
+                Console.Write(">> ");
                 input = "0";
                 input = Console.ReadLine();
                 int.TryParse(input, out i);
                 if (i == 0)
                 {
-                break;
+                    break;
                 }
                 SelectBuyItem(input);
             }
