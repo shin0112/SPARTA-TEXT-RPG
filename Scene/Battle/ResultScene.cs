@@ -17,10 +17,6 @@ namespace TEXT_RPG.Scene.Battle
             HandleSelections();
         }
 
-        protected override void ShowMonsterInfo()
-        {
-        }
-
         protected override void HandleInput(int select)
         {
             if (select == 0)

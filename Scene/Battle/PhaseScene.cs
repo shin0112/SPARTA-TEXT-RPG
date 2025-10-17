@@ -69,26 +69,5 @@ namespace TEXT_RPG.Scene.Battle
                 GameManager.Instance.SceneInfo = SceneType.Result;
             }
         }
-
-        protected override void ShowMonsterInfo()
-        {
-            // 몬스터 정보 가져오기
-            Monster monster = monsters[BattleManager.Instance.MonsterNumber - 1];
-            Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
-
-            int beforeHp = monster.Stats.Hp;
-
-            // 몬스터 공격하기
-            GameManager.Instance.Player!.Attack(monster);
-
-            if (monster.IsDead)
-            {
-                Console.WriteLine($"HP {beforeHp} →  Dead\n");
-            }
-            else
-            {
-                Console.WriteLine($"HP {beforeHp} →  {monster.Stats.Hp}\n");
-            }
-        }
     }
 }
