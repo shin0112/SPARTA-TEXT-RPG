@@ -1,4 +1,5 @@
-﻿using TEXT_RPG.Repository;
+﻿using TEXT_RPG.Manager;
+using TEXT_RPG.Repository;
 
 namespace TEXT_RPG.Core
 {
@@ -26,7 +27,7 @@ namespace TEXT_RPG.Core
         {
             player.GetExp(Exp);
             player.Gold += Gold;
-            ItemRepository.InventoryItem.AddRange(DropItem);
+            InventoryManager.Instance.InventoryItem.AddRange(DropItem);
 
             Console.WriteLine($"{Exp} 경험치와 {Gold} G를 획득했습니다.");
             foreach (Item item in DropItem) 
