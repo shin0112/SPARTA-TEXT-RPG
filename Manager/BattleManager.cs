@@ -103,12 +103,25 @@ namespace TEXT_RPG.Manager
             }
         }
 
+        public void Defeat()
+        {
+            if (IsDefeat) return;
+            IsDefeat = true;
+            OnDefeat?.Invoke();
+        }
+
         public void BattleEnd()
         {
             Monsters.Clear();
             MonsterNumber = 0;
             IsVictory = false;
+            IsDefeat = false;
             _deadCount = 0;
+        }
+
+        public void TurnEnd()
+        {
+            GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
         }
 
         public void BattleInfo()
