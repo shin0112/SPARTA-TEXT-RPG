@@ -18,24 +18,30 @@ namespace TEXT_RPG.Scene
 "; // 아이템 리스트 변경 시 예시 체크 필요
 
 
-        public Item? SelectSellItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
+        public void SelectSellItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
         {
             this.input = input;
             int.TryParse(input, out int i);
             i -= 1;
-            int itemPrice = InventoryItem[i].Price;
+            int sellQuantity = 1;
 
-            string inputSellCheck;
-
-            if (i < 0 || i >= InventoryItem.Count) //인벤토리 리스트로 변경 필요
+            if (i < 0 || i >= InventoryItem.Count)
             {
                 Console.WriteLine("잘못된 입력입니다. 번호를 확인해주세요.\n");
-                return null;
+                return;
             }
 
-            Console.WriteLine("정말 판매하시겠습니까?\n");
+            int itemPrice = InventoryItem[i].Price; //입력값이 리스트 숫자보다 크면 예외로 에러가 나서 확인 코드 아래에서 선언했습니다.
+
+            if (InventoryItem[i].Type == ItemType.HP || InventoryItem[i].Type == ItemType.Stamina) //소비 아이템일 경우 몇 개 팔지 입력
+            {
+                sellQuantity = 1; //1;은 주석처리한 함수 살리고 이걸로 교체 SellItemQuantity_Consume();
+            }
+
+            Console.WriteLine($"정말 판매하시겠습니까? 판매할 수량: {sellQuantity} 총 판매 금액: {(int)Math.Ceiling(InventoryItem[i].Price * 0.8f * sellQuantity)}\n");
             Console.WriteLine("1. 예");
             Console.WriteLine("2. 조금만 더 고민해보자...");
+            string inputSellCheck;
             inputSellCheck = Console.ReadLine();
 
             if (inputSellCheck != "1")

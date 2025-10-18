@@ -22,6 +22,7 @@ namespace TEXT_RPG.Scene
             this.input = input;
             int.TryParse(input, out int i);
             i -= 1;
+            Item newItem = ShopItem[i];
 
             string inputBuyCheck;
 
@@ -89,12 +90,9 @@ namespace TEXT_RPG.Scene
                     }
                     Console.WriteLine("\"맛있게 먹게나.\"\n");
                 }
-
             }
-
-            return ShopItem[i]; // <- 객체 그대로 반환
+            InventoryItem.Add(newItem);
         }
-
 
 
         public void DisplayShopBuy()
