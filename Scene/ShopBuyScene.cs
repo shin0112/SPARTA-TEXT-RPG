@@ -82,8 +82,14 @@ namespace TEXT_RPG.Scene
                     inputQuantity = Console.ReadLine();
                     int.TryParse(inputQuantity, out int buyQuantity);
 
+                    if(GameManager.Instance.Player.Gold < ShopItem[i].Price * buyQuantity)
+                    {
+                        Console.WriteLine("\"자네... 돈은 있지? 아니, 이걸로 되겠어? 참.\"");
+                        Console.WriteLine("돈을 더 벌어오자.\n");
+                        return null;
+                    }
+
                     GameManager.Instance.Player.Gold -= ShopItem[i].Price * buyQuantity;
-                    Init();
 
                     if (buyQuantity > 4)
                     {
