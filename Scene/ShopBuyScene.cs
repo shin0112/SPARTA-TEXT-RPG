@@ -71,7 +71,6 @@ namespace TEXT_RPG.Scene
                 {
                     ShopItem[i].IsBuy = true;
                     GameManager.Instance.Player.Gold -= ShopItem[i].Price;
-                    Init();
 
                     Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
                 }
@@ -109,13 +108,13 @@ namespace TEXT_RPG.Scene
         {
             ToggleBuyingScene();
 
-            Console.Clear();
-            Init();
-            Console.WriteLine(shopIntroText1);
-            ShopItemList();
-            Console.WriteLine(shopBuyText);
             while (true)
             {
+                Console.Clear();
+                Init();
+                Console.WriteLine(shopIntroText1);
+                ShopItemList();
+                Console.WriteLine(shopBuyText);
                 Console.Write(">> ");
                 input = "0";
                 input = Console.ReadLine();
@@ -125,6 +124,8 @@ namespace TEXT_RPG.Scene
                     break;
                 }
                 SelectBuyItem(input);
+                Console.WriteLine("아무 키나 입력하면 계속합니다.");
+                Console.ReadKey();
             }
             ToggleBuyingScene();
             GameManager.Instance.SceneInfo = SceneType.Shop;
