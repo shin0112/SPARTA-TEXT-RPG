@@ -1,14 +1,12 @@
-﻿using TEXT_RPG.Core;
+﻿using System.Reflection.Metadata.Ecma335;
+using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene
 {
     internal class ShopSellScene : ShopScene
     {
-        public int InventoryItemNumber { get; set; } = 0;  //현재 안 쓰는 코드
-
         string input;
-
         int i = 0;
 
         public string shopSellText = @$"
@@ -43,21 +41,45 @@ namespace TEXT_RPG.Scene
             if (inputSellCheck != "1")
             {
                 Console.WriteLine("아이템을 판매하지 않습니다.\n");
-                return null;
+                return;
             }
             else
             {
-                //if(GameManager.Instance.Player.IsEquipped == true)
-                //{
+                if (InventoryItem[i].IsEquipped == true)
+                {
+                    InventoryItem[i].IsEquipped = false;
+                }
 
-                //}
-                //인벤토리에서 아이템 하나 빠지는 코드 필요, 남은수량 빠지는 코드 필요
-                GameManager.Instance.Player.Gold += (int)Math.Ceiling(itemPrice * 0.8f);
-                Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐준 거라고!\"\n");
             }
-
-            return ShopItem[i];
+            //인벤토리에서 아이템 하나 빠지는 코드 필요
+            GameManager.Instance.Player.Gold += (int)Math.Ceiling((itemPrice * 0.8f) * sellQuantity);
+            Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐 준 거라고!\"\n");
+            InventoryItem.RemoveAt(i);
         }
+
+
+        //public int SellItemQuantity_Consume()
+        //{
+        //    string inputQuantity;
+
+        //    Console.WriteLine($"몇 개 판매하시겠습니까? 현재 보유 수량: {InventoryItem[i].remaining}");
+        //    while (true)
+        //    {
+        //        Console.Write(">> ");
+        //        inputQuantity = Console.ReadLine();
+        //        int.TryParse(inputQuantity, out int sellQuantity);
+
+        //        if (InventoryItem[i].remaining < sellQuantity || sellQuantity < 1) //0개 이하 입력이나 보유 개수 이상 입력 시 재입력
+        //        {
+        //            Console.WriteLine("잘못된 입력입니다. 보유 개수를 확인하세요.");
+        //        }
+        //        else
+        //        {
+        //            return sellQuantity;
+        //        }
+        //    }
+        //}
+
 
         public void DisplayShopSell()
         {
@@ -65,12 +87,12 @@ namespace TEXT_RPG.Scene
 
             while (true)
             {
-            Console.Clear();
-            Init();
-            Console.WriteLine(shopIntroText1);
-            InventoryItemList();
-            Console.WriteLine(shopSellText);
-            Console.Write(">> ");
+                Console.Clear();
+                Init();
+                Console.WriteLine(shopIntroText1);
+                InventoryItemList();
+                Console.WriteLine(shopSellText);
+                Console.Write(">> ");
                 input = "0";
                 input = Console.ReadLine();
                 int.TryParse(input, out i);
