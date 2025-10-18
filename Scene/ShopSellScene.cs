@@ -12,7 +12,6 @@ namespace TEXT_RPG.Scene
         int i = 0;
 
         public string shopSellText = @$"
-
 판매할 아이템의 번호를 입력하세요. ex) '2' 입력 시 '수학의 정석'을(를) 판매합니다.
 
 0. 뒤로가기
@@ -52,26 +51,26 @@ namespace TEXT_RPG.Scene
                 //{
 
                 //}
-                //인벤토리에서 아이템 하나 빠지는 코드 필요
-                GameManager.Instance.Player.Gold = (int)Math.Ceiling(itemPrice * 0.8f);
+                //인벤토리에서 아이템 하나 빠지는 코드 필요, 남은수량 빠지는 코드 필요
+                GameManager.Instance.Player.Gold += (int)Math.Ceiling(itemPrice * 0.8f);
                 Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐준 거라고!\"\n");
             }
 
-            return ShopItem[i]; //골드 반환 코드 필요
+            return ShopItem[i];
         }
 
         public void DisplayShopSell()
         {
             ToggleBuyingScene();
 
+            while (true)
+            {
             Console.Clear();
             Init();
             Console.WriteLine(shopIntroText1);
-            //InventoryItemList();
+            InventoryItemList();
             Console.WriteLine(shopSellText);
             Console.Write(">> ");
-            while (true)
-            {
                 input = "0";
                 input = Console.ReadLine();
                 int.TryParse(input, out i);
@@ -80,6 +79,8 @@ namespace TEXT_RPG.Scene
                     break;
                 }
                 SelectSellItem(input);
+                Console.WriteLine("아무 키나 입력하면 계속합니다.");
+                Console.ReadKey();
             }
             ToggleBuyingScene();
             GameManager.Instance.SceneInfo = SceneType.Shop;
