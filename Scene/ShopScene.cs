@@ -7,6 +7,7 @@ namespace TEXT_RPG.Scene
     internal class ShopScene
     {
         public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
+        public List<Item> InventoryItem = InventoryManager.Instance.InventoryItem;
 
         public bool isBuyingScene = false;
 
@@ -16,12 +17,9 @@ namespace TEXT_RPG.Scene
 
         public string shopIntroText2 = @$"
 
-
 1. 아이템 구매
 2. 아이템 판매
 0. 나가기
-
-
 
 ""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~""";
 
@@ -30,20 +28,16 @@ namespace TEXT_RPG.Scene
             shopIntroText1 = @$"       
 [상점]
 인자한 모습의 할아버지가 미소 지으며 반겨준다. 
-
 ""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
-
-
 
 [보유 골드]
 {GameManager.Instance.Player.Gold} G
-
 
 [아이템 목록]";
         }
 
 
-       public bool ToggleBuyingScene()
+        public bool ToggleBuyingScene()
         {
             isBuyingScene = !isBuyingScene;
             _itemNumber = 1;
@@ -59,7 +53,7 @@ namespace TEXT_RPG.Scene
 
             foreach (var item in ShopItem)
             {
-                string remaining = item.IsBuy ? "Sold Out" : "[남은 수량: 1]"; //foreach 밖에 놓는 방법 찾기
+                string remaining = item.IsBuy ? "[Sold Out]" : "[남은 수량: 1]"; //foreach 밖에 놓는 방법 찾기
 
                 switch (item.Type)
                 {
@@ -75,6 +69,57 @@ namespace TEXT_RPG.Scene
                     case ItemType.HP:
                         ability = "체력 회복";
                         isPercent = "%";
+                        remaining = "";
+                        break;
+                    case ItemType.Stamina:
+                        ability = "스태미너 회복";
+                        isPercent = "";
+                        remaining = "";
+                        break;
+                    default:
+                        Console.WriteLine("오류 발생 확인 필요");
+                        break;
+                }
+
+                switch (item.Name) //ShopItem 리스트의 각 아이템 타입의 첫 아이템이 변경될 경우 아래 case도 맞춰서 변경 필요
+                {
+                    case "열공 머리띠":
+                    case "천하장사 소시지":
+                    case "빠워에이드":
+                        Console.WriteLine();
+                        break;
+                }
+
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 구매가격: {item.Price} G | {item.Description}");
+            }
+        }
+
+        public void InventoryItemList()
+        {
+            string ability = "오류";
+            string isPercent = "";
+            _itemNumber = 1;
+
+            foreach (var item in InventoryItem)
+            {
+                string remaining = "보유 개수 : "; //포션항목만 인벤토리 항목에서 개수 불러올 것. 포션은 인벤에 항목하나로 합산되어야 함
+
+                switch (item.Type)
+                {
+                    case ItemType.Weapon:
+                        ability = "공격력";
+                        isPercent = "";
+                        remaining = "";
+                        break;
+
+                    case ItemType.Armor:
+                        ability = "방어력";
+                        isPercent = "";
+                        remaining = "";
+                        break;
+                    case ItemType.HP:
+                        ability = "체력 회복";
+                        isPercent = "%";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
@@ -85,7 +130,7 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                switch (item.Name)
+                switch (item.Name)  //InventoryItem 리스트의 각 아이템 타입의 첫 아이템이 변경될 경우 아래 case도 맞춰서 변경 필요
                 {
                     case "열공 머리띠":
                     case "천하장사 소시지":
@@ -94,10 +139,9 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 판매가격: {(int)Math.Ceiling(item.Price * 0.8f)} G | {item.Description}");
             }
         }
-
 
         public string DisplayItemNumber()
         {
@@ -114,8 +158,8 @@ namespace TEXT_RPG.Scene
 
         public void ShopSceneSelect() // 이동 방식 결정에 따라 코드 수정
         {
-                int inputInt = -1;
-                string inputStr;
+            int inputInt = -1;
+            string inputStr;
 
             while (inputInt != 1 || inputInt != 2 || inputInt != 0)
             {
@@ -128,21 +172,21 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine("잘못된 입력입니다. 숫자를 확인해주세요.\n>> ");
             }
 
-                if (inputInt == 1)
-                {
-                    //아이템 구매로 이동
-                    GameManager.Instance.SceneInfo = SceneType.ShopBuy;
-                }
-                else if (inputInt == 2)
-                {
+            if (inputInt == 1)
+            {
+                //아이템 구매로 이동
+                GameManager.Instance.SceneInfo = SceneType.ShopBuy;
+            }
+            else if (inputInt == 2)
+            {
                 //아이템 판매로 이동
                 GameManager.Instance.SceneInfo = SceneType.ShopSell;
             }
-                else if (inputInt == 0)
-                {
-                    //메인 화면으로 이동
-                    GameManager.Instance.SceneInfo = SceneType.Start;
-                }                         
+            else if (inputInt == 0)
+            {
+                //메인 화면으로 이동
+                GameManager.Instance.SceneInfo = SceneType.Start;
+            }
 
         }
         // 오늘의 추천 메뉴 추후 추가
@@ -159,11 +203,12 @@ namespace TEXT_RPG.Scene
         public void DisplayShop()
         {
             Console.Clear();
+            Init();
             Console.WriteLine(shopIntroText1);
             ShopItemList();
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();
-        }              
+        }
     }
 }
