@@ -1,6 +1,7 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Repository;
 using TEXT_RPG.Scene.Battle;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Manager
 {
@@ -85,6 +86,43 @@ namespace TEXT_RPG.Manager
             {
                 _dungeonNumber = dungeonNumber;
             }
+        }
+
+        public void PlayerTurn()
+        {
+            Monster monster = Monsters[MonsterNumber - 1];
+            Player player = GameManager.Instance.Player!;
+
+            int beforeHp = monster.Stats.Hp;
+
+
+            // 몬스터 공격하기
+            player.Attack(monster);
+
+            Console.WriteLine();
+            Console.WriteLine($"Lv. {monster.Level} {monster.Name}");
+            Console.WriteLine($"HP {beforeHp} →  {(monster.IsDead ? "Dead" : monster.Stats.Hp)}\n");
+        }
+
+        public void MonsterTurn(Monster monster)
+        {
+            Player player = GameManager.Instance.Player!;
+            if (player.IsDead)
+            {
+                Defeat();
+                return;
+            }
+
+            int actualDamage = Math.Max(monster.Stats.Atk - player.Stats.Def, 0);
+
+
+            Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
+            Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{actualDamage}]\n");
+
+            monster.Attack(player);
+
+            Console.WriteLine();
+            BattleSceneUI.ShowPlayerInfo();
         }
 
         private bool CheckVictoryAndDefeat()
