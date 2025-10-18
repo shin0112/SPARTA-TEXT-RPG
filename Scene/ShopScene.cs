@@ -81,7 +81,7 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                switch (item.Name)
+                switch (item.Name) //ShopItem 리스트의 각 아이템 타입의 첫 아이템이 변경될 경우 아래 case도 맞춰서 변경 필요
                 {
                     case "열공 머리띠":
                     case "천하장사 소시지":
@@ -90,10 +90,58 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | {item.Price} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 구매가격: {item.Price} G | {item.Description}");
             }
         }
 
+        public void InventoryItemList()
+        {
+            string ability = "오류";
+            string isPercent = "";
+            _itemNumber = 1;
+
+            foreach (var item in InventoryItem)
+            {
+                string remaining = "보유 개수 : "; //포션항목만 인벤토리 항목에서 개수 불러올 것. 포션은 인벤에 항목하나로 합산되어야 함
+
+                switch (item.Type)
+                {
+                    case ItemType.Weapon:
+                        ability = "공격력";
+                        isPercent = "";
+                        remaining = "";
+                        break;
+
+                    case ItemType.Armor:
+                        ability = "방어력";
+                        isPercent = "";
+                        remaining = "";
+                        break;
+                    case ItemType.HP:
+                        ability = "체력 회복";
+                        isPercent = "%";
+                        break;
+                    case ItemType.Stamina:
+                        ability = "스태미너 회복";
+                        isPercent = "";
+                        break;
+                    default:
+                        Console.WriteLine("오류 발생 확인 필요");
+                        break;
+                }
+
+                switch (item.Name)  //InventoryItem 리스트의 각 아이템 타입의 첫 아이템이 변경될 경우 아래 case도 맞춰서 변경 필요
+                {
+                    case "열공 머리띠":
+                    case "천하장사 소시지":
+                    case "빠워에이드":
+                        Console.WriteLine();
+                        break;
+                }
+
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 판매가격: {(int)Math.Ceiling(item.Price * 0.8f)} G | {item.Description}");
+            }
+        }
 
         public string DisplayItemNumber()
         {
