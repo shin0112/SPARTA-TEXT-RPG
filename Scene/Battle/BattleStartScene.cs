@@ -19,17 +19,5 @@ namespace TEXT_RPG.Scene.Battle
                     break;
             }
         }
-
-        protected override void ShowMonsterInfo()
-        {
-            List<Monster> monsters = BattleManager.Instance.Monsters;
-
-            for (int i = 0; i < monsters.Count; i++)
-            {
-                var monster = monsters[i];
-                Console.WriteLine($"Lv. {monster.Level} {monster.Name} | {(monster.IsDead ? "DEAD" : "HP " + monster.Stats.Hp)}");
-            }
-            Console.WriteLine();
-        }
     }
 }
