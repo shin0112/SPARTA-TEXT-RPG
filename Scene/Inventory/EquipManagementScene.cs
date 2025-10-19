@@ -13,7 +13,7 @@ namespace TEXT_RPG.Scene.Inventory
             Console.WriteLine("[아이템 목록]\n");
 
             var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.InventoryItem;
+            List<Item> item = invenManager.EquipItem;
 
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
