@@ -8,17 +8,13 @@ namespace TEXT_RPG.Scene.Inventory
     {
         public void Inventory()
         {
+            var invenManager = InventoryManager.Instance;
+            List<Item> item = invenManager.InventoryItem;
+
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리", "Yellow");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
             Console.WriteLine("[장비]\n");
-
-            var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.InventoryItem;
-            //List<Item> consumeItem = invenManager.ConsumeItem;
-            //List<Item> item = new List<Item>();
-            //item.AddRange(invenManager.EquipItem);
-            //item.AddRange(invenManager.ConsumeItem);
 
             // 아이템 리스트 나열 반복문
             for (int i = 0; i < item.Count; i++)

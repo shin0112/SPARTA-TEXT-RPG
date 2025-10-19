@@ -7,14 +7,14 @@ namespace TEXT_RPG.Scene.Inventory
     {
         public void EquipManagement()
         {
+            var invenManager = InventoryManager.Instance;
+            List<Item> inventory = invenManager.InventoryItem;
+            List<Item> equipList = new();
+
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리 - 장착 관리", "Yellow");
             Console.WriteLine("장비를 장착 또는 해제하세요.\n");
             Console.WriteLine("[아이템 목록]\n");
-
-            var invenManager = InventoryManager.Instance;
-            List<Item> inventory = invenManager.InventoryItem;
-            List<Item> equipList = new();
 
             // 각 장비 나열
             for (int i = 0; i < inventory.Count; i++)

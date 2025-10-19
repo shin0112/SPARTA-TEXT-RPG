@@ -42,12 +42,11 @@ namespace TEXT_RPG.Manager
             }
         }
 
+        // 장착중인 아이템 수치 불러오기
         public int EquipValue(ItemType type)
         {
             int equipValue = 0;
-            bool EquipCheck = equippedItems.ContainsKey(type);
-
-            if (EquipCheck)
+            if (equippedItems.ContainsKey(type))
             {
                 equipValue = equippedItems[type].Value;
             }

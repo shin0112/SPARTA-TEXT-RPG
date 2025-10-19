@@ -7,14 +7,17 @@ namespace TEXT_RPG.Scene.Inventory
     {
         public void ConsumeManagement()
         {
+            var invenManager = InventoryManager.Instance;
+            var player = GameManager.Instance.Player;
+            List<Item> inventory = invenManager.InventoryItem;
+            List<Item> consumeList = new();
+
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리 - 소모품 관리", "Yellow");
             Console.WriteLine("소모품을 사용하세요.\n");
+            Console.WriteLine("[플레이어 상태]");
+            Console.WriteLine($"체력 {player.Stats.Hp}/{player.Stats.MaxHp}\n");
             Console.WriteLine("[아이템 목록]\n");
-
-            var invenManager = InventoryManager.Instance;
-            List<Item> inventory = invenManager.InventoryItem;
-            List<Item> consumeList = new();
 
             // 각 장비 나열
             for (int i = 0; i < inventory.Count; i++)
@@ -39,9 +42,21 @@ namespace TEXT_RPG.Scene.Inventory
                 {
                     GameManager.Instance.SceneInfo = SceneType.Inven;
                 }
-                else if (true)
+                else if (intCheck && 1 <= number && number <= consumeList.Count)
                 {
-                    
+                    if (consumeList[number - 1].Type == ItemType.HP)
+                    {
+                        int value = consumeList[number - 1].Value;
+                        int max = player.Stats.MaxHp;
+                        player.Stats.Heal(value, max);
+
+
+                        inventory.Remove(consumeList[number - 1]);
+                    }
+                    else
+                    {
+                        //GameManager.Instance.Player.Stats.Stamina += consumeList[number - 1].Value;
+                    }
                 }
             }
         }
