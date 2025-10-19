@@ -21,7 +21,6 @@ namespace TEXT_RPG.Manager
         public ShopScene ShopScene { get; } = new();
         public ShopBuyScene ShopBuyScene { get; } = new();
         public ShopSellScene ShopSellScene { get; } = new();
-        public MonsterSelectScene MonsterSelectScene { get; } = new();
         public InventoryScene InventoryScene { get; } = new();
         public EquipManagementScene EquipManagementScene { get; } = new();
         public ConsumeManagementScene ConsumeManagementScene { get; } = new();

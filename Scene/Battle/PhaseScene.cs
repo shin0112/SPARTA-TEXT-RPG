@@ -5,8 +5,6 @@ namespace TEXT_RPG.Scene.Battle
 {
     internal class PhaseScene : BattleSceneBase
     {
-        // Todo: Monster 정보 저장하기 (임시 데이터)
-        private List<Monster> monsters = BattleManager.Instance.Monsters;
         protected override string[] Selections { get; } = ["다음"];
 
         public override void Show()
@@ -19,7 +17,7 @@ namespace TEXT_RPG.Scene.Battle
             HandleSelections();
 
             // 몬스터 턴 
-            foreach (var monster in monsters)
+            foreach (var monster in BattleManager.Instance.Monsters)
             {
                 if (monster.IsDead) continue; // 죽은 몬스터인 경우 스킵
                 ShowTitle();

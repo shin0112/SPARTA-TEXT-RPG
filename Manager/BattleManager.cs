@@ -190,7 +190,7 @@ namespace TEXT_RPG.Manager
             }
         }
 
-        public void Defeat()
+        private void Defeat()
         {
             if (IsDefeat) return;
             IsDefeat = true;
