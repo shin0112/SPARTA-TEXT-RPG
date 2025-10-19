@@ -8,12 +8,12 @@ namespace TEXT_RPG.Scene.Battle
         protected override string[] Selections { get; } = ["도망가기"];
         protected override int SelectionCount => Selections.Length + BattleManager.Instance.Monsters.Count;
 
-        protected override int SelectAct()
+        protected override int GetSelection()
         {
             while (true)
             {
                 Console.WriteLine("대상을 선택해주세요.");
-                (bool flowControl, int value) = GetSelectInput();
+                (bool flowControl, int value) = ValidateSelectionInput();
 
                 if (flowControl) continue; // 잘못된 입력
 

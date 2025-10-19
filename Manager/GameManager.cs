@@ -47,7 +47,7 @@ namespace TEXT_RPG.Manager
                         StartScene.GameStart();
                         break;
                     case SceneType.Battle: // 전투
-                        BattleManager.Instance.Battle();
+                        BattleManager.Instance.StartBattle();
                         break;
                     case SceneType.Spec: // 스펙
                         SpecScene.Specification();
@@ -71,7 +71,7 @@ namespace TEXT_RPG.Manager
                         ShopSellScene.DisplayShopSell();
                         break;
                     case SceneType.MonsterSelect:
-                        MonsterSelect.Show();
+                        MonsterSelect.Enter();
                         break;
                     case SceneType.DungeonSelect:
                         DungeonSelect.Show();

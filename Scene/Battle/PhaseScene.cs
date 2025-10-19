@@ -7,14 +7,14 @@ namespace TEXT_RPG.Scene.Battle
     {
         protected override string[] Selections { get; } = ["다음"];
 
-        public override void Show()
+        public override void Enter()
         {
             Player player = GameManager.Instance.Player!;
 
             // 플레이어 턴
             ShowTitle();
             BattleManager.Instance.PlayerTurn();
-            HandleSelections();
+            ProcessSelection();
 
             // 몬스터 턴 
             foreach (var monster in BattleManager.Instance.Monsters)
@@ -22,7 +22,7 @@ namespace TEXT_RPG.Scene.Battle
                 if (monster.IsDead) continue; // 죽은 몬스터인 경우 스킵
                 ShowTitle();
                 BattleManager.Instance.MonsterTurn(monster);
-                HandleSelections();
+                ProcessSelection();
             }
 
             // 한 턴 종료

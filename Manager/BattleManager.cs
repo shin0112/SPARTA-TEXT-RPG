@@ -18,13 +18,13 @@ namespace TEXT_RPG.Manager
         private int _dungeonNumber = 0;
 
         // 몬스터 사망 관리
-        public event Action? OnAllMonsterDead;
+        public event Action? HandleMonsterDead;
         private int _deadCount = 0;
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
         public bool IsDefeat { get; private set; } = false;
-        public void ResetIsVictory() => IsVictory = false;
+        public void ResetVictoryFlag() => IsVictory = false;
         public event Action? OnDefeat;
 
         public SceneType CurrentScene => GameManager.Instance.SceneInfo;
@@ -45,14 +45,14 @@ namespace TEXT_RPG.Manager
             {
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
-            OnAllMonsterDead += () =>
+            HandleMonsterDead += () =>
             {
                 IsVictory = true;
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
         }
 
-        public void Battle()
+        public void StartBattle()
         {
             SpawnRandomMonsters();
             while (true)
@@ -68,14 +68,14 @@ namespace TEXT_RPG.Manager
                 }
 
                 // 승리/패배 체크
-                if (CheckVictoryAndDefeat())
+                if (HasBattleEnded())
                 {
                     GameManager.Instance.SceneInfo = SceneType.Result;
                 }
 
-                _battleScenes[CurrentScene].Show();
+                _battleScenes[CurrentScene].Enter();
             }
-            BattleEnd();
+            EndBattle();
         }
 
         public void SelectDungeon(string? input)
@@ -125,16 +125,15 @@ namespace TEXT_RPG.Manager
             BattleSceneUI.ShowPlayerInfo();
         }
 
-        private bool CheckVictoryAndDefeat()
+        private bool HasBattleEnded()
         {
-            bool flag = IsVictory || IsDefeat;
-
-            if (flag)
+            if (IsVictory || IsDefeat)
             {
                 GameManager.Instance.SceneInfo = SceneType.Result;
+                return true;
             }
 
-            return flag;
+            return false;
         }
 
         private void SpawnRandomMonsters()
@@ -186,7 +185,7 @@ namespace TEXT_RPG.Manager
                 IsVictory = true;
                 _deadCount = 0;
                 Monsters.Clear();
-                OnAllMonsterDead?.Invoke();
+                HandleMonsterDead?.Invoke();
             }
         }
 
@@ -197,7 +196,7 @@ namespace TEXT_RPG.Manager
             OnDefeat?.Invoke();
         }
 
-        private void BattleEnd()
+        private void EndBattle()
         {
             Monsters.Clear();
             MonsterNumber = 0;
