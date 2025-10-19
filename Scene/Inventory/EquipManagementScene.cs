@@ -13,15 +13,17 @@ namespace TEXT_RPG.Scene.Inventory
             Console.WriteLine("[아이템 목록]\n");
 
             var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.EquipItem;
+            List<Item> inventory = invenManager.InventoryItem;
+            List<Item> equipList = new();
 
             // 각 장비 나열
-            for (int i = 0; i < item.Count; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
-                if (item[i].Type == ItemType.Armor || item[i].Type == ItemType.Weapon)
+                if (inventory[i].Type == ItemType.Armor || inventory[i].Type == ItemType.Weapon)
                 {
-                    string itemString = invenManager.IventoryListShow(item[i], i);
-                    UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
+                    string itemString = invenManager.IventoryListShow(inventory[i]);
+                    equipList.Add(inventory[i]);
+                    UIHelper.ColorWriteLine($"{equipList.Count}. {itemString}", "Cyan");
                 }
             }
 
@@ -37,9 +39,9 @@ namespace TEXT_RPG.Scene.Inventory
                 {
                     GameManager.Instance.SceneInfo = SceneType.Inven;
                 }
-                else if (intCheck && 1 <= number && number <= item.Count) // 장비 장착 또는 해제
+                else if (intCheck && 1 <= number && number <= equipList.Count) // 장비 장착 또는 해제
                 {
-                    invenManager.Equip(item[number - 1], number - 1);
+                    invenManager.Equip(equipList[number - 1]);
                 }
             }
         }

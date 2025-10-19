@@ -10,34 +10,35 @@ namespace TEXT_RPG.Manager
         public static InventoryManager Instance => _instance;
 
 
-        // 리포지터리 복제
         private readonly ItemRepository itemRepository = new();
 
-        public List<Item> EquipItem;
-        public List<Item> ConsumeItem;
+        public List<Item> InventoryItem;
         public List<Item> ShopItem;
         public List<Item> MonsterItem;
         // 각 타입별로 하나씩만 장착할 수 있는 슬롯
-        public Dictionary<ItemType, int> equippedItems = new();
+        public Dictionary<ItemType, Item> equippedItems = new();
 
         private InventoryManager()
         {
-            EquipItem = itemRepository.InventoryItem;
-            ConsumeItem = new();
+            InventoryItem = new();
+            for (int i = 0; i < itemRepository.InventoryItem.Count; i++)
+            {
+                InventoryItem.Add(itemRepository.InventoryItem[i].Clone());
+            }
             ShopItem = itemRepository.ShopItem;
             MonsterItem = itemRepository.MonsterItem;
         }
 
         // 아이템 장착
-        public void Equip(Item item, int number)
+        public void Equip(Item item)
         {
-            if (equippedItems.ContainsKey(item.Type) && equippedItems[item.Type] == number)
+            if (equippedItems.ContainsKey(item.Type) && equippedItems[item.Type] == item)
             {
                 equippedItems.Remove(item.Type);
             }
             else
             {
-                equippedItems[item.Type] = number;
+                equippedItems[item.Type] = item;
             }
         }
 
@@ -45,19 +46,17 @@ namespace TEXT_RPG.Manager
         {
             int equipValue = 0;
             bool EquipCheck = equippedItems.ContainsKey(type);
-            
+
             if (EquipCheck)
             {
-                int i = equippedItems[type];
-                equipValue = EquipItem[i].Value;
+                equipValue = equippedItems[type].Value;
             }
-
             return equipValue;
         }
 
-        public string IventoryListShow(Item item, int i)
+        public string IventoryListShow(Item item)
         {
-            string prefix = equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
+            string prefix = equippedItems.ContainsValue(item) ? "[E] " : ""; //아이템 장착 여부 확인
             string displayName = prefix + item.Name;
 
             string statType = item.Type switch
@@ -74,7 +73,7 @@ namespace TEXT_RPG.Manager
             string paddedName = UIHelper.GetPaddedString(displayName, 24);
             string paddedStat = UIHelper.GetPaddedString(displayStat, 12);
 
-            return $"{ paddedName} | { paddedStat} | { item.Description}";
+            return $"{paddedName} | {paddedStat} | {item.Description}";
         }
     }
 }

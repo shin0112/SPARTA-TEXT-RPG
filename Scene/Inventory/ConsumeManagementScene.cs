@@ -13,15 +13,17 @@ namespace TEXT_RPG.Scene.Inventory
             Console.WriteLine("[아이템 목록]\n");
 
             var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.EquipItem;
+            List<Item> inventory = invenManager.InventoryItem;
+            List<Item> consumeList = new();
 
             // 각 장비 나열
-            for (int i = 0; i < item.Count; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
-                if (item[i].Type == ItemType.HP || item[i].Type == ItemType.Stamina)
+                if (inventory[i].Type == ItemType.HP || inventory[i].Type == ItemType.Stamina)
                 {
-                    string itemString = invenManager.IventoryListShow(item[i], i);
-                    UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
+                    string itemString = invenManager.IventoryListShow(inventory[i]);
+                    consumeList.Add(inventory[i]);
+                    UIHelper.ColorWriteLine($"{consumeList.Count}. {itemString}", "Cyan");
                 }
             }
 

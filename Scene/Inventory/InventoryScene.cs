@@ -11,10 +11,10 @@ namespace TEXT_RPG.Scene.Inventory
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리", "Yellow");
             Console.WriteLine("보유 중인 아이템을 관리할 수 있습니다.\n");
-            Console.WriteLine("[아이템 목록]\n");
+            Console.WriteLine("[장비]\n");
 
             var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.EquipItem;
+            List<Item> item = invenManager.InventoryItem;
             //List<Item> consumeItem = invenManager.ConsumeItem;
             //List<Item> item = new List<Item>();
             //item.AddRange(invenManager.EquipItem);
@@ -25,18 +25,20 @@ namespace TEXT_RPG.Scene.Inventory
             {
                 if (item[i].Type == ItemType.Armor || item[i].Type == ItemType.Weapon)
                 {
-                    string itemString = invenManager.IventoryListShow(item[i], i);
+                    string itemString = invenManager.IventoryListShow(item[i]);
                     Console.WriteLine($" - {itemString}");
                 }
             }
 
             Console.WriteLine("\n===============================================================================================================\n");
-            
+            Console.WriteLine("[소모품]\n");
+
+
             for (int i = 0; i < item.Count; i++)
             {
                 if (item[i].Type == ItemType.HP || item[i].Type == ItemType.Stamina)
                 {
-                    string itemString = invenManager.IventoryListShow(item[i], i);
+                    string itemString = invenManager.IventoryListShow(item[i]);
                     Console.WriteLine($" - {itemString}");
                 }
             }
