@@ -48,8 +48,8 @@ public class SpecScene
 
         var player = GameManager.Instance.Player;
 
-        int equipAtk = InventoryManager.Instance.equipValue(ItemType.Weapon);
-        int equipDef = InventoryManager.Instance.equipValue(ItemType.Armor);
+        int equipAtk = InventoryManager.Instance.EquipValue(ItemType.Weapon);
+        int equipDef = InventoryManager.Instance.EquipValue(ItemType.Armor);
 
         Console.WriteLine("=========================================================================");
 

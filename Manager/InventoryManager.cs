@@ -41,7 +41,7 @@ namespace TEXT_RPG.Manager
             }
         }
 
-        public int equipValue(ItemType type)
+        public int EquipValue(ItemType type)
         {
             int equipValue = 0;
             bool EquipCheck = equippedItems.ContainsKey(type);
