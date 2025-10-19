@@ -80,7 +80,17 @@ namespace TEXT_RPG.Scene
                     Console.WriteLine("몇 개 사시겠습니까?");
                     Console.Write(">> ");
                     inputQuantity = Console.ReadLine();
-                    int.TryParse(inputQuantity, out int buyQuantity);
+                    isParsed = int.TryParse(inputQuantity, out int buyQuantity);
+                    if (isParsed == false)
+                    {
+                        Console.WriteLine("숫자를 입력하십시오.");
+                        return;
+                    }
+                    else if (buyQuantity < 1 )
+                    {
+                        Console.WriteLine("1개 이상 구매하십시오.");
+                        return;
+                    }
 
                     if (GameManager.Instance.Player.Gold < ShopItem[i].Price * buyQuantity)
                     {
