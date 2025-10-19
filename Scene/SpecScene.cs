@@ -48,6 +48,9 @@ public class SpecScene
 
         var player = GameManager.Instance.Player;
 
+        int equipAtk = InventoryManager.Instance.equipValue(ItemType.Weapon);
+        int equipDef = InventoryManager.Instance.equipValue(ItemType.Armor);
+
         Console.WriteLine("=========================================================================");
 
         WriteColoredStat("이름:", GameManager.Instance.Player?.Name, ConsoleColor.DarkGreen);
@@ -56,8 +59,8 @@ public class SpecScene
         Console.WriteLine();
 
         WriteColoredStat("체력:", GameManager.Instance.Player?.Stats.Hp.ToString(), ConsoleColor.Cyan);
-        WriteColoredStat("공격력:", GameManager.Instance.Player?.Stats.Atk.ToString(), ConsoleColor.Cyan);
-        WriteColoredStat("방어력:", GameManager.Instance.Player?.Stats.Def.ToString(), ConsoleColor.Cyan);
+        WriteColoredStat("공격력:", $"{(player?.Stats.Atk + equipAtk).ToString()} (+{equipAtk})", ConsoleColor.Cyan);
+        WriteColoredStat("방어력:", $"{(player?.Stats.Def + equipDef).ToString()} (+{equipDef})", ConsoleColor.Cyan);
         Console.WriteLine();
 
         WriteColoredStat("경험치:", GameManager.Instance.Player?.Exp.ToString(), ConsoleColor.DarkCyan);

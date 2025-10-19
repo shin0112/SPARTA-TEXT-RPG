@@ -6,7 +6,7 @@ namespace TEXT_RPG.Scene.Battle
     {
         protected override string Title { get; } = "Battle!!";
 
-        public override void Show()
+        public override void Enter()
         {
             ShowTitle();
             BattleSceneUI.ShowMonsterInfo();
@@ -14,7 +14,7 @@ namespace TEXT_RPG.Scene.Battle
 
             //BattleManager.Instance.BattleInfo();
 
-            HandleSelections();
+            ProcessSelection();
         }
     }
 }
