@@ -23,5 +23,11 @@ namespace TEXT_RPG.Core
             Hp = Math.Max(Hp - actualDamage, 0);
             return actualDamage;
         }
+
+        public void Heal(int value, int max)
+        {
+            Hp += value;
+            Hp = Math.Min(Hp, max);
+        }
     }
 }
