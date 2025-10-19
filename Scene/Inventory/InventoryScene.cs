@@ -1,4 +1,5 @@
-﻿using TEXT_RPG.Core;
+﻿using System.Collections.Generic;
+using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene.Inventory
@@ -14,13 +15,30 @@ namespace TEXT_RPG.Scene.Inventory
 
             var invenManager = InventoryManager.Instance;
             List<Item> item = invenManager.EquipItem;
+            //List<Item> consumeItem = invenManager.ConsumeItem;
+            //List<Item> item = new List<Item>();
+            //item.AddRange(invenManager.EquipItem);
+            //item.AddRange(invenManager.ConsumeItem);
 
             // 아이템 리스트 나열 반복문
             for (int i = 0; i < item.Count; i++)
             {
-                string itemString = invenManager.IventoryListShow(item[i], i);
+                if (item[i].Type == ItemType.Armor || item[i].Type == ItemType.Weapon)
+                {
+                    string itemString = invenManager.IventoryListShow(item[i], i);
+                    Console.WriteLine($" - {itemString}");
+                }
+            }
 
-                Console.WriteLine($" - {itemString}");
+            Console.WriteLine("\n===============================================================================================================\n");
+            
+            for (int i = 0; i < item.Count; i++)
+            {
+                if (item[i].Type == ItemType.HP || item[i].Type == ItemType.Stamina)
+                {
+                    string itemString = invenManager.IventoryListShow(item[i], i);
+                    Console.WriteLine($" - {itemString}");
+                }
             }
 
             UIHelper.ColorWriteLine("\n1. 장착 관리\n2. 소모품 관리\n0. 나가기\n", "Cyan");

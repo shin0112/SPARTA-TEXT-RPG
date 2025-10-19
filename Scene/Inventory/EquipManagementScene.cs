@@ -18,9 +18,11 @@ namespace TEXT_RPG.Scene.Inventory
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
             {
-                string itemString = invenManager.IventoryListShow(item[i], i);
-
-                UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
+                if (item[i].Type == ItemType.Armor || item[i].Type == ItemType.Weapon)
+                {
+                    string itemString = invenManager.IventoryListShow(item[i], i);
+                    UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
+                }
             }
 
             UIHelper.ColorWriteLine("\n0. 나가기\n", "Cyan");
