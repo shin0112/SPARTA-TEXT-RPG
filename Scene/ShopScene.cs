@@ -1,4 +1,5 @@
-﻿using TEXT_RPG.Core;
+﻿using System.Text;
+using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene
@@ -238,6 +239,7 @@ namespace TEXT_RPG.Scene
             Init();
             Console.WriteLine(shopIntroText1);
             ShopItemList();
+            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();
