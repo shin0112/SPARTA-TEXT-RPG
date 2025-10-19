@@ -21,11 +21,11 @@ namespace TEXT_RPG.Scene
         public void SelectSellItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
         {
             this.input = input;
-            int.TryParse(input, out int i);
+            bool isParsed = int.TryParse(input, out int i);
             i -= 1;
             int sellQuantity = 1;
 
-            if (i < 0 || i >= InventoryItem.Count)
+            if (i < 0 || i >= InventoryItem.Count || isParsed == false)
             {
                 Console.WriteLine("잘못된 입력입니다. 번호를 확인해주세요.\n");
                 return;
@@ -43,8 +43,15 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("2. 조금만 더 고민해보자...");
             string inputSellCheck;
             inputSellCheck = Console.ReadLine();
+            isParsed = int.TryParse(inputSellCheck, out int inputSellCheckTryParse);
 
-            if (inputSellCheck != "1")
+
+            if (isParsed == false)
+            {
+                Console.WriteLine("숫자를 입력하십시오.\n");
+                return;
+            }
+            else if (inputSellCheckTryParse != 1 || isParsed == false)
             {
                 Console.WriteLine("아이템을 판매하지 않습니다.\n");
                 return;
@@ -73,9 +80,13 @@ namespace TEXT_RPG.Scene
         //    {
         //        Console.Write(">> ");
         //        inputQuantity = Console.ReadLine();
-        //        int.TryParse(inputQuantity, out int sellQuantity);
+        //        bool isParsed = int.TryParse(inputQuantity, out int sellQuantity);
 
-        //        if (InventoryItem[i].remaining < sellQuantity || sellQuantity < 1) //0개 이하 입력이나 보유 개수 이상 입력 시 재입력
+        //        if(isParsed == false)
+        //        {
+        //            Console.WriteLine("잘못된 입력입니다. 숫자를 입력하세요.");
+        //        }
+        //        else if (InventoryItem[i].remaining < sellQuantity || sellQuantity < 1 ) //0개 이하 입력이나 보유 개수 이상 입력 시 재입력
         //        {
         //            Console.WriteLine("잘못된 입력입니다. 보유 개수를 확인하세요.");
         //        }
@@ -102,11 +113,18 @@ namespace TEXT_RPG.Scene
                 input = "0";
                 input = Console.ReadLine();
                 int.TryParse(input, out i);
-                if (i == 0)
+                if (int.TryParse(input, out i) == false)
+                {
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
+                }
+                else if (i == 0)
                 {
                     break;
                 }
-                SelectSellItem(input);
+                else
+                {
+                    SelectSellItem(input);
+                }
                 Console.WriteLine("아무 키나 입력하면 계속합니다.");
                 Console.ReadKey();
             }
