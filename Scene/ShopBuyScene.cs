@@ -15,6 +15,10 @@ namespace TEXT_RPG.Scene
 0. 뒤로가기
 
 ""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~"""; // 아이템 리스트 변경 시 예시 체크 필요
+        
+        
+        
+        
 
 
         public void SelectBuyItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
