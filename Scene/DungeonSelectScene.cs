@@ -7,14 +7,14 @@ namespace TEXT_RPG.Scene
     {
         string input;
 
-        string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
+        string[] stages = {"취준 하기", "면접 보기", "승진하기", "이직하기" };
         int[] requiredLevel = { 1, 2, 3, 5 };
         public void Show()
         {
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("던전 선택");
+                Console.WriteLine("취준던전 입장!");
                 Console.WriteLine();
                 for (int i = 0; i < stages.Length; i++)
                 {
