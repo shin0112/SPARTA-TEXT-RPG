@@ -13,7 +13,8 @@ namespace TEXT_RPG.Manager
         // 리포지터리 복제
         private readonly ItemRepository itemRepository = new();
 
-        public List<Item> InventoryItem;
+        public List<Item> EquipItem;
+        public List<Item> ConsumeItem;
         public List<Item> ShopItem;
         public List<Item> MonsterItem;
         // 각 타입별로 하나씩만 장착할 수 있는 슬롯
@@ -21,7 +22,8 @@ namespace TEXT_RPG.Manager
 
         private InventoryManager()
         {
-            InventoryItem = itemRepository.InventoryItem;
+            EquipItem = itemRepository.InventoryItem;
+            ConsumeItem = new();
             ShopItem = itemRepository.ShopItem;
             MonsterItem = itemRepository.MonsterItem;
         }
@@ -47,7 +49,7 @@ namespace TEXT_RPG.Manager
             if (EquipCheck)
             {
                 int i = equippedItems[type];
-                equipValue = InventoryItem[i].Value;
+                equipValue = EquipItem[i].Value;
             }
 
             return equipValue;

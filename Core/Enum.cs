@@ -9,6 +9,7 @@
         ShopBuy,
         ShopSell,
         Equip,
+        Consume,
         Battle,
         MonsterSelect,
         Phase,
