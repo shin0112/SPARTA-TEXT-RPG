@@ -13,19 +13,20 @@ namespace TEXT_RPG.Manager
         // 리포지터리 복제
         private readonly ItemRepository itemRepository = new();
 
-        public List<Item> InventoryItem;
+        public List<Item> EquipItem;
+        public List<Item> ConsumeItem;
         public List<Item> ShopItem;
         public List<Item> MonsterItem;
+        // 각 타입별로 하나씩만 장착할 수 있는 슬롯
+        public Dictionary<ItemType, int> equippedItems = new();
 
         private InventoryManager()
         {
-            InventoryItem = itemRepository.InventoryItem;
+            EquipItem = itemRepository.InventoryItem;
+            ConsumeItem = new();
             ShopItem = itemRepository.ShopItem;
             MonsterItem = itemRepository.MonsterItem;
         }
-
-        // 각 타입별로 하나씩만 장착할 수 있는 슬롯
-        public Dictionary<ItemType, int> equippedItems = new();
 
         // 아이템 장착
         public void Equip(Item item, int number)
@@ -40,9 +41,23 @@ namespace TEXT_RPG.Manager
             }
         }
 
+        public int equipValue(ItemType type)
+        {
+            int equipValue = 0;
+            bool EquipCheck = equippedItems.ContainsKey(type);
+            
+            if (EquipCheck)
+            {
+                int i = equippedItems[type];
+                equipValue = EquipItem[i].Value;
+            }
+
+            return equipValue;
+        }
+
         public string IventoryListShow(Item item, int i)
         {
-            string prefix = InventoryManager.Instance.equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
+            string prefix = equippedItems.ContainsValue(i) ? "[E] " : ""; //아이템 장착 여부 확인
             string displayName = prefix + item.Name;
 
             string statType = item.Type switch

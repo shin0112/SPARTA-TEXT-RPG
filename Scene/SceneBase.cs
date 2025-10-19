@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Scene
+﻿using TEXT_RPG.UI;
+
+namespace TEXT_RPG.Scene
 {
     internal abstract class SceneBase
     {
@@ -22,11 +24,7 @@
         protected void ShowTitle()
         {
             Console.Clear();
-            if (!string.IsNullOrEmpty(Title))
-            {
-                Console.WriteLine(Title);
-                Console.WriteLine();
-            }
+            SceneCommonUI.ShowTitle(Title);
         }
 
         protected virtual void HandleSelections()

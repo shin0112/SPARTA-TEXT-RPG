@@ -1,9 +1,7 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
-using TEXT_RPG.Repository;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace TEXT_RPG.Scene
+namespace TEXT_RPG.Scene.Inventory
 {
     internal class InventoryScene
     {
@@ -15,7 +13,7 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("[아이템 목록]\n");
 
             var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.InventoryItem;
+            List<Item> item = invenManager.EquipItem;
 
             // 아이템 리스트 나열 반복문
             for (int i = 0; i < item.Count; i++)
@@ -31,13 +29,14 @@ namespace TEXT_RPG.Scene
 
             string input = Console.ReadLine() ?? "";
 
-            if (input == "1")
+            switch (input)
             {
-                GameManager.Instance.SceneInfo = SceneType.Equip;
-            }
-            else if (input == "0")
-            {
-                GameManager.Instance.SceneInfo = SceneType.Start;
+                case "1":
+                    GameManager.Instance.SceneInfo = SceneType.Equip;
+                    break;
+                case "0":
+                    GameManager.Instance.SceneInfo = SceneType.Start;
+                    break;
             }
         }
     }
