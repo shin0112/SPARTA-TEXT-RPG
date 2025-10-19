@@ -24,7 +24,7 @@ namespace TEXT_RPG.Scene.Inventory
             }
 
             UIHelper.ColorWriteLine("\n0. 나가기\n", "Cyan");
-            Console.WriteLine("숫자를 입력해 아이템을 장착하세요.");
+            Console.WriteLine("숫자를 입력해 장비를 장착하세요.");
             Console.Write(">> ");
 
             string input = Console.ReadLine() ?? "";

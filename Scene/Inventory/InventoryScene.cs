@@ -23,7 +23,7 @@ namespace TEXT_RPG.Scene.Inventory
                 Console.WriteLine($" - {itemString}");
             }
 
-            UIHelper.ColorWriteLine("\n1. 아이템 관리\n0. 나가기\n", "Cyan");
+            UIHelper.ColorWriteLine("\n1. 장착 관리\n2. 소모품 관리\n0. 나가기\n", "Cyan");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
             Console.Write(">>> ");
 
@@ -33,6 +33,9 @@ namespace TEXT_RPG.Scene.Inventory
             {
                 case "1":
                     GameManager.Instance.SceneInfo = SceneType.Equip;
+                    break;
+                case "2":
+                    GameManager.Instance.SceneInfo = SceneType.Consume;
                     break;
                 case "0":
                     GameManager.Instance.SceneInfo = SceneType.Start;
