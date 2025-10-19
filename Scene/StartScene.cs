@@ -11,8 +11,8 @@ namespace TEXT_RPG.Scene
             UIHelper.ColorWriteLine("이제부터 시작이야!","DarkBlue");
             UIHelper.ColorWriteLine("강해져서 최고의 개발자가 되겠어","DarkBlue");
             Console.WriteLine();
-            Console.WriteLine("1.스펙보기");
-            Console.WriteLine("2.사회에 뛰어들기");
+            Console.WriteLine("1.나의 스펙 확인");
+            Console.WriteLine("2.취준던전 입장");
             Console.WriteLine("3.인벤토리");
             Console.WriteLine("4.상점 이동");
             Console.WriteLine("0.집으로 돌아간다..");
