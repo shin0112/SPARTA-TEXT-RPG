@@ -2,6 +2,7 @@
 using TEXT_RPG.Core;
 using TEXT_RPG.Scene;
 using TEXT_RPG.Scene.Battle;
+using TEXT_RPG.Scene.Inventory;
 
 namespace TEXT_RPG.Manager
 {
@@ -23,6 +24,7 @@ namespace TEXT_RPG.Manager
         public MonsterSelectScene MonsterSelectScene { get; } = new();
         public InventoryScene InventoryScene { get; } = new();
         public EquipManagementScene EquipManagementScene { get; } = new();
+        public ConsumeManagementScene ConsumeManagementScene { get; } = new();
         public BattleStartScene BattleStartScene { get; } = new();
         public MonsterSelectScene MonsterSelect { get; } = new();
         public PhaseScene PhaseScene { get; } = new();
@@ -56,6 +58,9 @@ namespace TEXT_RPG.Manager
                         break;
                     case SceneType.Equip: // 장비 장착
                         EquipManagementScene.EquipManagement();
+                        break;
+                    case SceneType.Consume: // 소비 관리
+                        ConsumeManagementScene.ConsumeManagement();
                         break;
                     case SceneType.Shop: // 상점
                         ShopScene.DisplayShop();

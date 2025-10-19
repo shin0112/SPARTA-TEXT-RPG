@@ -39,7 +39,7 @@ namespace TEXT_RPG.Core
         {
             player.GetExp(Exp);
             player.Gold += Gold;
-            InventoryManager.Instance.InventoryItem.AddRange(DropItem);
+            InventoryManager.Instance.EquipItem.AddRange(DropItem);
 
             Console.WriteLine($"{Exp} 경험치와 {Gold} G를 획득했습니다.");
             foreach (Item item in DropItem) 

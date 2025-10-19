@@ -1,8 +1,7 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
-using TEXT_RPG.Repository;
 
-namespace TEXT_RPG.Scene
+namespace TEXT_RPG.Scene.Inventory
 {
     internal class EquipManagementScene
     {
@@ -10,11 +9,11 @@ namespace TEXT_RPG.Scene
         {
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리 - 장착 관리", "Yellow");
-            Console.WriteLine("장비를 장착 또는 해제하거나, 소모품을 사용하세요.\n");
+            Console.WriteLine("장비를 장착 또는 해제하세요.\n");
             Console.WriteLine("[아이템 목록]\n");
 
             var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.InventoryItem;
+            List<Item> item = invenManager.EquipItem;
 
             // 각 장비 나열
             for (int i = 0; i < item.Count; i++)
@@ -36,7 +35,7 @@ namespace TEXT_RPG.Scene
                 {
                     GameManager.Instance.SceneInfo = SceneType.Inven;
                 }
-                else if (intCheck && (1 <= number && number <= item.Count)) // 장비 장착 또는 해제
+                else if (intCheck && 1 <= number && number <= item.Count) // 장비 장착 또는 해제
                 {
                     invenManager.Equip(item[number - 1], number - 1);
                 }
