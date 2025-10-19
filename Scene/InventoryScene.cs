@@ -1,7 +1,5 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
-using TEXT_RPG.Repository;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace TEXT_RPG.Scene
 {
@@ -31,13 +29,14 @@ namespace TEXT_RPG.Scene
 
             string input = Console.ReadLine() ?? "";
 
-            if (input == "1")
+            switch (input)
             {
-                GameManager.Instance.SceneInfo = SceneType.Equip;
-            }
-            else if (input == "0")
-            {
-                GameManager.Instance.SceneInfo = SceneType.Start;
+                case "1":
+                    GameManager.Instance.SceneInfo = SceneType.Equip;
+                    break;
+                case "0":
+                    GameManager.Instance.SceneInfo = SceneType.Start;
+                    break;
             }
         }
     }
