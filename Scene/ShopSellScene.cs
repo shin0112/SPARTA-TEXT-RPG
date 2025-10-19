@@ -1,14 +1,12 @@
-﻿using TEXT_RPG.Core;
+﻿using System.Reflection.Metadata.Ecma335;
+using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene
 {
     internal class ShopSellScene : ShopScene
     {
-        public int InventoryItemNumber { get; set; } = 0;  //현재 안 쓰는 코드
-
         string input;
-
         int i = 0;
 
         public string shopSellText = @$"
@@ -20,44 +18,74 @@ namespace TEXT_RPG.Scene
 "; // 아이템 리스트 변경 시 예시 체크 필요
 
 
-        public Item? SelectSellItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
+        public void SelectSellItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
         {
             this.input = input;
             int.TryParse(input, out int i);
             i -= 1;
-            int itemPrice = InventoryItem[i].Price;
+            int sellQuantity = 1;
 
-            string inputSellCheck;
-
-            if (i < 0 || i >= InventoryItem.Count) //인벤토리 리스트로 변경 필요
+            if (i < 0 || i >= InventoryItem.Count)
             {
                 Console.WriteLine("잘못된 입력입니다. 번호를 확인해주세요.\n");
-                return null;
+                return;
             }
 
-            Console.WriteLine("정말 판매하시겠습니까?\n");
+            int itemPrice = InventoryItem[i].Price; //입력값이 리스트 숫자보다 크면 예외로 에러가 나서 확인 코드 아래에서 선언했습니다.
+
+            if (InventoryItem[i].Type == ItemType.HP || InventoryItem[i].Type == ItemType.Stamina) //소비 아이템일 경우 몇 개 팔지 입력
+            {
+                sellQuantity = 1; //1;은 주석처리한 함수 살리고 이걸로 교체 SellItemQuantity_Consume();
+            }
+
+            Console.WriteLine($"정말 판매하시겠습니까? 판매할 수량: {sellQuantity} 총 판매 금액: {(int)Math.Ceiling(InventoryItem[i].Price * 0.8f * sellQuantity)}\n");
             Console.WriteLine("1. 예");
             Console.WriteLine("2. 조금만 더 고민해보자...");
+            string inputSellCheck;
             inputSellCheck = Console.ReadLine();
 
             if (inputSellCheck != "1")
             {
                 Console.WriteLine("아이템을 판매하지 않습니다.\n");
-                return null;
+                return;
             }
             else
             {
-                //if(GameManager.Instance.Player.IsEquipped == true)
-                //{
+                if (InventoryItem[i].IsEquipped == true)
+                {
+                    InventoryItem[i].IsEquipped = false;
+                }
 
-                //}
-                //인벤토리에서 아이템 하나 빠지는 코드 필요, 남은수량 빠지는 코드 필요
-                GameManager.Instance.Player.Gold += (int)Math.Ceiling(itemPrice * 0.8f);
-                Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐준 거라고!\"\n");
             }
-
-            return ShopItem[i];
+            //인벤토리에서 아이템 하나 빠지는 코드 필요
+            GameManager.Instance.Player.Gold += (int)Math.Ceiling((itemPrice * 0.8f) * sellQuantity);
+            Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐 준 거라고!\"\n");
+            InventoryItem.RemoveAt(i);
         }
+
+
+        //public int SellItemQuantity_Consume()
+        //{
+        //    string inputQuantity;
+
+        //    Console.WriteLine($"몇 개 판매하시겠습니까? 현재 보유 수량: {InventoryItem[i].remaining}");
+        //    while (true)
+        //    {
+        //        Console.Write(">> ");
+        //        inputQuantity = Console.ReadLine();
+        //        int.TryParse(inputQuantity, out int sellQuantity);
+
+        //        if (InventoryItem[i].remaining < sellQuantity || sellQuantity < 1) //0개 이하 입력이나 보유 개수 이상 입력 시 재입력
+        //        {
+        //            Console.WriteLine("잘못된 입력입니다. 보유 개수를 확인하세요.");
+        //        }
+        //        else
+        //        {
+        //            return sellQuantity;
+        //        }
+        //    }
+        //}
+
 
         public void DisplayShopSell()
         {
@@ -65,12 +93,12 @@ namespace TEXT_RPG.Scene
 
             while (true)
             {
-            Console.Clear();
-            Init();
-            Console.WriteLine(shopIntroText1);
-            InventoryItemList();
-            Console.WriteLine(shopSellText);
-            Console.Write(">> ");
+                Console.Clear();
+                Init();
+                Console.WriteLine(shopIntroText1);
+                InventoryItemList();
+                Console.WriteLine(shopSellText);
+                Console.Write(">> ");
                 input = "0";
                 input = Console.ReadLine();
                 int.TryParse(input, out i);
