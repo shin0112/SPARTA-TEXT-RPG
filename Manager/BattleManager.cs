@@ -51,7 +51,7 @@ namespace TEXT_RPG.Manager
             OnAllMonstersDead += () =>
             {
                 IsVictory = true;
-                Reward.Get(GameManager.Instance.Player!);
+                GameManager.Instance.Player!.Get(Reward);
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
         }
