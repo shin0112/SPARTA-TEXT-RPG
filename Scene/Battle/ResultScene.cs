@@ -13,7 +13,8 @@ namespace TEXT_RPG.Scene.Battle
         {
             ShowTitle();
             Console.WriteLine($"{(BattleManager.Instance.IsVictory ? "Victory" : "You Lose")}\n");
-            BattleSceneUI.ShowPlayerInfo();
+            BattleSceneUI.ShowBattleResult();
+            BattleSceneUI.ShowPlayerInfoAfterBattle();
             ProcessSelection();
         }
 

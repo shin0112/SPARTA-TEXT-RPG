@@ -23,9 +23,9 @@ namespace TEXT_RPG.Repository
 
         public List<Monster> MonstersNo2 { get; } = [
             new Monster("머리 까진 면접관", 4, new Stats(4, 4, 20), new Reward(4, 40, new List<int>{ })),
-            new Monster("내가 말하는데 조는 면접관", 5, new Stats(5, 5, 25), new Reward(5, 50, new List<int>{ })),
+            new Monster("말하는데 조는 면접관", 5, new Stats(5, 5, 25), new Reward(5, 50, new List<int>{ })),
             new Monster("막말하는 면접관", 6, new Stats(6, 6, 30), new Reward(6, 60, new List<int>{ })),
-            ];
+        ];
 
         public Dictionary<int, List<List<Monster>>> DungeonMonsters { get; }
 

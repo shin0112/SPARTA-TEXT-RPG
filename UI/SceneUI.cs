@@ -45,5 +45,29 @@ namespace TEXT_RPG.UI
             }
             Console.WriteLine();
         }
+
+        public static void ShowBattleResult()
+        {
+            var manager = BattleManager.Instance;
+            Dictionary<string, int> monsterCount = [];
+
+            Console.WriteLine("=== 해치운 몬스터 ===");
+            manager.Monsters.ForEach(m => monsterCount[m.Name] = monsterCount.GetValueOrDefault(m.Name) + 1);
+            Console.WriteLine($"[ {string.Join(", ", monsterCount.Select(m => $"{m.Key} - {m.Value}마리"))} ]\n");
+
+            Console.WriteLine("=== 얻은 보상 ===");
+            string items = $"Items: [ {string.Join(", ", manager.Reward.DropItem.Select(item => $"{item.Name}"))} ]";
+            Console.WriteLine($"[ Exp: {manager.Reward.Exp}, Gold: {manager.Reward.Gold}, {items} ]\n");
+        }
+
+        public static void ShowPlayerInfoAfterBattle()
+        {
+            var beforePlayer = BattleManager.Instance.BeforePlayer!;
+            var afterPlayer = GameManager.Instance.Player!;
+
+            Console.WriteLine("[내 정보]");
+            Console.WriteLine($"Lv. {beforePlayer.Level} -> {afterPlayer.Level}, {beforePlayer.Name}, ({beforePlayer.Job})");
+            Console.WriteLine($"체력 {beforePlayer.Stats.Hp}/{afterPlayer.Stats.MaxHp} -> {afterPlayer.Stats.Hp}/{afterPlayer.Stats.MaxHp}\n");
+        }
     }
 }
