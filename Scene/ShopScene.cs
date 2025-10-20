@@ -9,6 +9,8 @@ namespace TEXT_RPG.Scene
         public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
         public List<Item> InventoryItem = InventoryManager.Instance.InventoryItem;
 
+        Random random = new();
+
         public bool isBuyingScene = false;
 
         int _itemNumber = 1;
@@ -220,16 +222,18 @@ namespace TEXT_RPG.Scene
             }
 
         }
-        // 오늘의 추천 메뉴 추후 추가
-        //public void RandomRecommend()  
-        //{
-        //    Random random = new();
 
-        //    string randomFood = "";
+        public void RandomFoodRecommend()  //오늘의 추천 메뉴
+        {
+            int number = random.Next(9, 15);
 
-        //    Console.WriteLine("오늘은 이걸 먹어보는 게 어떻겠나?");
-        //    Console.WriteLine($">> {randomFood} <<");
-        //}
+            string randomFood = ShopItem[number].Name;
+
+            Console.WriteLine();
+            Console.WriteLine("[오늘의 추천 메뉴]\n");
+            Console.WriteLine("오늘은 이걸 먹어보는 게 어떻겠나?");
+            Console.WriteLine($">>>>>>>  {randomFood}  <<<<<<<");
+        }
 
         public void DisplayShop()
         {
@@ -238,6 +242,7 @@ namespace TEXT_RPG.Scene
             Console.WriteLine(shopIntroText1);
             ShopItemList();
             Console.OutputEncoding = Encoding.UTF8;
+            RandomFoodRecommend();
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();
