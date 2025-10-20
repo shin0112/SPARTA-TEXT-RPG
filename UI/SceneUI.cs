@@ -45,5 +45,19 @@ namespace TEXT_RPG.UI
             }
             Console.WriteLine();
         }
+
+        public static void ShowBattleResult()
+        {
+            var manager = BattleManager.Instance;
+            Dictionary<string, int> monsterCount = [];
+
+            Console.WriteLine("=== 해치운 몬스터 ===");
+            manager.Monsters.ForEach(m => monsterCount[m.Name] = monsterCount.GetValueOrDefault(m.Name) + 1);
+            Console.WriteLine($"[ {string.Join(", ", monsterCount.Select(m => $"{m.Key} - {m.Value}마리"))} ]\n");
+
+            Console.WriteLine("=== 얻은 보상 ===");
+            string items = $"Items: [ {string.Join(", ", manager.Reward.DropItem.Select(item => $"{item.Name}"))} ]";
+            Console.WriteLine($"[ Exp: {manager.Reward.Exp}, Gold: {manager.Reward.Gold}, {items} ]\n");
+        }
     }
 }

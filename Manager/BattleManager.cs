@@ -219,15 +219,5 @@ namespace TEXT_RPG.Manager
         {
             GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
         }
-
-        public void BattleInfo()
-        {
-            Console.WriteLine("=== 전투 정보 ===");
-            Console.WriteLine($"총 몬스터 수: {Monsters.Count}");
-            Console.WriteLine($"죽은 몬스터 수: {_deadMonsterCount}");
-            Console.WriteLine($"승리 상태: {IsVictory}");
-
-            Console.WriteLine();
-        }
     }
 }
