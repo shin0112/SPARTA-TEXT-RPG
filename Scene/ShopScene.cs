@@ -55,7 +55,7 @@ namespace TEXT_RPG.Scene
 
 
 [보유 골드]
-{GameManager.Instance.Player.Gold} G
+{GameManager.Instance.Player!.Gold} G
 
 [아이템 목록]";
         }
@@ -72,7 +72,7 @@ namespace TEXT_RPG.Scene
         public void ShopItemList()
         {
             string ability = "오류";
-            string isPercent = "";
+            //string isPercent = "";
             _itemNumber = 1;
 
             foreach (var item in ShopItem)
@@ -83,21 +83,21 @@ namespace TEXT_RPG.Scene
                 {
                     case ItemType.Weapon:
                         ability = "공격력";
-                        isPercent = "";
+                        //isPercent = "";
                         break;
 
                     case ItemType.Armor:
                         ability = "방어력";
-                        isPercent = "";
+                        //isPercent = "";
                         break;
                     case ItemType.HP:
                         ability = "체력 회복";
-                        isPercent = "%";
+                        //isPercent = "%";
                         remaining = "";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
-                        isPercent = "";
+                        //isPercent = "";
                         remaining = "";
                         break;
                     default:
@@ -114,7 +114,7 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 구매가격: {item.Price} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value} | 구매가격: {item.Price} G | {item.Description}");
             }
         }
 
