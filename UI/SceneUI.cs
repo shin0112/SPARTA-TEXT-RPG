@@ -9,7 +9,7 @@ namespace TEXT_RPG.UI
         {
             if (!string.IsNullOrEmpty(title))
             {
-                Console.WriteLine($"{title}\n");
+                UIHelper.ColorWriteLine($"{title}\n", "Yellow");
             }
         }
     }

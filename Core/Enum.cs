@@ -15,6 +15,7 @@
         Phase,
         Result,
         DungeonSelect,
+        Training,
     }
 
     public enum ItemType
