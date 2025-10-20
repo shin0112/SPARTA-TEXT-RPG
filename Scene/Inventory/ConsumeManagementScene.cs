@@ -54,6 +54,7 @@ namespace TEXT_RPG.Scene.Inventory
                     {
                         max = player.Stats.MaxHp;
                         player.Stats.HPUp(value, max);
+                        if (player.IsDead) player.IsDead = false;
                     }
                     else if (consumeList[i].Type == ItemType.Stamina)
                     {
