@@ -27,7 +27,6 @@ namespace TEXT_RPG.Scene
 
         public void Init()
         {
-            RandomFoodRecommend();
             Console.OutputEncoding = Encoding.UTF8;
             shopIntroText1 = @$"       
 [상점]
