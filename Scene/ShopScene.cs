@@ -1,4 +1,5 @@
-﻿using TEXT_RPG.Core;
+﻿using System.Text;
+using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene
@@ -6,7 +7,7 @@ namespace TEXT_RPG.Scene
     internal class ShopScene
     {
         public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
-        public List<Item> InventoryItem = InventoryManager.Instance.EquipItem;
+        public List<Item> InventoryItem = InventoryManager.Instance.InventoryItem;
 
         public bool isBuyingScene = false;
 
@@ -50,8 +51,6 @@ namespace TEXT_RPG.Scene
 ⠀⠀⠀⠀⠀⢨⡷⣤⡀⠈⠉⠉⢁⡴⠋⠀⠀⠀⣸⠃⠀⠀
 
 인자한 모습의 할아버지가 미소 지으며 반겨준다. 
-
-
 ""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
 
 
@@ -238,6 +237,7 @@ namespace TEXT_RPG.Scene
             Init();
             Console.WriteLine(shopIntroText1);
             ShopItemList();
+            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();

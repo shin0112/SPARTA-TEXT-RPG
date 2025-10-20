@@ -10,27 +10,28 @@ namespace TEXT_RPG.Manager
         private static BattleManager _instance = new();
         public static BattleManager Instance => _instance;
 
-        private readonly MonsterRepository monsterRepository = new();
+        private readonly MonsterRepository _monsterRepository = new();
 
-        // 몬스터 리스트 정보
-        public List<Monster> Monsters = [];
+        // 몬스터 & 던전 관련 정보
+        public List<Monster> Monsters { get; private set; } = [];
         public int MonsterNumber { get; set; } = 0;
-        private int _dungeonNumber = 0;
-
-        // 몬스터 사망 관리
-        public event Action? OnAllMonsterDead;
-        private int _deadCount = 0;
+        private int _currentDungeonId = 0;
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
         public bool IsDefeat { get; private set; } = false;
-        public void ResetIsVictory() => IsVictory = false;
+        private int _deadMonsterCount = 0;
+
+        // 이벤트
+        public event Action? OnAllMonstersDead;
         public event Action? OnDefeat;
 
+        // Scene 관련
         public SceneType CurrentScene => GameManager.Instance.SceneInfo;
 
         private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
 
+        // 초기화
         public void InitScenes(GameManager game)
         {
             _battleScenes = new()
@@ -45,38 +46,42 @@ namespace TEXT_RPG.Manager
             {
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
-            OnAllMonsterDead += () =>
+            OnAllMonstersDead += () =>
             {
                 IsVictory = true;
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
         }
 
-        public void Battle()
+        public void StartBattle()
         {
             SpawnRandomMonsters();
+
             while (true)
             {
                 // 화면 관리
-                if (CurrentScene == SceneType.Start) break;
-                else if (CurrentScene == SceneType.DungeonSelect) break;
+                if (CurrentScene is SceneType.Start or SceneType.DungeonSelect) break;
 
                 // 플레이어 사망 체크
                 if (GameManager.Instance.Player!.IsDead)
                 {
                     Defeat();
+                    break;
                 }
 
-                // 승리/패배 체크
-                if (CheckVictoryAndDefeat())
+                if (HasBattleEnded())
                 {
                     GameManager.Instance.SceneInfo = SceneType.Result;
                 }
 
-                _battleScenes[CurrentScene].Show();
+                _battleScenes[CurrentScene].Enter();
             }
-            BattleEnd();
+
+            EndBattle();
         }
+
+        public void ResetVictoryFlag() => IsVictory = false;
+
 
         public void SelectDungeon(string? input)
         {
@@ -84,7 +89,7 @@ namespace TEXT_RPG.Manager
 
             if (isNumber)
             {
-                _dungeonNumber = dungeonNumber;
+                _currentDungeonId = dungeonNumber;
             }
         }
 
@@ -94,7 +99,6 @@ namespace TEXT_RPG.Manager
             Player player = GameManager.Instance.Player!;
 
             int beforeHp = monster.Stats.Hp;
-
 
             // 몬스터 공격하기
             player.Attack(monster);
@@ -107,6 +111,7 @@ namespace TEXT_RPG.Manager
         public void MonsterTurn(Monster monster)
         {
             Player player = GameManager.Instance.Player!;
+
             if (player.IsDead)
             {
                 Defeat();
@@ -114,7 +119,6 @@ namespace TEXT_RPG.Manager
             }
 
             int actualDamage = Math.Max(monster.Stats.Atk - player.Stats.Def, 0);
-
 
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
             Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{actualDamage}]\n");
@@ -125,17 +129,7 @@ namespace TEXT_RPG.Manager
             BattleSceneUI.ShowPlayerInfo();
         }
 
-        private bool CheckVictoryAndDefeat()
-        {
-            bool flag = IsVictory || IsDefeat;
-
-            if (flag)
-            {
-                GameManager.Instance.SceneInfo = SceneType.Result;
-            }
-
-            return flag;
-        }
+        private bool HasBattleEnded() => IsVictory || IsDefeat;
 
         private void SpawnRandomMonsters()
         {
@@ -143,7 +137,7 @@ namespace TEXT_RPG.Manager
             try
             {
                 // monsters[0] : 일반 몬스터, monsters[1] : 특수 몬스터
-                monsters = monsterRepository.DungeonMonsters[_dungeonNumber];
+                monsters = _monsterRepository.DungeonMonsters[_currentDungeonId];
             }
             catch (KeyNotFoundException e)
             {
@@ -178,32 +172,31 @@ namespace TEXT_RPG.Manager
 
         private void OnMonsterDeadChanged(bool isDead)
         {
-            if (isDead) _deadCount++;
+            if (isDead) _deadMonsterCount++;
 
             // 모든 몬스터가 죽었는지 확인
-            if (_deadCount == Monsters.Count)
+            if (_deadMonsterCount == Monsters.Count)
             {
                 IsVictory = true;
-                _deadCount = 0;
-                Monsters.Clear();
-                OnAllMonsterDead?.Invoke();
+                OnAllMonstersDead?.Invoke();
             }
         }
 
-        public void Defeat()
+        private void Defeat()
         {
             if (IsDefeat) return;
             IsDefeat = true;
             OnDefeat?.Invoke();
         }
 
-        private void BattleEnd()
+        private void EndBattle()
         {
             Monsters.Clear();
             MonsterNumber = 0;
+            _currentDungeonId = -11;
+            _deadMonsterCount = 0;
             IsVictory = false;
             IsDefeat = false;
-            _deadCount = 0;
         }
 
         public void TurnEnd()
@@ -215,7 +208,7 @@ namespace TEXT_RPG.Manager
         {
             Console.WriteLine("=== 전투 정보 ===");
             Console.WriteLine($"총 몬스터 수: {Monsters.Count}");
-            Console.WriteLine($"죽은 몬스터 수: {_deadCount}");
+            Console.WriteLine($"죽은 몬스터 수: {_deadMonsterCount}");
             Console.WriteLine($"승리 상태: {IsVictory}");
 
             Console.WriteLine();

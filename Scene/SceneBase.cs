@@ -8,7 +8,7 @@ namespace TEXT_RPG.Scene
         protected virtual string[] Selections { get; } = [];
         protected virtual int SelectionCount => Selections.Length;
 
-        public abstract void Show();
+        public abstract void Enter();
         protected abstract void HandleInput(int select);
 
         protected virtual void ShowSelections()
@@ -27,20 +27,20 @@ namespace TEXT_RPG.Scene
             SceneCommonUI.ShowTitle(Title);
         }
 
-        protected virtual void HandleSelections()
+        protected virtual void ProcessSelection()
         {
             ShowSelections();
             Console.WriteLine();
-            int select = SelectAct();
+            int select = GetSelection();
             HandleInput(select);
         }
 
-        protected virtual int SelectAct()
+        protected virtual int GetSelection()
         {
             while (true)
             {
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
-                (bool flowControl, int value) = GetSelectInput();
+                (bool flowControl, int value) = ValidateSelectionInput();
                 if (!flowControl)
                 {
                     return value;
@@ -48,7 +48,7 @@ namespace TEXT_RPG.Scene
             }
         }
 
-        protected (bool flowControl, int value) GetSelectInput()
+        protected (bool flowControl, int value) ValidateSelectionInput()
         {
             Console.Write(">> ");
             bool isNumber = int.TryParse(Console.ReadLine(), out int select);
