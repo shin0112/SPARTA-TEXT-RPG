@@ -85,5 +85,21 @@
                 }
             }
         }
+
+        private Player(string name, string job, int level, Stats stats, int gold, int exp)
+        {
+            Name = name;
+            Job = job;
+            Level = level;
+            Stats = new Stats(stats.Atk, stats.Def, stats.Hp);
+            Gold = gold;
+            Exp = exp;
+            RequiredExp = requiredExpList[level];
+        }
+
+        public Player Clone()
+        {
+            return new(Name, Job, Level, Stats, Gold, Exp);
+        }
     }
 }
