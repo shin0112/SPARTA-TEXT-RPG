@@ -59,6 +59,7 @@ public class SpecScene
         Console.WriteLine();
 
         WriteColoredStat("체력:", GameManager.Instance.Player?.Stats.Hp.ToString(), ConsoleColor.Cyan);
+        WriteColoredStat("스테미나:", GameManager.Instance.Player?.Stats.Sp.ToString(), ConsoleColor.Cyan);
         WriteColoredStat("공격력:", $"{(player?.Stats.Atk + equipAtk).ToString()} (+{equipAtk})", ConsoleColor.Cyan);
         WriteColoredStat("방어력:", $"{(player?.Stats.Def + equipDef).ToString()} (+{equipDef})", ConsoleColor.Cyan);
         Console.WriteLine();
