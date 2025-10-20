@@ -8,7 +8,6 @@ namespace TEXT_RPG.Scene
         protected virtual string[] Selections { get; } = [];
         protected virtual int SelectionCount => Selections.Length;
         protected string? WarnOutput = null;
-        public void ResetWarnOutput() => WarnOutput = null;
 
         public abstract void Enter();
         protected abstract void HandleInput(int select);
@@ -41,7 +40,7 @@ namespace TEXT_RPG.Scene
         {
             while (true)
             {
-                if (WarnOutput != null) Console.WriteLine(WarnOutput);
+                PrintWarnOut();
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 (bool flowControl, int value) = ValidateSelectionInput();
                 if (!flowControl)
@@ -60,7 +59,8 @@ namespace TEXT_RPG.Scene
 
             if (!isNumber || select < 0 || SelectionCount <= select)
             {
-                Console.WriteLine("잘못된 입력입니다.");
+                WarnOutput = "잘못된 입력입니다.";
+                PrintWarnOut();
             }
             else
             {
@@ -68,6 +68,15 @@ namespace TEXT_RPG.Scene
             }
 
             return (flowControl: true, value: default);
+        }
+
+        protected void PrintWarnOut()
+        {
+            if (WarnOutput != null)
+            {
+                UIHelper.ColorWriteLine(WarnOutput, "Red");
+                WarnOutput = null;
+            }
         }
     }
 }

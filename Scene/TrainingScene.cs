@@ -33,7 +33,6 @@ namespace TEXT_RPG.Scene
             {
                 case 0:
                     GameManager.Instance.SceneInfo = SceneType.Start;
-                    ResetWarnOutput();
                     break;
                 default:
                     Train(select);
