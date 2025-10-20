@@ -27,6 +27,8 @@ namespace TEXT_RPG.Scene
 
         public void Init()
         {
+            RandomFoodRecommend();
+            Console.OutputEncoding = Encoding.UTF8;
             shopIntroText1 = @$"       
 [상점]
 
@@ -161,7 +163,6 @@ namespace TEXT_RPG.Scene
                     case "열공 머리띠":
                     case "천하장사 소시지":
                     case "빠워에이드":
-                        Console.WriteLine();
                         break;
                 }
 
@@ -225,7 +226,7 @@ namespace TEXT_RPG.Scene
 
         public void RandomFoodRecommend()  //오늘의 추천 메뉴
         {
-            int number = random.Next(9, 15);
+            int number = random.Next(9, ShopItem.Count);
 
             string randomFood = ShopItem[number].Name;
 

@@ -9,6 +9,8 @@ namespace TEXT_RPG.Scene
         string input;
         int i = 0;
 
+        string currentItemName;
+
         public string shopSellText = @$"
 판매할 아이템의 번호를 입력하세요. ex) '2' 입력 시 '수학의 정석'을(를) 판매합니다.
 
@@ -24,6 +26,7 @@ namespace TEXT_RPG.Scene
             bool isParsed = int.TryParse(input, out int i);
             i -= 1;
             int sellQuantity = 1;
+            currentItemName = InventoryItem[i].Name;
 
             if (i < 0 || i >= InventoryItem.Count || isParsed == false)
             {
@@ -35,7 +38,7 @@ namespace TEXT_RPG.Scene
 
             if (InventoryItem[i].Type == ItemType.HP || InventoryItem[i].Type == ItemType.Stamina) //소비 아이템일 경우 몇 개 팔지 입력
             {
-                sellQuantity = 1; //1;은 주석처리한 함수 살리고 이걸로 교체 SellItemQuantity_Consume();
+                sellQuantity = SellItemQuantity_Consume();
             }
 
             Console.WriteLine($"정말 판매하시겠습니까? 판매할 수량: {sellQuantity} 총 판매 금액: {(int)Math.Ceiling(InventoryItem[i].Price * 0.8f * sellQuantity)}\n");
@@ -66,36 +69,73 @@ namespace TEXT_RPG.Scene
             //인벤토리에서 아이템 하나 빠지는 코드 필요
             GameManager.Instance.Player.Gold += (int)Math.Ceiling((itemPrice * 0.8f) * sellQuantity);
             Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐 준 거라고!\"\n");
-            InventoryItem.RemoveAt(i);
+
+            int sellItemCount = 0;
+            int index = 0;
+            for (index = 0; index <= InventoryItem.Count; )
+            {
+                if (sellItemCount == sellQuantity)
+                {
+                    break;
+                }
+                if (InventoryItem[index].Name == currentItemName)
+                {
+                    InventoryItem.RemoveAt(index);
+                    sellItemCount++;
+                    index = 0;
+                }
+                else
+                {
+                    index++;
+                }
+            }
+
         }
 
 
-        //public int SellItemQuantity_Consume()
-        //{
-        //    string inputQuantity;
+        public int SellItemQuantity_Consume()  //소비아이템 몇 개 판매할지 정하는 함수
+        {
+            string inputQuantity;
+            int sellQuantity;
+            int remaining = ConsumeItemSum(i);
 
-        //    Console.WriteLine($"몇 개 판매하시겠습니까? 현재 보유 수량: {InventoryItem[i].remaining}");
-        //    while (true)
-        //    {
-        //        Console.Write(">> ");
-        //        inputQuantity = Console.ReadLine();
-        //        bool isParsed = int.TryParse(inputQuantity, out int sellQuantity);
+            Console.WriteLine($"몇 개 판매하시겠습니까? 현재 보유 수량: {remaining}");
+            while (true)
+            {
+                Console.Write(">> ");
+                inputQuantity = Console.ReadLine();
+                bool isParsed = int.TryParse(inputQuantity, out sellQuantity);
 
-        //        if(isParsed == false)
-        //        {
-        //            Console.WriteLine("잘못된 입력입니다. 숫자를 입력하세요.");
-        //        }
-        //        else if (InventoryItem[i].remaining < sellQuantity || sellQuantity < 1 ) //0개 이하 입력이나 보유 개수 이상 입력 시 재입력
-        //        {
-        //            Console.WriteLine("잘못된 입력입니다. 보유 개수를 확인하세요.");
-        //        }
-        //        else
-        //        {
-        //            return sellQuantity;
-        //        }
-        //    }
-        //}
+                if (isParsed == false)
+                {
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력하세요.");
+                }
+                else if (remaining < sellQuantity || sellQuantity < 1) //0개 이하 입력이나 보유 개수 이상 입력 시 재입력
+                {
+                    Console.WriteLine("잘못된 입력입니다. 보유 개수를 확인하세요.");
+                }
+                else
+                {
+                    return sellQuantity;
+                }
+            }
+        }
 
+
+        public int ConsumeItemSum(int i)  //보유수량 표시 함수
+        {
+            int consumeItemSum = 0;
+            int index = 0;
+            foreach (Item inventoryItem in InventoryItem)
+            {
+                if (InventoryItem[index].Name == currentItemName)
+                {
+                    consumeItemSum++;
+                }
+                index++;
+            }
+            return consumeItemSum;
+        }
 
         public void DisplayShopSell()
         {
