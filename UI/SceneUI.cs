@@ -41,7 +41,9 @@ namespace TEXT_RPG.UI
             {
                 var monster = monsters[i];
                 Console.Write($"{(GameManager.Instance.SceneInfo == SceneType.Battle ? "" : (i + 1).ToString() + ". ")}");
-                Console.WriteLine($"Lv. {monster.Level} {monster.Name} | {(monster.IsDead ? "DEAD" : "HP " + monster.Stats.Hp)}");
+                Console.WriteLine(
+                    $"Lv. {monster.Level} {(monster.MonsterType == MonsterType.Boss ? " [Boss]" : "")} {monster.Name} " +
+                    $"| {(monster.IsDead ? "DEAD" : "HP " + monster.Stats.Hp)}");
             }
             Console.WriteLine();
         }
