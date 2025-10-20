@@ -12,6 +12,17 @@ namespace TEXT_RPG.UI
                 UIHelper.ColorWriteLine($"{title}\n", "Yellow");
             }
         }
+
+        public static void ShowPlayerInfoDiff()
+        {
+            var beforePlayer = GameManager.Instance.BeforePlayer!;
+            var afterPlayer = GameManager.Instance.Player!;
+            Console.WriteLine("[내 정보]");
+            Console.WriteLine($"{beforePlayer.Name}, ({beforePlayer.Job})");
+            Console.WriteLine($"Lv {beforePlayer.Level} -> {afterPlayer.Level}");
+            Console.WriteLine($"Exp {beforePlayer.Exp} -> {afterPlayer.Exp}");
+            Console.WriteLine($"Sp {beforePlayer.Stats.Sp} -> {afterPlayer.Stats.Sp}");
+        }
     }
 
     internal static class BattleSceneUI
@@ -67,7 +78,7 @@ namespace TEXT_RPG.UI
 
         public static void ShowPlayerInfoAfterBattle()
         {
-            var beforePlayer = BattleManager.Instance.BeforePlayer!;
+            var beforePlayer = GameManager.Instance.BeforePlayer!;
             var afterPlayer = GameManager.Instance.Player!;
 
             Console.WriteLine("[내 정보]");
