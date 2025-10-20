@@ -7,7 +7,7 @@ namespace TEXT_RPG.Manager
 {
     internal class BattleManager
     {
-        private static BattleManager _instance = new();
+        private readonly static BattleManager _instance = new();
         public static BattleManager Instance => _instance;
 
         private readonly MonsterRepository _monsterRepository = new();
@@ -18,7 +18,7 @@ namespace TEXT_RPG.Manager
         public Player? BeforePlayer { get; private set; } = null;
         private int _currentDungeonId = 0;
         public Reward Reward { get; private set; } = new(0, 0, []);
-        private int[] _bossStages = [2, 4];
+        private readonly int[] _bossStages = [2, 4];
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
@@ -32,7 +32,7 @@ namespace TEXT_RPG.Manager
         // Scene 관련
         public SceneType CurrentScene => GameManager.Instance.SceneInfo;
 
-        private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
+        private Dictionary<SceneType, BattleSceneBase> _battleScenes = [];
 
         // 초기화
         public void InitScenes(GameManager game)
@@ -144,7 +144,7 @@ namespace TEXT_RPG.Manager
                 // monsters[0] : 일반 몬스터, monsters[1] : 특수 몬스터
                 monsters = _monsterRepository.DungeonMonsters[_currentDungeonId];
             }
-            catch (KeyNotFoundException e)
+            catch (KeyNotFoundException)
             {
                 Console.WriteLine("던전 정보를 찾을 수 없습니다.");
                 GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
