@@ -17,10 +17,16 @@
             Hp = hp;
         }
 
-        public void Heal(int value, int max)
+        public void HPUp(int value, int max)
         {
             Hp += value;
             Hp = Math.Min(Hp, max);
+        }
+
+        public void SPUp(int value, int max)
+        {
+            Sp += value;
+            Sp = Math.Min(Sp, max);
         }
 
         public void SpendSp(int value) => Sp -= value;
