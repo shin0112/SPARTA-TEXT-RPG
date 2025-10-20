@@ -19,6 +19,8 @@ namespace TEXT_RPG.Scene.Battle
             // 몬스터 턴 
             foreach (var monster in BattleManager.Instance.Monsters)
             {
+                if (BattleManager.Instance.CurrentScene == SceneType.Result) return;
+
                 if (monster.IsDead) continue; // 죽은 몬스터인 경우 스킵
                 ShowTitle();
                 BattleManager.Instance.MonsterTurn(monster);

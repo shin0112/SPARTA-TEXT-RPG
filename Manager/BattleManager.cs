@@ -72,7 +72,6 @@ namespace TEXT_RPG.Manager
                 if (GameManager.Instance.Player!.IsDead)
                 {
                     Defeat();
-                    break;
                 }
 
                 if (HasBattleEnded())
