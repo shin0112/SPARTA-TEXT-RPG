@@ -59,5 +59,15 @@ namespace TEXT_RPG.UI
             string items = $"Items: [ {string.Join(", ", manager.Reward.DropItem.Select(item => $"{item.Name}"))} ]";
             Console.WriteLine($"[ Exp: {manager.Reward.Exp}, Gold: {manager.Reward.Gold}, {items} ]\n");
         }
+
+        public static void ShowPlayerInfoAfterBattle()
+        {
+            var beforePlayer = BattleManager.Instance.BeforePlayer!;
+            var afterPlayer = GameManager.Instance.Player!;
+
+            Console.WriteLine("[내 정보]");
+            Console.WriteLine($"Lv. {beforePlayer.Level} -> {afterPlayer.Level}, {beforePlayer.Name}, ({beforePlayer.Job})");
+            Console.WriteLine($"체력 {beforePlayer.Stats.Hp}/{afterPlayer.Stats.MaxHp} -> {afterPlayer.Stats.Hp}/{afterPlayer.Stats.MaxHp}\n");
+        }
     }
 }
