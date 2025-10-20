@@ -1,12 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TEXT_RPG.Core
+﻿namespace TEXT_RPG.Core
 {
     public class Stats
     {
+        public readonly static int MaxSp = 100;
         public int Atk { get; set; }
         public int Def { get; set; }
         public int Hp { get; set; }
+        public int Sp { get; set; } = 100;
         public int MaxHp { get; set; }
 
         public Stats(int atk, int def, int hp)
@@ -17,11 +17,18 @@ namespace TEXT_RPG.Core
             Hp = hp;
         }
 
-        public int TakeDamage(int damage)
+        public void HPUp(int value, int max)
         {
-            int actualDamage = Math.Max(damage - Def, 0);
-            Hp = Math.Max(Hp - actualDamage, 0);
-            return actualDamage;
+            Hp += value;
+            Hp = Math.Min(Hp, max);
         }
+
+        public void SPUp(int value, int max)
+        {
+            Sp += value;
+            Sp = Math.Min(Sp, max);
+        }
+
+        public void SpendSp(int value) => Sp -= value;
     }
 }

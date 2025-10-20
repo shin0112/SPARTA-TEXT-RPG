@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene
 {
@@ -7,18 +8,18 @@ namespace TEXT_RPG.Scene
     {
         string input;
 
-        string[] stages = { "취준하기", "면접 보기", "승진하기", "이직하기" };
+        string[] stages = {"취준 하기", "면접 보기", "승진하기", "이직하기" };
         int[] requiredLevel = { 1, 2, 3, 5 };
         public void Show()
         {
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("던전 선택");
+                Console.WriteLine("취준던전 입장!");
                 Console.WriteLine();
                 for (int i = 0; i < stages.Length; i++)
                 {
-                    if (requiredLevel[i] <= GameManager.Instance.Player.Level)
+                    if (requiredLevel[i] <= GameManager.Instance.Player!.Level)
                     {
                         Console.WriteLine($"{i + 1}. {stages[i]}");
                         continue;
@@ -33,7 +34,7 @@ namespace TEXT_RPG.Scene
 
                 input = Console.ReadLine();
                 BattleManager.Instance.SelectDungeon(input);
-                if (GameManager.Instance.Player!.IsDead) input = "-1";
+                if (input != "0" && GameManager.Instance.Player!.IsDead) input = "-1";
                 switch (input)
                 {
                     case "0":
@@ -45,7 +46,7 @@ namespace TEXT_RPG.Scene
                         GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     case "2":
-                        if (GameManager.Instance.Player.Level <= requiredLevel[1])
+                        if (GameManager.Instance.Player.Level < requiredLevel[1])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
@@ -54,7 +55,7 @@ namespace TEXT_RPG.Scene
                         GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     case "3":
-                        if (GameManager.Instance.Player.Level <= requiredLevel[2])
+                        if (GameManager.Instance.Player.Level < requiredLevel[2])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;
@@ -63,7 +64,7 @@ namespace TEXT_RPG.Scene
                         GameManager.Instance.SceneInfo = SceneType.Battle;
                         return;
                     case "4":
-                        if (GameManager.Instance.Player.Level <= requiredLevel[3])
+                        if (GameManager.Instance.Player.Level < requiredLevel[3])
                         {
                             Console.WriteLine("플레이어의 레벨이 권장 레벨보다 낮습니다.");
                             break;

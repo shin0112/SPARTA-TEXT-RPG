@@ -1,5 +1,4 @@
-﻿using ConsoleRPG;
-using TEXT_RPG.Core;
+﻿using TEXT_RPG.Core;
 using TEXT_RPG.Scene;
 using TEXT_RPG.Scene.Battle;
 using TEXT_RPG.Scene.Inventory;
@@ -21,7 +20,6 @@ namespace TEXT_RPG.Manager
         public ShopScene ShopScene { get; } = new();
         public ShopBuyScene ShopBuyScene { get; } = new();
         public ShopSellScene ShopSellScene { get; } = new();
-        public MonsterSelectScene MonsterSelectScene { get; } = new();
         public InventoryScene InventoryScene { get; } = new();
         public EquipManagementScene EquipManagementScene { get; } = new();
         public ConsumeManagementScene ConsumeManagementScene { get; } = new();
@@ -30,6 +28,7 @@ namespace TEXT_RPG.Manager
         public PhaseScene PhaseScene { get; } = new();
         public ResultScene ResultScene { get; } = new();
         public DungeonSelectScene DungeonSelect { get; } = new();
+        public TrainingScene TrainingScene { get; } = new();
 
 
         // 게임 시작하는 함수
@@ -48,7 +47,7 @@ namespace TEXT_RPG.Manager
                         StartScene.GameStart();
                         break;
                     case SceneType.Battle: // 전투
-                        BattleManager.Instance.Battle();
+                        BattleManager.Instance.StartBattle();
                         break;
                     case SceneType.Spec: // 스펙
                         SpecScene.Specification();
@@ -72,10 +71,13 @@ namespace TEXT_RPG.Manager
                         ShopSellScene.DisplayShopSell();
                         break;
                     case SceneType.MonsterSelect:
-                        MonsterSelect.Show();
+                        MonsterSelect.Enter();
                         break;
                     case SceneType.DungeonSelect:
                         DungeonSelect.Show();
+                        break;
+                    case SceneType.Training:
+                        TrainingScene.Enter();
                         break;
                 }
                 // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.

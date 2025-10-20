@@ -15,6 +15,7 @@
         Phase,
         Result,
         DungeonSelect,
+        Training,
     }
 
     public enum ItemType
@@ -23,5 +24,11 @@
         Armor,
         HP,
         Stamina
+    }
+
+    public enum MonsterType
+    {
+        Normal,
+        Boss
     }
 }

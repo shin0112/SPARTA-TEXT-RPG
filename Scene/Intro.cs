@@ -2,7 +2,7 @@ using System.Text;
 using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
-namespace ConsoleRPG
+namespace TEXT_RPG.Scene
 {
     public class Intro
     {
@@ -48,9 +48,9 @@ namespace ConsoleRPG
 
             Console.WriteLine("우선 당신의 정보를 입력해주세요.");
 
-            Console.Write("이름:");
+            Console.Write("이름: ");
             string inputName = Console.ReadLine();
-            Console.Write("직업:");
+            Console.Write("직업: ");
             string inputJob = Console.ReadLine();
 
             GameManager.Instance.Player = new Player(inputName, inputJob);

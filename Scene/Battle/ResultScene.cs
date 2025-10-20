@@ -9,12 +9,13 @@ namespace TEXT_RPG.Scene.Battle
         protected override string Title { get; } = $"Battle!! - Result";
         protected override string[] Selections { get; } = ["나가기"];
 
-        public override void Show()
+        public override void Enter()
         {
             ShowTitle();
             Console.WriteLine($"{(BattleManager.Instance.IsVictory ? "Victory" : "You Lose")}\n");
-            BattleSceneUI.ShowPlayerInfo();
-            HandleSelections();
+            BattleSceneUI.ShowBattleResult();
+            BattleSceneUI.ShowPlayerInfoAfterBattle();
+            ProcessSelection();
         }
 
         protected override void HandleInput(int select)

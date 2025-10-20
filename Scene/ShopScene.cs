@@ -1,13 +1,13 @@
-﻿using TEXT_RPG.Core;
+﻿using System.Text;
+using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
-using TEXT_RPG.Repository;
 
 namespace TEXT_RPG.Scene
 {
     internal class ShopScene
     {
         public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
-        public List<Item> InventoryItem = InventoryManager.Instance.EquipItem;
+        public List<Item> InventoryItem = InventoryManager.Instance.InventoryItem;
 
         public bool isBuyingScene = false;
 
@@ -27,11 +27,35 @@ namespace TEXT_RPG.Scene
         {
             shopIntroText1 = @$"       
 [상점]
+
+""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  
+...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
+⠘⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀            ⡜⠀⠀⠀
+⠀⠀⠀⠑⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀         ⠀⡔⠁⠀⠀⠀
+⠀⠀⠀⠀⠈⠢⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀         ⠀⣀⠴⠊⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢸⠀⠀⠀⢀⣀⣀⣀⣀⣀⡀⠤⠄⠒⠤⠀⠒⠈⠀⠒⠈⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠘⣀⠄⠊⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢀⣴⠶⠿⠟⠛⠻⠛⠳⠶⣄⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⣠⣶⣿⣿⣿⣶⣖⠶⢶⣤⡀⠀⠈⢿⣆⠀⠀⠀⠀⠀
+⢀⣴⣿⠋⠉⠉⠀⠀⠈⠉⠛⠿⢿⣷⡀⠀⠈⢷⡀⠀⠀⠀
+⡾⠉⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢦⡀⠘⣷⡀⠀⠀
+⣷⢰⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢳⡀⢸⡇⠀⠀
+⢻⡜⡄⠀⢀⣀⣤⣶⣶⡄⣴⣾⣿⣛⣓⠀⠀⣧⢸⣇⠀⠀
+⢈⣧⣧⠀⢩⠞⠿⠿⠻⠀⠘⠙⠃⠛⠛⠓⠀⣿⣻⠿⣷⠀
+⢸⡵⣿⠀⠀⠀⠀⠀⠀⠀⠀⠠⡀⠀⠀⠀⠀⠀⢻⣇⡟⠀
+⠘⢧⣿⡀⠀⠀⠀⠀⢧⣤⣤⣶⣗⠀⠀⠀⠀⠀⠜⣽⠁⠀
+⠀⠈⢿⣧⠀⠀⠀⠀⣿⣿⣿⣿⣿⣀⠀⠀⠀⢠⡟⠁⠀⠀
+⠀⠀⠀⠘⣇⠀⠀⠰⠋⠉⠙⠂⠀⠉⠀⠀⠀⣼⡅⠀⠀⠀
+⠀⠀⠀⠀⠹⣦⡀⠀⠀⠀⠉⠉⠁⠀⠀⠀⣠⠏⢻⣤⡀⠀
+⠀⠀⠀⠀⠀⢹⡷⢦⣄⣀⣀⣀⣀⣤⣴⡾⠃⠀⠘⡿⠙⢶
+⠀⠀⠀⠀⠀⢨⡷⣤⡀⠈⠉⠉⢁⡴⠋⠀⠀⠀⣸⠃⠀⠀
+
 인자한 모습의 할아버지가 미소 지으며 반겨준다. 
 ""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
 
+
 [보유 골드]
-{GameManager.Instance.Player.Gold} G
+{GameManager.Instance.Player!.Gold} G
 
 [아이템 목록]";
         }
@@ -48,7 +72,7 @@ namespace TEXT_RPG.Scene
         public void ShopItemList()
         {
             string ability = "오류";
-            string isPercent = "";
+            //string isPercent = "";
             _itemNumber = 1;
 
             foreach (var item in ShopItem)
@@ -59,21 +83,21 @@ namespace TEXT_RPG.Scene
                 {
                     case ItemType.Weapon:
                         ability = "공격력";
-                        isPercent = "";
+                        //isPercent = "";
                         break;
 
                     case ItemType.Armor:
                         ability = "방어력";
-                        isPercent = "";
+                        //isPercent = "";
                         break;
                     case ItemType.HP:
                         ability = "체력 회복";
-                        isPercent = "%";
+                        //isPercent = "%";
                         remaining = "";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
-                        isPercent = "";
+                        //isPercent = "";
                         remaining = "";
                         break;
                     default:
@@ -90,40 +114,40 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 구매가격: {item.Price} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value} | 구매가격: {item.Price} G | {item.Description}");
             }
         }
 
         public void InventoryItemList()
         {
             string ability = "오류";
-            string isPercent = "";
+            //string isPercent = "";
             _itemNumber = 1;
 
             foreach (var item in InventoryItem)
             {
-                string remaining = "보유 개수 : "; //포션항목만 인벤토리 항목에서 개수 불러올 것. 포션은 인벤에 항목하나로 합산되어야 함
+                //string remaining = "보유 개수 :  |"; //포션항목만 인벤토리 항목에서 개수 불러올 것. 포션은 인벤에 항목하나로 합산되어야 함
 
                 switch (item.Type)
                 {
                     case ItemType.Weapon:
                         ability = "공격력";
-                        isPercent = "";
-                        remaining = "";
+                        //isPercent = "";
+                        //remaining = "";
                         break;
 
                     case ItemType.Armor:
                         ability = "방어력";
-                        isPercent = "";
-                        remaining = "";
+                        //isPercent = "";
+                        //remaining = "";
                         break;
                     case ItemType.HP:
                         ability = "체력 회복";
-                        isPercent = "%";
+                        //isPercent = "%";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
-                        isPercent = "";
+                        //isPercent = "";
                         break;
                     default:
                         Console.WriteLine("오류 발생 확인 필요");
@@ -139,7 +163,7 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 판매가격: {(int)Math.Ceiling(item.Price * 0.8f)} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()} {item.Name} | {ability} + {item.Value} | 판매가격: {(int)Math.Ceiling(item.Price * 0.8f)} G | {item.Description}");
             }
         }
 
@@ -165,11 +189,18 @@ namespace TEXT_RPG.Scene
             {
                 inputStr = Console.ReadLine();
                 int.TryParse(inputStr, out inputInt);
-                if (inputInt == 1 || inputInt == 2 || inputInt == 0)
+                if (int.TryParse(inputStr, out inputInt) == false)
+                {
+                    Console.Write("잘못된 입력입니다. 숫자를 입력해주세요.\n>> ");
+                }
+                else if (inputInt == 1 || inputInt == 2 || inputInt == 0)
                 {
                     break;
                 }
-                Console.WriteLine("잘못된 입력입니다. 숫자를 확인해주세요.\n>> ");
+                else
+                {
+                    Console.Write("잘못된 입력입니다. 숫자를 확인해주세요.\n>> ");
+                }
             }
 
             if (inputInt == 1)
@@ -206,6 +237,7 @@ namespace TEXT_RPG.Scene
             Init();
             Console.WriteLine(shopIntroText1);
             ShopItemList();
+            Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();

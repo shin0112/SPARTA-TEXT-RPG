@@ -7,30 +7,34 @@ namespace TEXT_RPG.Manager
 {
     internal class BattleManager
     {
-        private static BattleManager _instance = new();
+        private readonly static BattleManager _instance = new();
         public static BattleManager Instance => _instance;
 
-        private readonly MonsterRepository monsterRepository = new();
+        private readonly MonsterRepository _monsterRepository = new();
 
-        // 몬스터 리스트 정보
-        public List<Monster> Monsters = [];
+        // 몬스터 & 던전 관련 정보
+        public List<Monster> Monsters { get; private set; } = [];
         public int MonsterNumber { get; set; } = 0;
-        private int _dungeonNumber = 0;
-
-        // 몬스터 사망 관리
-        public event Action? OnAllMonsterDead;
-        private int _deadCount = 0;
+        public Player? BeforePlayer { get; private set; } = null;
+        private int _currentDungeonId = 0;
+        public Reward Reward { get; private set; } = new(0, 0, []);
+        private readonly int[] _bossStages = [2, 4];
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
         public bool IsDefeat { get; private set; } = false;
-        public void ResetIsVictory() => IsVictory = false;
+        private int _deadMonsterCount = 0;
+
+        // 이벤트
+        public event Action? OnAllMonstersDead;
         public event Action? OnDefeat;
 
+        // Scene 관련
         public SceneType CurrentScene => GameManager.Instance.SceneInfo;
 
-        private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
+        private Dictionary<SceneType, BattleSceneBase> _battleScenes = [];
 
+        // 초기화
         public void InitScenes(GameManager game)
         {
             _battleScenes = new()
@@ -45,21 +49,24 @@ namespace TEXT_RPG.Manager
             {
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
-            OnAllMonsterDead += () =>
+            OnAllMonstersDead += () =>
             {
                 IsVictory = true;
+                GameManager.Instance.Player!.Get(Reward);
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
         }
 
-        public void Battle()
+        public void StartBattle()
         {
-            SpawnRandomMonsters();
+            SaveBeforePlayerInfo();
+            SpawnRandomMonsters();  // 랜덤 몬스터  스폰
+            CalculateTotalRewards(); // 보상 정보 정리
+
             while (true)
             {
                 // 화면 관리
-                if (CurrentScene == SceneType.Start) break;
-                else if (CurrentScene == SceneType.DungeonSelect) break;
+                if (CurrentScene is SceneType.Start or SceneType.DungeonSelect) break;
 
                 // 플레이어 사망 체크
                 if (GameManager.Instance.Player!.IsDead)
@@ -67,16 +74,18 @@ namespace TEXT_RPG.Manager
                     Defeat();
                 }
 
-                // 승리/패배 체크
-                if (CheckVictoryAndDefeat())
+                if (HasBattleEnded())
                 {
                     GameManager.Instance.SceneInfo = SceneType.Result;
                 }
 
-                _battleScenes[CurrentScene].Show();
+                _battleScenes[CurrentScene].Enter();
             }
-            BattleEnd();
+
+            EndBattle();
         }
+
+        public void ResetVictoryFlag() => IsVictory = false;
 
         public void SelectDungeon(string? input)
         {
@@ -84,7 +93,7 @@ namespace TEXT_RPG.Manager
 
             if (isNumber)
             {
-                _dungeonNumber = dungeonNumber;
+                _currentDungeonId = dungeonNumber;
             }
         }
 
@@ -94,7 +103,6 @@ namespace TEXT_RPG.Manager
             Player player = GameManager.Instance.Player!;
 
             int beforeHp = monster.Stats.Hp;
-
 
             // 몬스터 공격하기
             player.Attack(monster);
@@ -107,14 +115,14 @@ namespace TEXT_RPG.Manager
         public void MonsterTurn(Monster monster)
         {
             Player player = GameManager.Instance.Player!;
+
             if (player.IsDead)
             {
                 Defeat();
                 return;
             }
 
-            int actualDamage = Math.Max(monster.Stats.Atk - player.Stats.Def, 0);
-
+            int actualDamage = Math.Max(monster.Stats.Atk - (player.Stats.Def + InventoryManager.Instance.EquipValue(ItemType.Armor)), 0);
 
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
             Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{actualDamage}]\n");
@@ -125,17 +133,7 @@ namespace TEXT_RPG.Manager
             BattleSceneUI.ShowPlayerInfo();
         }
 
-        private bool CheckVictoryAndDefeat()
-        {
-            bool flag = IsVictory || IsDefeat;
-
-            if (flag)
-            {
-                GameManager.Instance.SceneInfo = SceneType.Result;
-            }
-
-            return flag;
-        }
+        private bool HasBattleEnded() => IsVictory || IsDefeat;
 
         private void SpawnRandomMonsters()
         {
@@ -143,9 +141,9 @@ namespace TEXT_RPG.Manager
             try
             {
                 // monsters[0] : 일반 몬스터, monsters[1] : 특수 몬스터
-                monsters = monsterRepository.DungeonMonsters[_dungeonNumber];
+                monsters = _monsterRepository.DungeonMonsters[_currentDungeonId];
             }
-            catch (KeyNotFoundException e)
+            catch (KeyNotFoundException)
             {
                 Console.WriteLine("던전 정보를 찾을 수 없습니다.");
                 GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
@@ -153,21 +151,37 @@ namespace TEXT_RPG.Manager
             }
 
             Random random = new();
-            int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
+            int monsterCount = 0; // 일반 스테이지: 최대 4마리 스폰 | 보스 스테이지:: 3마리 고정 (보스 1, 일반 2)
 
-            // 던전 일반 몬스터 스폰 
-            for (int i = 0; i < monsterCount; i++)
+            if (_bossStages.Contains(_currentDungeonId))
             {
-                Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
-            }
+                AddSpawnMonster(monsters[0][0]); // Add 보스 몬스터
 
-            if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
-            {
-                if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                monsterCount = 2;
+
+                for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.RemoveAt(3);
+                    AddSpawnMonster(monsters[0][random.Next(1, monsters[0].Count)]);
                 }
-                Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
+            }
+            else
+            {
+                monsterCount = random.Next(1, 5);
+
+                // 던전 일반 몬스터 스폰 
+                for (int i = 0; i < monsterCount; i++)
+                {
+                    AddSpawnMonster(monsters[0][random.Next(monsters[0].Count)]);
+                }
+
+                if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+                {
+                    if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                    {
+                        Monsters.RemoveAt(3);
+                    }
+                    AddSpawnMonster(monsters[1][random.Next(monsters[1].Count)]);
+                }
             }
 
             foreach (var monster in Monsters)
@@ -176,49 +190,52 @@ namespace TEXT_RPG.Manager
             }
         }
 
+        private void AddSpawnMonster(Monster monster) => Monsters.Add(monster.Clone());
+
+        private void CalculateTotalRewards()
+        {
+            Monsters.ForEach(m => Reward.Add(m.Reward));
+        }
+
+        private void SaveBeforePlayerInfo()
+        {
+            BeforePlayer = GameManager.Instance.Player!.Clone();
+        }
+
         private void OnMonsterDeadChanged(bool isDead)
         {
-            if (isDead) _deadCount++;
+            if (isDead) _deadMonsterCount++;
 
             // 모든 몬스터가 죽었는지 확인
-            if (_deadCount == Monsters.Count)
+            if (_deadMonsterCount == Monsters.Count)
             {
                 IsVictory = true;
-                _deadCount = 0;
-                Monsters.Clear();
-                OnAllMonsterDead?.Invoke();
+                OnAllMonstersDead?.Invoke();
             }
         }
 
-        public void Defeat()
+        private void Defeat()
         {
             if (IsDefeat) return;
             IsDefeat = true;
             OnDefeat?.Invoke();
         }
 
-        private void BattleEnd()
+        private void EndBattle()
         {
             Monsters.Clear();
             MonsterNumber = 0;
+            Reward = new(0, 0, []);
+            _currentDungeonId = -11;
+            _deadMonsterCount = 0;
+            BeforePlayer = null;
             IsVictory = false;
             IsDefeat = false;
-            _deadCount = 0;
         }
 
         public void TurnEnd()
         {
             GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
-        }
-
-        public void BattleInfo()
-        {
-            Console.WriteLine("=== 전투 정보 ===");
-            Console.WriteLine($"총 몬스터 수: {Monsters.Count}");
-            Console.WriteLine($"죽은 몬스터 수: {_deadCount}");
-            Console.WriteLine($"승리 상태: {IsVictory}");
-
-            Console.WriteLine();
         }
     }
 }

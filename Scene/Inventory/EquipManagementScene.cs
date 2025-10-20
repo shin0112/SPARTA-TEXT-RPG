@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene.Inventory
 {
@@ -7,24 +8,28 @@ namespace TEXT_RPG.Scene.Inventory
     {
         public void EquipManagement()
         {
+            var invenManager = InventoryManager.Instance;
+            List<Item> inventory = invenManager.InventoryItem;
+            List<Item> equipList = new();
+
             Console.Clear();
             UIHelper.ColorWriteLine("인벤토리 - 장착 관리", "Yellow");
             Console.WriteLine("장비를 장착 또는 해제하세요.\n");
             Console.WriteLine("[아이템 목록]\n");
 
-            var invenManager = InventoryManager.Instance;
-            List<Item> item = invenManager.EquipItem;
-
             // 각 장비 나열
-            for (int i = 0; i < item.Count; i++)
+            for (int i = 0; i < inventory.Count; i++)
             {
-                string itemString = invenManager.IventoryListShow(item[i], i);
-
-                UIHelper.ColorWriteLine($"{i + 1}. {itemString}", "Cyan");
+                if (inventory[i].Type == ItemType.Armor || inventory[i].Type == ItemType.Weapon)
+                {
+                    string itemString = invenManager.IventoryListShow(inventory[i]);
+                    equipList.Add(inventory[i]);
+                    UIHelper.ColorWriteLine($"{equipList.Count}. {itemString}", "Cyan");
+                }
             }
 
             UIHelper.ColorWriteLine("\n0. 나가기\n", "Cyan");
-            Console.WriteLine("숫자를 입력해 아이템을 장착하세요.");
+            Console.WriteLine("숫자를 입력해 장비를 장착하세요.");
             Console.Write(">> ");
 
             string input = Console.ReadLine() ?? "";
@@ -35,9 +40,9 @@ namespace TEXT_RPG.Scene.Inventory
                 {
                     GameManager.Instance.SceneInfo = SceneType.Inven;
                 }
-                else if (intCheck && 1 <= number && number <= item.Count) // 장비 장착 또는 해제
+                else if (intCheck && 1 <= number && number <= equipList.Count) // 장비 장착 또는 해제
                 {
-                    invenManager.Equip(item[number - 1], number - 1);
+                    invenManager.Equip(equipList[number - 1]);
                 }
             }
         }
