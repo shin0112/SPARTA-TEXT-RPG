@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene
 {
@@ -19,7 +20,7 @@ namespace TEXT_RPG.Scene
             Console.WriteLine("0.집으로 돌아간다..");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">>");
+            Console.Write(">> ");
             string input = Console.ReadLine();
 
             if (input == "1")

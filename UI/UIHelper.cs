@@ -1,4 +1,4 @@
-﻿namespace TEXT_RPG
+﻿namespace TEXT_RPG.UI
 {
     internal class UIHelper
     {
@@ -16,7 +16,7 @@
             int width = 0;
             foreach (char c in text)
             {
-                width += (c >= 0xAC00 && c <= 0xD7A3) ? 2 : 1; // 한글 탐지
+                width += c >= 0xAC00 && c <= 0xD7A3 ? 2 : 1; // 한글 탐지
             }
             return width;
         }
