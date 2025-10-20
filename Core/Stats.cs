@@ -6,7 +6,7 @@
         public int Atk { get; set; }
         public int Def { get; set; }
         public int Hp { get; set; }
-        public int Sp { get; set; } = 10;
+        public int Sp { get; set; } = 100;
         public int MaxHp { get; set; }
 
         public Stats(int atk, int def, int hp)
