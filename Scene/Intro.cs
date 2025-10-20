@@ -32,7 +32,7 @@ namespace ConsoleRPG
             foreach (char emoticon in logo)
             {
                 Console.Write(emoticon);
-                Thread.Sleep(2);
+                Thread.Sleep(7); //char string 흘러가는 속도
             }
 
             Thread.Sleep(500);
