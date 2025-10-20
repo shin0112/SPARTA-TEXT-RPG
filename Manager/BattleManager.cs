@@ -181,7 +181,7 @@ namespace TEXT_RPG.Manager
 
         private void SaveBeforePlayerInfo()
         {
-            BeforePlayer = GameManager.Instance.Player!;
+            BeforePlayer = GameManager.Instance.Player!.Clone();
         }
 
         private void OnMonsterDeadChanged(bool isDead)
