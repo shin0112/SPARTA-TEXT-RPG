@@ -19,7 +19,7 @@ namespace TEXT_RPG.Core
             {
                 if (index >= 0 && index < InventoryManager.Instance.MonsterItem.Count)
                 {
-                    DropItem.Add(InventoryManager.Instance.MonsterItem[index]);
+                    DropItem.Add(InventoryManager.Instance.MonsterItem[index].Clone());
                 }
             }
         }
