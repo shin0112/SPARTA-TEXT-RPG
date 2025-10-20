@@ -18,6 +18,7 @@ namespace TEXT_RPG.Manager
         public Player? BeforePlayer { get; private set; } = null;
         private int _currentDungeonId = 0;
         public Reward Reward { get; private set; } = new(0, 0, []);
+        private int[] _bossStages = [2, 4];
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
@@ -151,21 +152,37 @@ namespace TEXT_RPG.Manager
             }
 
             Random random = new();
-            int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
+            int monsterCount = 0; // 일반 스테이지: 최대 4마리 스폰 | 보스 스테이지:: 3마리 고정 (보스 1, 일반 2)
 
-            // 던전 일반 몬스터 스폰 
-            for (int i = 0; i < monsterCount; i++)
+            if (_bossStages.Contains(_currentDungeonId))
             {
-                Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
-            }
+                Monsters.Add(monsters[0][0]); // Add 보스 몬스터
 
-            if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
-            {
-                if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                monsterCount = 2;
+
+                for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.RemoveAt(3);
+                    Monsters.Add(monsters[0][random.Next(1, monsters[0].Count)].Clone());
                 }
-                Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
+            }
+            else
+            {
+                monsterCount = random.Next(1, 5);
+
+                // 던전 일반 몬스터 스폰 
+                for (int i = 0; i < monsterCount; i++)
+                {
+                    Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
+                }
+
+                if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+                {
+                    if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                    {
+                        Monsters.RemoveAt(3);
+                    }
+                    Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
+                }
             }
 
             foreach (var monster in Monsters)
