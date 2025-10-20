@@ -78,6 +78,7 @@ namespace TEXT_RPG.Scene
                     GameManager.Instance.Player.Gold -= ShopItem[i].Price;
 
                     Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
+                    InventoryItem.Add(newItem);
                 }
                 else
                 {
@@ -110,9 +111,13 @@ namespace TEXT_RPG.Scene
                         Console.WriteLine("\"자네, 그거 정말 다 먹을 수 있나..?\"");
                     }
                     Console.WriteLine("\"맛있게 먹게나.\"\n");
+
+                    for (int quantity = 1; quantity <= buyQuantity; quantity++)
+                    {
+                        InventoryItem.Add(newItem);
+                    }
                 }
             }
-            InventoryItem.Add(newItem);
         }
 
 
