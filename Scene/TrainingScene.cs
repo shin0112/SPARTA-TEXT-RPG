@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene
 {
@@ -14,6 +15,14 @@ namespace TEXT_RPG.Scene
         {
             ShowTitle();
             Console.WriteLine($"스펙을 쌓기 위한 훈련! (현재 스테미나: {GameManager.Instance.Player!.Stats.Sp})\n");
+
+            if (GameManager.Instance.BeforePlayer != null)
+            {
+                SceneCommonUI.ShowPlayerInfoDiff();
+                Console.WriteLine();
+            }
+            GameManager.Instance.SaveBeforePlayerInfo();
+
             ProcessSelection();
         }
 
@@ -21,7 +30,7 @@ namespace TEXT_RPG.Scene
         {
             for (int i = 1; i < Selections.Length; i++)
             {
-                Console.WriteLine($"{i}. {Selections[i]} | 필요 스테미나: {_requiredSp[i]}");
+                Console.WriteLine($"{i}. {Selections[i]} | 획득 경험치: {_trainExp[i]} | 필요 스테미나: {_requiredSp[i]}");
             }
             Console.WriteLine();
             Console.WriteLine($"0. {Selections[0]}");
@@ -33,6 +42,7 @@ namespace TEXT_RPG.Scene
             {
                 case 0:
                     GameManager.Instance.SceneInfo = SceneType.Start;
+                    GameManager.Instance.ResetBeforePlayer();
                     break;
                 default:
                     Train(select);
