@@ -156,7 +156,7 @@ namespace TEXT_RPG.Manager
 
             if (_bossStages.Contains(_currentDungeonId))
             {
-                Monsters.Add(monsters[0][0]); // Add 보스 몬스터
+                Monsters.Add(monsters[0][0].Clone()); // Add 보스 몬스터
 
                 monsterCount = 2;
 
