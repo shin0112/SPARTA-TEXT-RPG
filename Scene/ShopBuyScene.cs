@@ -34,7 +34,7 @@ namespace TEXT_RPG.Scene
                 return;
             }
 
-            Item newItem = ShopItem[i].Clone(); //입력값이 리스트 숫자보다 크면 예외로 에러가 나서 확인 코드 아래에서 선언했습니다.
+            Item newItem = ShopItem[i]; //입력값이 리스트 숫자보다 크면 예외로 에러가 나서 확인 코드 아래에서 선언했습니다.
 
             if (ShopItem[i].IsBuy == true)
             {
@@ -78,7 +78,7 @@ namespace TEXT_RPG.Scene
                     GameManager.Instance.Player.Gold -= ShopItem[i].Price;
 
                     Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
-                    InventoryItem.Add(newItem);
+                    InventoryItem.Add(newItem.Clone());
                 }
                 else
                 {
@@ -114,7 +114,7 @@ namespace TEXT_RPG.Scene
 
                     for (int quantity = 1; quantity <= buyQuantity; quantity++)
                     {
-                        InventoryItem.Add(newItem);
+                        InventoryItem.Add(newItem.Clone());
                     }
                 }
             }
