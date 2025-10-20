@@ -8,13 +8,14 @@ namespace TEXT_RPG.Scene
         public void GameStart()
         {
             Console.Clear();
-            UIHelper.ColorWriteLine("이제부터 시작이야!","DarkBlue");
-            UIHelper.ColorWriteLine("강해져서 최고의 개발자가 되겠어","DarkBlue");
+            UIHelper.ColorWriteLine("이제부터 시작이야!", "DarkBlue");
+            UIHelper.ColorWriteLine("강해져서 최고의 개발자가 되겠어", "DarkBlue");
             Console.WriteLine();
             Console.WriteLine("1.나의 스펙 확인");
             Console.WriteLine("2.취준던전 입장");
             Console.WriteLine("3.인벤토리");
             Console.WriteLine("4.상점 이동");
+            Console.WriteLine("5.스펙 쌓기");
             Console.WriteLine("0.집으로 돌아간다..");
             Console.WriteLine();
             Console.WriteLine("원하시는 행동을 입력해주세요.");
@@ -30,7 +31,7 @@ namespace TEXT_RPG.Scene
             {
                 Console.WriteLine("사회에 뛰어들기를 선택했습니다");
                 GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
-                
+
             }
             else if (input == "3")
             {
@@ -41,6 +42,11 @@ namespace TEXT_RPG.Scene
             {
                 Console.WriteLine("상점으로 이동합니다.");
                 GameManager.Instance.SceneInfo = SceneType.Shop;
+            }
+            else if (input == "5")
+            {
+                Console.WriteLine("훈련하기로 이동합니다.");
+                GameManager.Instance.SceneInfo = SceneType.Training;
             }
             else if (input == "0")
             {
