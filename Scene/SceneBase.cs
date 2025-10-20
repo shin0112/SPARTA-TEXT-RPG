@@ -7,6 +7,8 @@ namespace TEXT_RPG.Scene
         protected virtual string Title { get; } = "";
         protected virtual string[] Selections { get; } = [];
         protected virtual int SelectionCount => Selections.Length;
+        protected string? WarnOutput = null;
+        public void ResetWarnOutput() => WarnOutput = null;
 
         public abstract void Enter();
         protected abstract void HandleInput(int select);
@@ -39,6 +41,7 @@ namespace TEXT_RPG.Scene
         {
             while (true)
             {
+                if (WarnOutput != null) Console.WriteLine(WarnOutput);
                 Console.WriteLine("원하시는 행동을 입력해주세요.");
                 (bool flowControl, int value) = ValidateSelectionInput();
                 if (!flowControl)
