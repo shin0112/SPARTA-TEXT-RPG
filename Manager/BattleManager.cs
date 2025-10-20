@@ -15,7 +15,6 @@ namespace TEXT_RPG.Manager
         // 몬스터 & 던전 관련 정보
         public List<Monster> Monsters { get; private set; } = [];
         public int MonsterNumber { get; set; } = 0;
-        public Player? BeforePlayer { get; private set; } = null;
         private int _currentDungeonId = 0;
         public Reward Reward { get; private set; } = new(0, 0, []);
         private readonly int[] _bossStages = [2, 4];
@@ -59,7 +58,7 @@ namespace TEXT_RPG.Manager
 
         public void StartBattle()
         {
-            SaveBeforePlayerInfo();
+            GameManager.Instance.SaveBeforePlayerInfo();
             SpawnRandomMonsters();  // 랜덤 몬스터  스폰
             CalculateTotalRewards(); // 보상 정보 정리
 
@@ -197,11 +196,6 @@ namespace TEXT_RPG.Manager
             Monsters.ForEach(m => Reward.Add(m.Reward));
         }
 
-        private void SaveBeforePlayerInfo()
-        {
-            BeforePlayer = GameManager.Instance.Player!.Clone();
-        }
-
         private void OnMonsterDeadChanged(bool isDead)
         {
             if (isDead) _deadMonsterCount++;
@@ -228,9 +222,9 @@ namespace TEXT_RPG.Manager
             Reward = new(0, 0, []);
             _currentDungeonId = -11;
             _deadMonsterCount = 0;
-            BeforePlayer = null;
             IsVictory = false;
             IsDefeat = false;
+            GameManager.Instance.ResetBeforePlayer();
         }
 
         public void TurnEnd()
