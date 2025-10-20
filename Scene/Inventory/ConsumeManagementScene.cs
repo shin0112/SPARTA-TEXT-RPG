@@ -1,5 +1,6 @@
 ﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene.Inventory
 {
@@ -16,7 +17,8 @@ namespace TEXT_RPG.Scene.Inventory
             UIHelper.ColorWriteLine("인벤토리 - 소모품 관리", "Yellow");
             Console.WriteLine("소모품을 사용하세요.\n");
             Console.WriteLine("[플레이어 상태]");
-            Console.WriteLine($"체력 {player.Stats.Hp}/{player.Stats.MaxHp}\n");
+            Console.WriteLine($"체력     {player.Stats.Hp} / {player.Stats.MaxHp}");
+            Console.WriteLine($"스태미나 {player.Stats.Sp} / {Stats.MaxSp}\n");
             Console.WriteLine("[아이템 목록]\n");
 
             // 각 장비 나열
@@ -44,19 +46,23 @@ namespace TEXT_RPG.Scene.Inventory
                 }
                 else if (intCheck && 1 <= number && number <= consumeList.Count)
                 {
-                    if (consumeList[number - 1].Type == ItemType.HP)
-                    {
-                        int value = consumeList[number - 1].Value;
-                        int max = player.Stats.MaxHp;
-                        player.Stats.Heal(value, max);
+                    int i = number - 1;
+                    int value = consumeList[i].Value;
+                    int max;
 
-
-                        inventory.Remove(consumeList[number - 1]);
-                    }
-                    else
+                    if (consumeList[i].Type == ItemType.HP)
                     {
-                        //GameManager.Instance.Player.Stats.Stamina += consumeList[number - 1].Value;
+                        max = player.Stats.MaxHp;
+                        player.Stats.HPUp(value, max);
+                        if (player.IsDead) player.IsDead = false;
                     }
+                    else if (consumeList[i].Type == ItemType.Stamina)
+                    {
+                        max = Stats.MaxSp;
+                        player.Stats.SPUp(value, max);
+                    }
+
+                    inventory.Remove(consumeList[i]);
                 }
             }
         }

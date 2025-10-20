@@ -9,6 +9,8 @@ namespace TEXT_RPG.Scene
         public List<Item> ShopItem = InventoryManager.Instance.ShopItem;
         public List<Item> InventoryItem = InventoryManager.Instance.InventoryItem;
 
+        Random random = new();
+
         public bool isBuyingScene = false;
 
         int _itemNumber = 1;
@@ -55,7 +57,7 @@ namespace TEXT_RPG.Scene
 
 
 [보유 골드]
-{GameManager.Instance.Player!.Gold} G
+{GameManager.Instance.Player.Gold} G
 
 [아이템 목록]";
         }
@@ -72,7 +74,7 @@ namespace TEXT_RPG.Scene
         public void ShopItemList()
         {
             string ability = "오류";
-            //string isPercent = "";
+            string isPercent = "";
             _itemNumber = 1;
 
             foreach (var item in ShopItem)
@@ -83,21 +85,21 @@ namespace TEXT_RPG.Scene
                 {
                     case ItemType.Weapon:
                         ability = "공격력";
-                        //isPercent = "";
+                        isPercent = "";
                         break;
 
                     case ItemType.Armor:
                         ability = "방어력";
-                        //isPercent = "";
+                        isPercent = "";
                         break;
                     case ItemType.HP:
                         ability = "체력 회복";
-                        //isPercent = "%";
+                        isPercent = "%";
                         remaining = "";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
-                        //isPercent = "";
+                        isPercent = "";
                         remaining = "";
                         break;
                     default:
@@ -114,14 +116,14 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value} | 구매가격: {item.Price} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 구매가격: {item.Price} G | {item.Description}");
             }
         }
 
         public void InventoryItemList()
         {
             string ability = "오류";
-            //string isPercent = "";
+            string isPercent = "";
             _itemNumber = 1;
 
             foreach (var item in InventoryItem)
@@ -188,8 +190,8 @@ namespace TEXT_RPG.Scene
             while (inputInt != 1 || inputInt != 2 || inputInt != 0)
             {
                 inputStr = Console.ReadLine();
-                int.TryParse(inputStr, out inputInt);
-                if (int.TryParse(inputStr, out inputInt) == false)
+                bool isParsed = int.TryParse(inputStr, out inputInt);
+                if (isParsed == false)
                 {
                     Console.Write("잘못된 입력입니다. 숫자를 입력해주세요.\n>> ");
                 }
@@ -220,16 +222,18 @@ namespace TEXT_RPG.Scene
             }
 
         }
-        // 오늘의 추천 메뉴 추후 추가
-        //public void RandomRecommend()  
-        //{
-        //    Random random = new();
 
-        //    string randomFood = "";
+        public void RandomFoodRecommend()  //오늘의 추천 메뉴
+        {
+            int number = random.Next(9, 15);
 
-        //    Console.WriteLine("오늘은 이걸 먹어보는 게 어떻겠나?");
-        //    Console.WriteLine($">> {randomFood} <<");
-        //}
+            string randomFood = ShopItem[number].Name;
+
+            Console.WriteLine();
+            Console.WriteLine("[오늘의 추천 메뉴]\n");
+            Console.WriteLine("오늘은 이걸 먹어보는 게 어떻겠나?");
+            Console.WriteLine($">>>>>>>  {randomFood}  <<<<<<<");
+        }
 
         public void DisplayShop()
         {
@@ -238,6 +242,7 @@ namespace TEXT_RPG.Scene
             Console.WriteLine(shopIntroText1);
             ShopItemList();
             Console.OutputEncoding = Encoding.UTF8;
+            RandomFoodRecommend();
             Console.WriteLine(shopIntroText2);
             Console.Write(">> ");
             ShopSceneSelect();

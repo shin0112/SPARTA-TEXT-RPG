@@ -54,19 +54,18 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine("숫자를 입력하십시오.\n");
                 return;
             }
-            else if (inputSellCheckTryParse != 1 || isParsed == false)
+
+            if (inputSellCheckTryParse != 1 || isParsed == false)  // else만 삭제해보기
             {
                 Console.WriteLine("아이템을 판매하지 않습니다.\n");
                 return;
             }
-            else
-            {
-                if (InventoryItem[i].IsEquipped == true)
-                {
-                    InventoryItem[i].IsEquipped = false;
-                }
 
+            if (InventoryItem[i].IsEquipped == true)
+            {
+                InventoryItem[i].IsEquipped = false;
             }
+
             //인벤토리에서 아이템 하나 빠지는 코드 필요
             GameManager.Instance.Player.Gold += (int)Math.Ceiling((itemPrice * 0.8f) * sellQuantity);
             Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐 준 거라고!\"\n");
