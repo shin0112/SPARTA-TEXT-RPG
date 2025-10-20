@@ -9,7 +9,7 @@ namespace TEXT_RPG.Scene
         string input;
         int i = 0;
 
-        Item currentItem;
+        string currentItemName;
 
         public string shopSellText = @$"
 판매할 아이템의 번호를 입력하세요. ex) '2' 입력 시 '수학의 정석'을(를) 판매합니다.
@@ -26,7 +26,7 @@ namespace TEXT_RPG.Scene
             bool isParsed = int.TryParse(input, out int i);
             i -= 1;
             int sellQuantity = 1;
-            currentItem = InventoryItem[i];
+            currentItemName = InventoryItem[i].Name;
 
             if (i < 0 || i >= InventoryItem.Count || isParsed == false)
             {
@@ -70,21 +70,26 @@ namespace TEXT_RPG.Scene
             GameManager.Instance.Player.Gold += (int)Math.Ceiling((itemPrice * 0.8f) * sellQuantity);
             Console.WriteLine("\"이건 내가 사가도록 하지. 값은 제대로 쳐 준 거라고!\"\n");
 
-            for (i = 0; i < InventoryItem.Count; i++)
+            int sellItemCount = 0;
+            int index = 0;
+            for (index = 0; index <= InventoryItem.Count; )
             {
-                int sellItemCount = 0;
-
-                if(sellItemCount == sellQuantity)
+                if (sellItemCount == sellQuantity)
                 {
                     break;
                 }
-
-                if (InventoryItem[i].Name == currentItem.Name)
+                if (InventoryItem[index].Name == currentItemName)
                 {
-                    InventoryItem.RemoveAt(i);
+                    InventoryItem.RemoveAt(index);
                     sellItemCount++;
+                    index = 0;
+                }
+                else
+                {
+                    index++;
                 }
             }
+
         }
 
 
@@ -120,12 +125,14 @@ namespace TEXT_RPG.Scene
         public int ConsumeItemSum(int i)  //보유수량 표시 함수
         {
             int consumeItemSum = 0;
+            int index = 0;
             foreach (Item inventoryItem in InventoryItem)
             {
-                if (InventoryItem[i].Name == currentItem.Name)
+                if (InventoryItem[index].Name == currentItemName)
                 {
                     consumeItemSum++;
                 }
+                index++;
             }
             return consumeItemSum;
         }
