@@ -121,33 +121,33 @@ namespace TEXT_RPG.Scene
         public void InventoryItemList()
         {
             string ability = "오류";
-            string isPercent = "";
+            //string isPercent = "";
             _itemNumber = 1;
 
             foreach (var item in InventoryItem)
             {
-                string remaining = "보유 개수 :  |"; //포션항목만 인벤토리 항목에서 개수 불러올 것. 포션은 인벤에 항목하나로 합산되어야 함
+                //string remaining = "보유 개수 :  |"; //포션항목만 인벤토리 항목에서 개수 불러올 것. 포션은 인벤에 항목하나로 합산되어야 함
 
                 switch (item.Type)
                 {
                     case ItemType.Weapon:
                         ability = "공격력";
-                        isPercent = "";
-                        remaining = "";
+                        //isPercent = "";
+                        //remaining = "";
                         break;
 
                     case ItemType.Armor:
                         ability = "방어력";
-                        isPercent = "";
-                        remaining = "";
+                        //isPercent = "";
+                        //remaining = "";
                         break;
                     case ItemType.HP:
                         ability = "체력 회복";
-                        isPercent = "%";
+                        //isPercent = "%";
                         break;
                     case ItemType.Stamina:
                         ability = "스태미너 회복";
-                        isPercent = "";
+                        //isPercent = "";
                         break;
                     default:
                         Console.WriteLine("오류 발생 확인 필요");
@@ -163,7 +163,7 @@ namespace TEXT_RPG.Scene
                         break;
                 }
 
-                Console.WriteLine($"- {DisplayItemNumber()}{remaining} {item.Name} | {ability} + {item.Value}{isPercent} | 판매가격: {(int)Math.Ceiling(item.Price * 0.8f)} G | {item.Description}");
+                Console.WriteLine($"- {DisplayItemNumber()} {item.Name} | {ability} + {item.Value} | 판매가격: {(int)Math.Ceiling(item.Price * 0.8f)} G | {item.Description}");
             }
         }
 
