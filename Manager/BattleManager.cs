@@ -156,13 +156,13 @@ namespace TEXT_RPG.Manager
 
             if (_bossStages.Contains(_currentDungeonId))
             {
-                Monsters.Add(monsters[0][0].Clone()); // Add 보스 몬스터
+                AddSpawnMonster(monsters[0][0]); // Add 보스 몬스터
 
                 monsterCount = 2;
 
                 for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.Add(monsters[0][random.Next(1, monsters[0].Count)].Clone());
+                    AddSpawnMonster(monsters[0][random.Next(1, monsters[0].Count)]);
                 }
             }
             else
@@ -172,7 +172,7 @@ namespace TEXT_RPG.Manager
                 // 던전 일반 몬스터 스폰 
                 for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
+                    AddSpawnMonster(monsters[0][random.Next(monsters[0].Count)]);
                 }
 
                 if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
@@ -181,7 +181,7 @@ namespace TEXT_RPG.Manager
                     {
                         Monsters.RemoveAt(3);
                     }
-                    Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
+                    AddSpawnMonster(monsters[1][random.Next(monsters[1].Count)]);
                 }
             }
 
@@ -190,6 +190,8 @@ namespace TEXT_RPG.Manager
                 monster.OnDeadChanged += OnMonsterDeadChanged;
             }
         }
+
+        private void AddSpawnMonster(Monster monster) => Monsters.Add(monster.Clone());
 
         private void CalculateTotalRewards()
         {
