@@ -1,6 +1,7 @@
 using System.Text;
 using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene;
 
@@ -78,7 +79,7 @@ public class SpecScene
 
         Console.WriteLine();
         Console.WriteLine("원하시는 행동을 입력해주세요.");
-        Console.Write(">>");
+        Console.Write(">> ");
 
         string input = Console.ReadLine();
 
