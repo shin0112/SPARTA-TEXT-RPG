@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using TEXT_RPG.Core;
+﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
+using TEXT_RPG.UI;
 
 namespace TEXT_RPG.Scene.Inventory
 {
@@ -41,7 +41,7 @@ namespace TEXT_RPG.Scene.Inventory
 
             UIHelper.ColorWriteLine("\n1. 장착 관리\n2. 소모품 관리\n0. 나가기\n", "Cyan");
             Console.WriteLine("원하시는 행동을 입력해주세요.");
-            Console.Write(">>> ");
+            Console.Write(">> ");
 
             string input = Console.ReadLine() ?? "";
 

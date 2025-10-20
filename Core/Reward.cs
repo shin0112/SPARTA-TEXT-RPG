@@ -1,5 +1,4 @@
 ﻿using TEXT_RPG.Manager;
-using TEXT_RPG.Repository;
 
 namespace TEXT_RPG.Core
 {

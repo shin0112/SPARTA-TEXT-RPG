@@ -1,5 +1,4 @@
-﻿using ConsoleRPG;
-using TEXT_RPG.Core;
+﻿using TEXT_RPG.Core;
 using TEXT_RPG.Scene;
 using TEXT_RPG.Scene.Battle;
 using TEXT_RPG.Scene.Inventory;
