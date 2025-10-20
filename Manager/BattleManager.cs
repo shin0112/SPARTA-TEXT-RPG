@@ -7,7 +7,7 @@ namespace TEXT_RPG.Manager
 {
     internal class BattleManager
     {
-        private static BattleManager _instance = new();
+        private readonly static BattleManager _instance = new();
         public static BattleManager Instance => _instance;
 
         private readonly MonsterRepository _monsterRepository = new();
@@ -18,6 +18,7 @@ namespace TEXT_RPG.Manager
         public Player? BeforePlayer { get; private set; } = null;
         private int _currentDungeonId = 0;
         public Reward Reward { get; private set; } = new(0, 0, []);
+        private readonly int[] _bossStages = [2, 4];
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
@@ -31,7 +32,7 @@ namespace TEXT_RPG.Manager
         // Scene 관련
         public SceneType CurrentScene => GameManager.Instance.SceneInfo;
 
-        private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
+        private Dictionary<SceneType, BattleSceneBase> _battleScenes = [];
 
         // 초기화
         public void InitScenes(GameManager game)
@@ -51,7 +52,7 @@ namespace TEXT_RPG.Manager
             OnAllMonstersDead += () =>
             {
                 IsVictory = true;
-                Reward.Get(GameManager.Instance.Player!);
+                GameManager.Instance.Player!.Get(Reward);
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
         }
@@ -71,7 +72,6 @@ namespace TEXT_RPG.Manager
                 if (GameManager.Instance.Player!.IsDead)
                 {
                     Defeat();
-                    break;
                 }
 
                 if (HasBattleEnded())
@@ -122,7 +122,7 @@ namespace TEXT_RPG.Manager
                 return;
             }
 
-            int actualDamage = Math.Max(monster.Stats.Atk - player.Stats.Def, 0);
+            int actualDamage = Math.Max(monster.Stats.Atk - (player.Stats.Def + InventoryManager.Instance.EquipValue(ItemType.Armor)), 0);
 
             Console.WriteLine($"Lv. {monster.Level} {monster.Name}의 공격!");
             Console.WriteLine($"{player.Name} 을(를) 맞췄습니다. [데미지:{actualDamage}]\n");
@@ -143,7 +143,7 @@ namespace TEXT_RPG.Manager
                 // monsters[0] : 일반 몬스터, monsters[1] : 특수 몬스터
                 monsters = _monsterRepository.DungeonMonsters[_currentDungeonId];
             }
-            catch (KeyNotFoundException e)
+            catch (KeyNotFoundException)
             {
                 Console.WriteLine("던전 정보를 찾을 수 없습니다.");
                 GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
@@ -151,21 +151,37 @@ namespace TEXT_RPG.Manager
             }
 
             Random random = new();
-            int monsterCount = random.Next(1, 5); // 최대 4마리 스폰
+            int monsterCount = 0; // 일반 스테이지: 최대 4마리 스폰 | 보스 스테이지:: 3마리 고정 (보스 1, 일반 2)
 
-            // 던전 일반 몬스터 스폰 
-            for (int i = 0; i < monsterCount; i++)
+            if (_bossStages.Contains(_currentDungeonId))
             {
-                Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
-            }
+                AddSpawnMonster(monsters[0][0]); // Add 보스 몬스터
 
-            if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
-            {
-                if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                monsterCount = 2;
+
+                for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.RemoveAt(3);
+                    AddSpawnMonster(monsters[0][random.Next(1, monsters[0].Count)]);
                 }
-                Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
+            }
+            else
+            {
+                monsterCount = random.Next(1, 5);
+
+                // 던전 일반 몬스터 스폰 
+                for (int i = 0; i < monsterCount; i++)
+                {
+                    AddSpawnMonster(monsters[0][random.Next(monsters[0].Count)]);
+                }
+
+                if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+                {
+                    if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
+                    {
+                        Monsters.RemoveAt(3);
+                    }
+                    AddSpawnMonster(monsters[1][random.Next(monsters[1].Count)]);
+                }
             }
 
             foreach (var monster in Monsters)
@@ -174,6 +190,8 @@ namespace TEXT_RPG.Manager
             }
         }
 
+        private void AddSpawnMonster(Monster monster) => Monsters.Add(monster.Clone());
+
         private void CalculateTotalRewards()
         {
             Monsters.ForEach(m => Reward.Add(m.Reward));
@@ -181,7 +199,7 @@ namespace TEXT_RPG.Manager
 
         private void SaveBeforePlayerInfo()
         {
-            BeforePlayer = GameManager.Instance.Player!;
+            BeforePlayer = GameManager.Instance.Player!.Clone();
         }
 
         private void OnMonsterDeadChanged(bool isDead)
@@ -218,16 +236,6 @@ namespace TEXT_RPG.Manager
         public void TurnEnd()
         {
             GameManager.Instance.SceneInfo = SceneType.MonsterSelect;
-        }
-
-        public void BattleInfo()
-        {
-            Console.WriteLine("=== 전투 정보 ===");
-            Console.WriteLine($"총 몬스터 수: {Monsters.Count}");
-            Console.WriteLine($"죽은 몬스터 수: {_deadMonsterCount}");
-            Console.WriteLine($"승리 상태: {IsVictory}");
-
-            Console.WriteLine();
         }
     }
 }
