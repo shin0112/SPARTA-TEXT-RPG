@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Core
+﻿using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Core
 {
     internal class Player : IAttack, IAttackable
     {
@@ -83,6 +85,18 @@
                     _isDead = value;
                     OnDeadChanged?.Invoke(_isDead);
                 }
+            }
+        }
+        public void Get(Reward reward)
+        {
+            GetExp(reward.Exp);
+            Gold += reward.Gold;
+            InventoryManager.Instance.InventoryItem.AddRange(reward.DropItem);
+
+            Console.WriteLine($"{reward.Exp} 경험치와 {reward.Gold} G를 획득했습니다.");
+            foreach (Item item in reward.DropItem)
+            {
+                Console.WriteLine($"{item.Name} 을(를) 획득했습니다.");
             }
         }
     }
