@@ -5,7 +5,6 @@ namespace TEXT_RPG.Core
 {
     internal class Reward
     {
-
         public int Exp { get; private set; }
         public int Gold { get; private set; }
         public List<Item> DropItem { get; private set; }
@@ -20,32 +19,15 @@ namespace TEXT_RPG.Core
             {
                 if (index >= 0 && index < InventoryManager.Instance.MonsterItem.Count)
                 {
-                    DropItem.Add(InventoryManager.Instance.MonsterItem[index]);
-                }
-                else
-                {
+                    DropItem.Add(InventoryManager.Instance.MonsterItem[index].Clone());
                 }
             }
         }
-
         public void Add(Reward other)
         {
             Exp += other.Exp;
             Gold += other.Gold;
             DropItem.AddRange(other.DropItem);
-        }
-
-        public void Get(Player player)
-        {
-            player.GetExp(Exp);
-            player.Gold += Gold;
-            InventoryManager.Instance.InventoryItem.AddRange(DropItem);
-
-            Console.WriteLine($"{Exp} 경험치와 {Gold} G를 획득했습니다.");
-            foreach (Item item in DropItem) 
-            { 
-                Console.WriteLine($"{item.Name} 을(를) 획득했습니다.");
-            }
         }
     }
 }

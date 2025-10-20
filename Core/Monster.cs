@@ -55,7 +55,8 @@
             }
             else
             {
-                int actualDamage = Stats.TakeDamage(damage);
+                int actualDamage = Math.Max(damage - Stats.Def, 0);
+                Stats.Hp = Math.Max(Stats.Hp - actualDamage, 0);
                 Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
                 IsDead = Stats.Hp <= 0;
             }

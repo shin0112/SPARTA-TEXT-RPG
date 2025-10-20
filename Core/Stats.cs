@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Core
 {
@@ -15,13 +16,6 @@ namespace TEXT_RPG.Core
             Def = def;
             MaxHp = hp;
             Hp = hp;
-        }
-
-        public int TakeDamage(int damage)
-        {
-            int actualDamage = Math.Max(damage - Def, 0);
-            Hp = Math.Max(Hp - actualDamage, 0);
-            return actualDamage;
         }
 
         public void Heal(int value, int max)
