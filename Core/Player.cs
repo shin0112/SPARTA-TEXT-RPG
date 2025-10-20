@@ -28,10 +28,12 @@ namespace TEXT_RPG.Core
 
         public void Attack(IAttackable target)
         {
-            Console.WriteLine($"{Name}의 공격!");
+            int equippedAtk = InventoryManager.Instance.EquipValue(ItemType.Weapon);
+            int totalAtk = Stats.Atk + equippedAtk;
             int criticalRate = random.Next(0, 100);
             int evadeRate = random.Next(0, 100);
-            if(evadeRate <= 10)
+            Console.WriteLine($"{Name}의 공격!");
+            if (evadeRate <= 10)
             {
                 Console.WriteLine("공격이 빗나갔습니다.");
                 return;
@@ -39,14 +41,18 @@ namespace TEXT_RPG.Core
             if (criticalRate <= 15)
             {
                 Console.WriteLine("치명타 발생!");
-                target.TakeDamage((int)Math.Ceiling(Stats.Atk * 1.6f));
+                target.TakeDamage((int)Math.Ceiling(totalAtk * 1.6f));
                 return;
             }
-            target.TakeDamage(Stats.Atk);
+            target.TakeDamage(totalAtk);
         }
         public void TakeDamage(int damage)
         {
-            int actualDamage = Stats.TakeDamage(damage);
+            int equippedDef = InventoryManager.Instance.EquipValue(ItemType.Armor);
+            int totalDef = Stats.Def + equippedDef;
+
+            int actualDamage = Math.Max(damage - totalDef, 0);
+            Stats.Hp = Math.Max(Stats.Hp - actualDamage, 0);
             Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
             IsDead = Stats.Hp <= 0;
         }
@@ -92,12 +98,6 @@ namespace TEXT_RPG.Core
             GetExp(reward.Exp);
             Gold += reward.Gold;
             InventoryManager.Instance.InventoryItem.AddRange(reward.DropItem);
-
-            Console.WriteLine($"{reward.Exp} 경험치와 {reward.Gold} G를 획득했습니다.");
-            foreach (Item item in reward.DropItem)
-            {
-                Console.WriteLine($"{item.Name} 을(를) 획득했습니다.");
-            }
         }
     }
 }
