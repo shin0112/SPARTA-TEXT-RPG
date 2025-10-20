@@ -24,4 +24,10 @@
         HP,
         Stamina
     }
+
+    public enum MonsterType
+    {
+        Normal,
+        Boss
+    }
 }

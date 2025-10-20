@@ -8,6 +8,7 @@
         public int Level { get; set; }
         public Stats Stats { get; set; }
         internal Reward Reward { get; set; }
+        public MonsterType MonsterType { get; private set; }
 
         public event Action<bool>? OnDeadChanged;
         private bool _isDead;
@@ -24,13 +25,14 @@
             }
         }
 
-        internal Monster(string name, int level, Stats stats, Reward reward)
+        internal Monster(string name, int level, Stats stats, Reward reward, MonsterType monsterType = MonsterType.Normal)
         {
             Name = name;
             Level = level;
             IsDead = false;
             Stats = stats;
             Reward = reward;
+            MonsterType = monsterType;
         }
 
         public void Attack(IAttackable target)

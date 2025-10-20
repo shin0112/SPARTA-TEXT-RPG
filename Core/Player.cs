@@ -16,10 +16,10 @@ namespace TEXT_RPG.Core
         public int RequiredExp { get; set; }
 
         public Player(string name, string job)
-        { 
+        {
             Name = name;
             Job = job;
-            Level = 1;
+            Level = 2;
             Stats = new Stats(10, 5, 100);
             Gold = 1000;
             Exp = 0;
@@ -32,8 +32,7 @@ namespace TEXT_RPG.Core
             int totalAtk = Stats.Atk + equippedAtk;
             int criticalRate = random.Next(0, 100);
             int evadeRate = random.Next(0, 100);
-            Console.WriteLine($"{Name}의 공격!");
-            if (evadeRate <= 10)
+            if(evadeRate <= 10)
             {
                 Console.WriteLine("공격이 빗나갔습니다.");
                 return;
@@ -61,7 +60,7 @@ namespace TEXT_RPG.Core
             Exp += exp;
             while (Exp >= RequiredExp)
             {
-                if(Level < requiredExpList.Length)
+                if (Level < requiredExpList.Length)
                 {
                     LevelUp();
                 }
