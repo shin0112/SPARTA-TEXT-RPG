@@ -7,7 +7,7 @@ namespace TEXT_RPG.Manager
 {
     internal class BattleManager
     {
-        private static BattleManager _instance = new();
+        private readonly static BattleManager _instance = new();
         public static BattleManager Instance => _instance;
 
         private readonly MonsterRepository _monsterRepository = new();
@@ -18,7 +18,7 @@ namespace TEXT_RPG.Manager
         public Player? BeforePlayer { get; private set; } = null;
         private int _currentDungeonId = 0;
         public Reward Reward { get; private set; } = new(0, 0, []);
-        private int[] _bossStages = [2, 4];
+        private readonly int[] _bossStages = [2, 4];
 
         // 전투 승리 처리
         public bool IsVictory { get; private set; } = false;
@@ -32,7 +32,7 @@ namespace TEXT_RPG.Manager
         // Scene 관련
         public SceneType CurrentScene => GameManager.Instance.SceneInfo;
 
-        private Dictionary<SceneType, BattleSceneBase> _battleScenes = new();
+        private Dictionary<SceneType, BattleSceneBase> _battleScenes = [];
 
         // 초기화
         public void InitScenes(GameManager game)
@@ -72,7 +72,6 @@ namespace TEXT_RPG.Manager
                 if (GameManager.Instance.Player!.IsDead)
                 {
                     Defeat();
-                    break;
                 }
 
                 if (HasBattleEnded())
@@ -144,7 +143,7 @@ namespace TEXT_RPG.Manager
                 // monsters[0] : 일반 몬스터, monsters[1] : 특수 몬스터
                 monsters = _monsterRepository.DungeonMonsters[_currentDungeonId];
             }
-            catch (KeyNotFoundException e)
+            catch (KeyNotFoundException)
             {
                 Console.WriteLine("던전 정보를 찾을 수 없습니다.");
                 GameManager.Instance.SceneInfo = SceneType.DungeonSelect;
@@ -156,13 +155,13 @@ namespace TEXT_RPG.Manager
 
             if (_bossStages.Contains(_currentDungeonId))
             {
-                Monsters.Add(monsters[0][0].Clone()); // Add 보스 몬스터
+                AddSpawnMonster(monsters[0][0]); // Add 보스 몬스터
 
                 monsterCount = 2;
 
                 for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.Add(monsters[0][random.Next(1, monsters[0].Count)].Clone());
+                    AddSpawnMonster(monsters[0][random.Next(1, monsters[0].Count)]);
                 }
             }
             else
@@ -172,7 +171,7 @@ namespace TEXT_RPG.Manager
                 // 던전 일반 몬스터 스폰 
                 for (int i = 0; i < monsterCount; i++)
                 {
-                    Monsters.Add(monsters[0][random.Next(monsters[0].Count)].Clone());
+                    AddSpawnMonster(monsters[0][random.Next(monsters[0].Count)]);
                 }
 
                 if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
@@ -181,7 +180,7 @@ namespace TEXT_RPG.Manager
                     {
                         Monsters.RemoveAt(3);
                     }
-                    Monsters.Add(monsters[1][random.Next(monsters[1].Count)].Clone());
+                    AddSpawnMonster(monsters[1][random.Next(monsters[1].Count)]);
                 }
             }
 
@@ -190,6 +189,8 @@ namespace TEXT_RPG.Manager
                 monster.OnDeadChanged += OnMonsterDeadChanged;
             }
         }
+
+        private void AddSpawnMonster(Monster monster) => Monsters.Add(monster.Clone());
 
         private void CalculateTotalRewards()
         {
