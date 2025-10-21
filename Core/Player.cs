@@ -96,7 +96,7 @@ namespace TEXT_RPG.Core
         {
             GetExp(reward.Exp);
             Gold += reward.Gold;
-            InventoryManager.Instance.InventoryItem.AddRange(reward.DropItem);
+            InventoryManager.Instance.InventoryItem.AddRange(reward.DropItem.Select(i => i.Clone()));
         }
 
         private Player(string name, string job, int level, Stats stats, int gold, int exp)
