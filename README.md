@@ -6,6 +6,8 @@
 
 ## 📑 목차
 
+- [실행 방법](#실행-방법)
+- [발표 자료 & 문서](#발표-자료--문서)
 - [프로젝트 개요](#프로젝트-개요)
 - [게임 플레이 흐름](#게임-플레이-흐름)
 - [프로젝트 설명](#프로젝트-설명)
@@ -23,8 +25,32 @@
 - [팀 소개](#팀-소개)
 - [Developers](#developers)
 - [Ground Rule & 협업 방식](#ground-rule--협업-방식)
+- [한줄 요약](#한줄-요약)
 
 ---
+
+## [실행 방법]
+
+### 1. 저장소 클론
+
+```bash
+git clone https://github.com/shin0112/SPARTA-TEXT-RPG.git
+```
+
+### 2. Visual Studio 실행
+
+- `SPARTA-TEXT-RPG.sln` 파일 열기
+- `Program.cs` 선택 후 Ctrl + F5 실행
+
+## [발표 자료 & 문서]
+
+> 넣을 것만 넣기
+
+| 문서               | 링크                                                                                                        |
+| ------------------ | ----------------------------------------------------------------------------------------------------------- |
+| 발표 자료 (PDF)    | [발표 슬라이드 보기](https://drive.google.com/your-slide-link)                                              |
+| UML 구조도         | [UML 다이어그램 보기](./Docs/uml-diagram.png)                                                               |
+| Figma 와이어프레임 | [Figma 보기](https://www.figma.com/design/9uOBBRzgsTEd0DpK92gFKa/TEXT-RPG?node-id=0-1&t=L8mwcZmhaGIM1F0G-1) |
 
 ## [프로젝트 개요]
 
@@ -153,13 +179,13 @@ SPARTA-TEXT-RPG/
 
 ## [팀 소개]
 
-| 이름       | 역할             | 주요 담당                        |
-| ---------- | ---------------- | -------------------------------- |
-| **신주은** | 팀장 / 설계 총괄 | 전투 로직, Scene 구조, Git 관리  |
-| **유가영** | 시스템 담당      | 플레이어, 공격 로직, 전투 밸런스 |
-| **김준영** | 상점 담당        | 구매·판매, 아이템 리스트 관리    |
-| **이하람** | 인벤토리 담당    | 장비 시스템, 데이터 연동         |
-| **이지원** | UI / 발표        | 인트로, 시작씬, 발표자료 제작    |
+| 이름       | 역할             | 주요 담당                                    |
+| ---------- | ---------------- | -------------------------------------------- |
+| **신주은** | 팀장 / 설계 총괄 | 전투 로직, Scene 구조, Git 관리              |
+| **유가영** | UI / 발표        | 인트로, 시작 화면, 발표자료 제작             |
+| **이하람** | 인벤토리 담당    | 아이템, 인벤토리 관리, 장비 / 포션 로직 관리 |
+| **정지원** | 상점 담당        | 구매·판매, 아이템 리스트 관리, 발표자료 제작 |
+| **황준영** | 시스템 담당      | 플레이어, 몬스터, 공격 로직, 전투 밸런스     |
 
 ## [Developers]
 
@@ -193,9 +219,9 @@ SPARTA-TEXT-RPG/
             <a href="https://github.com/checkmate0710"><I>checkmate0710</I></a>
         </td>
         <td>
-            <img src="https://github.com/soyeonvv.png?size=100" width="100">
+            <img src="https://github.com/PeacefulKim.png?size=100" width="100">
             <br>
-            <a href="https://github.com/soyeonvv"><I>PeacefulKim</I></a>
+            <a href="https://github.com/PeacefulKim"><I>PeacefulKim</I></a>
         </td>
     </tr>
 </table>
@@ -203,17 +229,16 @@ SPARTA-TEXT-RPG/
 
 ## [Ground Rule & 협업 방식]
 
-### 🔧 Ground Rule
+### Ground Rule
 
 - UML 설계 → Figma 와이어프레임 → 코드 작성
-- “**모든 코드에는 이유가 있다.**” 원칙 준수
-- 브랜치별 역할 분담 및 코드리뷰 의무화
+- 브랜치별 역할 분담 및 코드리뷰
 
-### 🌿 Git Strategy
+### Git Strategy
 
 - `main` → `own's branch` → `PR` → 코드리뷰 → Merge
 
-### 🧾 Commit Convention
+### Commit Convention
 
 ```
 feat: 기능 추가
@@ -227,6 +252,6 @@ docs: readme 등 문서 작성 및 수정
 chore: 환경 설정 변경 (ex. .gitignore)
 ```
 
-## 🧩 한줄 요약
+## 한줄 요약
 
 > 객체지향 설계 원칙을 기반으로, Scene 간 독립성과 이벤트 기반 전투 시스템을 구현한 콘솔 RPG 프로젝트입니다.
