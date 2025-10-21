@@ -199,29 +199,29 @@ SPARTA-TEXT-RPG/
     </tr>
     <tr align="center">
         <td>
-            <img src="https://github.com/shin0112.png?size=100" width="100">
+            <img src="https://github.com/shin0112.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/shin0112"><I>shin0112</I></a>
+            <a href="https://github.com/shin0112"><i>shin0112</i></a>
         </td>
         <td>
-            <img src="https://github.com/Gayeong.png?size=100" width="100">
+            <img src="https://github.com/Gayeong-you.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/Gayeong"><I>Gayeong-you</I></a>
+            <a href="https://github.com/Gayeong-you"><i>Gayeong-you</i></a>
         </td>
         <td>
-            <img src="https://github.com/haramey123.png?size=100" width="100">
+            <img src="https://github.com/haramey123.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/haramey123"><I>haramey123</I></a>
+            <a href="https://github.com/haramey123"><i>haramey123</i></a>
         </td>
         <td>
-            <img src="https://github.com/checkmate0710.png?size=100" width="100">
+            <img src="https://github.com/checkmate0710.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/checkmate0710"><I>checkmate0710</I></a>
+            <a href="https://github.com/checkmate0710"><i>checkmate0710</i></a>
         </td>
         <td>
-            <img src="https://github.com/PeacefulKim.png?size=100" width="100">
+            <img src="https://github.com/PeacefulKim.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/PeacefulKim"><I>PeacefulKim</I></a>
+            <a href="https://github.com/PeacefulKim"><i>PeacefulKim</i></a>
         </td>
     </tr>
 </table>
