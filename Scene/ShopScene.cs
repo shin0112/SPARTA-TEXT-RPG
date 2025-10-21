@@ -27,7 +27,6 @@ namespace TEXT_RPG.Scene
 
         public void Init()
         {
-            RandomFoodRecommend();
             Console.OutputEncoding = Encoding.UTF8;
             shopIntroText1 = @$"       
 [상점]
@@ -54,8 +53,6 @@ namespace TEXT_RPG.Scene
 ⠀⠀⠀⠀⠀⢹⡷⢦⣄⣀⣀⣀⣀⣤⣴⡾⠃⠀⠘⡿⠙⢶
 ⠀⠀⠀⠀⠀⢨⡷⣤⡀⠈⠉⠉⢁⡴⠋⠀⠀⠀⣸⠃⠀⠀
 
-인자한 모습의 할아버지가 미소 지으며 반겨준다. 
-""사는 게 쉽지 않지? 와서 박카스나 한 잔 마시고 해.  ...뭐해 돈 안 내고? 세상에 공짜가 어딨나?""
 
 
 [보유 골드]

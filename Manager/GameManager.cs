@@ -38,7 +38,7 @@ namespace TEXT_RPG.Manager
         {
             BattleManager.Instance.InitScenes(this);
             ShopScene.Init();
-            //new Intro().StartIntro();
+            new Intro().StartIntro();
             while (true)
             {
                 // 2. 1에서 저장된 정보가 아직 유지되고 있습니다!
