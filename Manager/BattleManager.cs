@@ -173,7 +173,7 @@ namespace TEXT_RPG.Manager
                     AddSpawnMonster(monsters[0][random.Next(monsters[0].Count)]);
                 }
 
-                if (random.Next(1000) == 777) // Todo: 특수 몬스터 발생 확률 지정 (현재: 0.1%);
+                if (random.Next(10) == 7) // Todo: 특수 몬스터 발생 확률 지정 (현재: 10%);
                 {
                     if (monsterCount == 4) // 최대 몬스터 수 4마리 유지
                     {

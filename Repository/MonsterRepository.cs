@@ -13,6 +13,7 @@ namespace TEXT_RPG.Repository
         public List<Monster> SpecialMonstersNo1 { get; } = [
             new Monster("김영호 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("신찬용 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("채한승 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("이재현 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("진우원 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("하승우 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
@@ -29,6 +30,16 @@ namespace TEXT_RPG.Repository
 
         public List<Monster> SpecialMonstersNo2 { get; } = [];
 
+        public List<Monster> MonstersNo3 { get; } = [
+            new Monster("나한테 일 미루는 대리", 5, new Stats(13, 5, 25), new Reward(5, 50, new List<int>{ })),
+            new Monster("자꾸 믹스커피 가져오라는 과장", 5, new Stats(13, 5, 25), new Reward(5, 50, new List<int>{ })),
+            new Monster("자기 자랑하는 팀장", 5, new Stats(13, 5, 25), new Reward(5, 50, new List<int>{ })),
+        ];
+
+        public List<Monster> SpecialMonstersNo3 { get; } = [
+            new Monster("갑자기 출몰한 회장님", 7, new Stats(17, 7, 35), new Reward(5, 50, new List<int>{8})),
+        ];
+
         public Dictionary<int, List<List<Monster>>> DungeonMonsters { get; }
 
         public MonsterRepository()
@@ -36,7 +47,8 @@ namespace TEXT_RPG.Repository
             DungeonMonsters = new Dictionary<int, List<List<Monster>>>
             {
                 { 1, new() { MonstersNo1, SpecialMonstersNo1 } },
-                { 2, new() { MonstersNo2, SpecialMonstersNo2 } }
+                { 2, new() { MonstersNo2, SpecialMonstersNo2 } },
+                { 3, new() { MonstersNo3, SpecialMonstersNo3 } },
             };
         }
     }
