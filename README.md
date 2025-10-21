@@ -55,11 +55,11 @@ git clone https://github.com/shin0112/SPARTA-TEXT-RPG.git
   </tr>
   <tr>
     <td>발표 자료 (PDF)</td>
-    <td><a href="https://drive.google.com/your-slide-link" target="_blank">발표 슬라이드 보기</a></td>
+    <td><a href="" target="_blank">-</a></td>
   </tr>
   <tr>
     <td>UML 구조도</td>
-    <td><a href="./Docs/uml-diagram.png" target="_blank">UML 다이어그램 보기</a></td>
+    <td><a href="" target="_blank">-</a></td>
   </tr>
   <tr>
     <td>Figma 와이어프레임</td>
@@ -187,8 +187,8 @@ SPARTA-TEXT-RPG/
 | 주제                              | 요약                                              | 링크                                                                                                                                                                                                                                                                   |
 | --------------------------------- | ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 몬스터 상태 초기화 이슈           | BattleManager와 Repository 간 참조 공유 문제 해결 | [🔗 [C#] 리팩토링 과정에서 발생한 객체 참조 공유 문제](https://velog.io/@shin0112/C-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81-%EA%B3%BC%EC%A0%95%EC%97%90%EC%84%9C-%EB%B0%9C%EC%83%9D%ED%95%9C-%EA%B0%9D%EC%B2%B4-%EC%B0%B8%EC%A1%B0-%EA%B3%B5%EC%9C%A0-%EB%AC%B8%EC%A0%9C) |
-| Scene 순환 참조 문제              | GameManager와 Scene 간 의존성 해소                | [🔗 작성 중 / TIL 예정]()                                                                                                                                                                                                                                              |
-| 맥 ↔ 윈도우 아스키 코드 변환 충돌 | `Console.UTF8` 설정으로 라인 엔딩 통일            | [🔗 작성 중 / TIL 예정]()                                                                                                                                                                                                                                              |
+| Scene 순환 참조 문제              | GameManager와 Scene 간 의존성 해소                | [🔗 -]()                                                                                                                                                                                                                                                               |
+| 맥 ↔ 윈도우 아스키 코드 변환 충돌 | `Console.UTF8` 설정으로 라인 엔딩 통일            | [🔗 -]()                                                                                                                                                                                                                                                               |
 
 ---
 
