@@ -83,11 +83,12 @@ git clone https://github.com/shin0112/SPARTA-TEXT-RPG.git
 
 1. **IntroScene** — 이름/직업 선택
 2. **StartScene** — 메인 화면
-3. **DungeonScene** — 던전 난이도 선택
-4. **BattleScene** — 전투 진행
-5. **ShopScene** — 아이템 구매·판매
-6. **InventoryScene** — 장비 장착 및 능력치 관리
-7. **TrainingScene** — 스테미나로 경험치 획득
+3. **SpecScene** — 캐릭터 정보 보기
+4. **DungeonScene** — 던전 난이도 선택
+5. **BattleScene** — 전투 진행
+6. **ShopScene** — 아이템 구매·판매
+7. **InventoryScene** — 장비 장착 및 능력치 관리
+8. **TrainingScene** — 스테미나로 경험치 획득
 
 ## <img src="./Docs/flow-chart.png" width="100%" alt="게임 흐름도"/>
 
