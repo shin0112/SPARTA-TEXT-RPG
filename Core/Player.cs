@@ -4,6 +4,7 @@ namespace TEXT_RPG.Core
 {
     internal class Player : IAttack, IAttackable
     {
+        public static int MAX_LEVEL = 5;
         Random random = new();
         private int[] requiredExpList = { 0, 10, 35, 65, 100 };
 
@@ -68,13 +69,15 @@ namespace TEXT_RPG.Core
         }
         private void LevelUp()
         {
+            if (Level == MAX_LEVEL) return; // 최대 레벨
+
             Level++;
             Exp -= RequiredExp;
             if (Exp < 0) { Exp = 0; }
             RequiredExp = requiredExpList[Level];
 
-            Stats.Atk += Level;
-            Stats.Def += Level;
+            Stats.Atk += 1;
+            Stats.Def += 2;
             Stats.Hp = Stats.MaxHp;
         }
 
