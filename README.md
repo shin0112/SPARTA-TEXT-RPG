@@ -46,11 +46,26 @@ git clone https://github.com/shin0112/SPARTA-TEXT-RPG.git
 
 > 넣을 것만 넣기
 
-| 문서               | 링크                                                                                                        |
-| ------------------ | ----------------------------------------------------------------------------------------------------------- |
-| 발표 자료 (PDF)    | [발표 슬라이드 보기](https://drive.google.com/your-slide-link)                                              |
-| UML 구조도         | [UML 다이어그램 보기](./Docs/uml-diagram.png)                                                               |
-| Figma 와이어프레임 | [Figma 보기](https://www.figma.com/design/9uOBBRzgsTEd0DpK92gFKa/TEXT-RPG?node-id=0-1&t=L8mwcZmhaGIM1F0G-1) |
+## [참고 자료]
+
+<table>
+  <tr>
+    <th>문서</th>
+    <th>링크</th>
+  </tr>
+  <tr>
+    <td>발표 자료 (PDF)</td>
+    <td><a href="https://drive.google.com/your-slide-link" target="_blank">발표 슬라이드 보기</a></td>
+  </tr>
+  <tr>
+    <td>UML 구조도</td>
+    <td><a href="./Docs/uml-diagram.png" target="_blank">UML 다이어그램 보기</a></td>
+  </tr>
+  <tr>
+    <td>Figma 와이어프레임</td>
+    <td><a href="https://www.figma.com/design/9uOBBRzgsTEd0DpK92gFKa/TEXT-RPG?node-id=0-1&t=L8mwcZmhaGIM1F0G-1" target="_blank">Figma 보기</a></td>
+  </tr>
+</table>
 
 ## [프로젝트 개요]
 
@@ -201,27 +216,27 @@ SPARTA-TEXT-RPG/
         <td>
             <img src="https://github.com/shin0112.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/shin0112"><i>shin0112</i></a>
+            <a href="https://github.com/shin0112" target="_blank"><i>shin0112</i></a>
         </td>
         <td>
             <img src="https://github.com/Gayeong-you.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/Gayeong-you"><i>Gayeong-you</i></a>
+            <a href="https://github.com/Gayeong-you" target="_blank"><i>Gayeong-you</i></a>
         </td>
         <td>
             <img src="https://github.com/haramey123.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/haramey123"><i>haramey123</i></a>
+            <a href="https://github.com/haramey123" target="_blank"><i>haramey123</i></a>
         </td>
         <td>
             <img src="https://github.com/checkmate0710.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/checkmate0710"><i>checkmate0710</i></a>
+            <a href="https://github.com/checkmate0710" target="_blank"><i>checkmate0710</i></a>
         </td>
         <td>
             <img src="https://github.com/PeacefulKim.png" width="100" height="100" style="object-fit:cover;">
             <br>
-            <a href="https://github.com/PeacefulKim"><i>PeacefulKim</i></a>
+            <a href="https://github.com/PeacefulKim" target="_blank"><i>PeacefulKim</i></a>
         </td>
     </tr>
 </table>
