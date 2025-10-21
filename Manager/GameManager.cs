@@ -11,6 +11,7 @@ namespace TEXT_RPG.Manager
         public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
+        public Player? BeforePlayer { get; private set; } = null;
         public Player? Player { get; set; } = new("아무개", "백수");
         public SceneType SceneInfo { get; set; } = SceneType.Start;
 
@@ -80,6 +81,12 @@ namespace TEXT_RPG.Manager
                 // 1. 각 Scene 안에서 변경된 SceneInfo 정보가 Gamemanager에 저장되어 있는 상태입니다.
             }
         }
-    }
 
+        public void SaveBeforePlayerInfo()
+        {
+            if (Player != null) BeforePlayer = Player.Clone();
+        }
+
+        public void ResetBeforePlayer() => BeforePlayer = null;
+    }
 }

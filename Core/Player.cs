@@ -1,4 +1,6 @@
-﻿namespace TEXT_RPG.Core
+﻿using TEXT_RPG.Manager;
+
+namespace TEXT_RPG.Core
 {
     internal class Player : IAttack, IAttackable
     {
@@ -14,7 +16,7 @@
         public int RequiredExp { get; set; }
 
         public Player(string name, string job)
-        { 
+        {
             Name = name;
             Job = job;
             Level = 1;
@@ -26,10 +28,11 @@
 
         public void Attack(IAttackable target)
         {
-            Console.WriteLine($"{Name}의 공격!");
+            int equippedAtk = InventoryManager.Instance.EquipValue(ItemType.Weapon);
+            int totalAtk = Stats.Atk + equippedAtk;
             int criticalRate = random.Next(0, 100);
             int evadeRate = random.Next(0, 100);
-            if(evadeRate <= 10)
+            if (evadeRate <= 10)
             {
                 Console.WriteLine("공격이 빗나갔습니다.");
                 return;
@@ -37,14 +40,18 @@
             if (criticalRate <= 15)
             {
                 Console.WriteLine("치명타 발생!");
-                target.TakeDamage((int)Math.Ceiling(Stats.Atk * 1.6f));
+                target.TakeDamage((int)Math.Ceiling(totalAtk * 1.6f));
                 return;
             }
-            target.TakeDamage(Stats.Atk);
+            target.TakeDamage(totalAtk);
         }
         public void TakeDamage(int damage)
         {
-            int actualDamage = Stats.TakeDamage(damage);
+            int equippedDef = InventoryManager.Instance.EquipValue(ItemType.Armor);
+            int totalDef = Stats.Def + equippedDef;
+
+            int actualDamage = Math.Max(damage - totalDef, 0);
+            Stats.Hp = Math.Max(Stats.Hp - actualDamage, 0);
             Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
             IsDead = Stats.Hp <= 0;
         }
@@ -53,7 +60,7 @@
             Exp += exp;
             while (Exp >= RequiredExp)
             {
-                if(Level < requiredExpList.Length)
+                if (Level < requiredExpList.Length)
                 {
                     LevelUp();
                 }
@@ -84,6 +91,28 @@
                     OnDeadChanged?.Invoke(_isDead);
                 }
             }
+        }
+        public void Get(Reward reward)
+        {
+            GetExp(reward.Exp);
+            Gold += reward.Gold;
+            InventoryManager.Instance.InventoryItem.AddRange(reward.DropItem.Select(i => i.Clone()));
+        }
+
+        private Player(string name, string job, int level, Stats stats, int gold, int exp)
+        {
+            Name = name;
+            Job = job;
+            Level = level;
+            Stats = new Stats(stats.Atk, stats.Def, stats.Hp);
+            Gold = gold;
+            Exp = exp;
+            RequiredExp = requiredExpList[level];
+        }
+
+        public Player Clone()
+        {
+            return new(Name, Job, Level, Stats, Gold, Exp);
         }
     }
 }

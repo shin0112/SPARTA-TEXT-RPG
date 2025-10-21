@@ -15,6 +15,7 @@ namespace TEXT_RPG.Repository
         public List<Monster> SpecialMonstersNo1 { get; } = [
             new Monster("김영호 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("신찬용 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
+            new Monster("채한승 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("이재현 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("진우원 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),
             new Monster("하승우 튜터", 5, new Stats(13, 5, 20), new Reward(5, 50, new List<int>{1})),

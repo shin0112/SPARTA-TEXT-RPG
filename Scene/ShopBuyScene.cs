@@ -15,10 +15,10 @@ namespace TEXT_RPG.Scene
 0. 뒤로가기
 
 ""멀뚱멀뚱 서서 뭐 하고 있어? 언넝 골라~"""; // 아이템 리스트 변경 시 예시 체크 필요
-        
-        
-        
-        
+
+
+
+
 
 
         public void SelectBuyItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
@@ -34,7 +34,7 @@ namespace TEXT_RPG.Scene
                 return;
             }
 
-            Item newItem = ShopItem[i].Clone(); //입력값이 리스트 숫자보다 크면 예외로 에러가 나서 확인 코드 아래에서 선언했습니다.
+            Item newItem = ShopItem[i]; //입력값이 리스트 숫자보다 크면 예외로 에러가 나서 확인 코드 아래에서 선언했습니다.
 
             if (ShopItem[i].IsBuy == true)
             {
@@ -61,59 +61,63 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine("숫자를 입력하십시오.\n");
                 return;
             }
-            else if (inputBuyCheckTryParse != 1 )
+            else if (inputBuyCheckTryParse != 1)
             {
                 Console.WriteLine("아이템을 구매하지 않습니다.\n");
                 return;
             }
 
 
-            if (ShopItem[i].IsBuy == false)
+
+            string inputQuantity = "";
+
+            if (ShopItem[i].Type is 0 or (ItemType)1)
             {
-                string inputQuantity = "";
+                ShopItem[i].IsBuy = true;
+                GameManager.Instance.Player.Gold -= ShopItem[i].Price;
 
-                if (ShopItem[i].Type is 0 or (ItemType)1)
+                Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
+                InventoryItem.Add(newItem.Clone());
+            }
+            else
+            {
+                Console.WriteLine("몇 개 사시겠습니까?");
+                Console.Write(">> ");
+                inputQuantity = Console.ReadLine();
+                isParsed = int.TryParse(inputQuantity, out int buyQuantity);
+                if (isParsed == false)
                 {
-                    ShopItem[i].IsBuy = true;
-                    GameManager.Instance.Player.Gold -= ShopItem[i].Price;
-
-                    Console.WriteLine("\"좋은 선택일세. 사회에 나가 꿈을 펼쳐보게나.\"\n");
+                    Console.WriteLine("숫자를 입력하십시오.");
+                    return;
                 }
-                else
+                else if (buyQuantity < 1)
                 {
-                    Console.WriteLine("몇 개 사시겠습니까?");
-                    Console.Write(">> ");
-                    inputQuantity = Console.ReadLine();
-                    isParsed = int.TryParse(inputQuantity, out int buyQuantity);
-                    if (isParsed == false)
-                    {
-                        Console.WriteLine("숫자를 입력하십시오.");
-                        return;
-                    }
-                    else if (buyQuantity < 1 )
-                    {
-                        Console.WriteLine("1개 이상 구매하십시오.");
-                        return;
-                    }
+                    Console.WriteLine("1개 이상 구매하십시오.");
+                    return;
+                }
 
-                    if (GameManager.Instance.Player.Gold < ShopItem[i].Price * buyQuantity)
-                    {
-                        Console.WriteLine("\"자네... 돈은 있지? 아니, 이걸로 되겠어? 참.\"");
-                        Console.WriteLine("돈을 더 벌어오자.\n");
-                        return;
-                    }
+                if (GameManager.Instance.Player.Gold < ShopItem[i].Price * buyQuantity)
+                {
+                    Console.WriteLine("\"자네... 돈은 있지? 아니, 이걸로 되겠어? 참.\"");
+                    Console.WriteLine("돈을 더 벌어오자.\n");
+                    return;
+                }
 
-                    GameManager.Instance.Player.Gold -= ShopItem[i].Price * buyQuantity;
+                GameManager.Instance.Player.Gold -= ShopItem[i].Price * buyQuantity;
 
-                    if (buyQuantity > 4)
-                    {
-                        Console.WriteLine("\"자네, 그거 정말 다 먹을 수 있나..?\"");
-                    }
-                    Console.WriteLine("\"맛있게 먹게나.\"\n");
+                if (buyQuantity > 4)
+                {
+                    Console.WriteLine("\"자네, 그거 정말 다 먹을 수 있나..?\"");
+                }
+                Console.WriteLine("\"맛있게 먹게나.\"\n");
+
+                for (int quantity = 1; quantity <= buyQuantity; quantity++)
+                {
+                    InventoryItem.Add(newItem.Clone());
                 }
             }
-            InventoryItem.Add(newItem);
         }
+
 
 
         public void DisplayShopBuy()
@@ -133,7 +137,7 @@ namespace TEXT_RPG.Scene
                 int.TryParse(input, out i);
                 if (int.TryParse(input, out i) == false)
                 {
-                    Console.WriteLine ("잘못된 입력입니다. 숫자를 입력해주세요.");
+                    Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
                 }
                 else if (i == 0)
                 {
@@ -143,8 +147,8 @@ namespace TEXT_RPG.Scene
                 {
                     SelectBuyItem(input);
                 }
-                    Console.WriteLine("아무 키나 입력하면 계속합니다.");
-                    Console.ReadKey();
+                Console.WriteLine("아무 키나 입력하면 계속합니다.");
+                Console.ReadKey();
             }
             ToggleBuyingScene();
             GameManager.Instance.SceneInfo = SceneType.Shop;
