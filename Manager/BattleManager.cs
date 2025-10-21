@@ -34,7 +34,7 @@ namespace TEXT_RPG.Manager
         private Dictionary<SceneType, BattleSceneBase> _battleScenes = [];
 
         // 초기화
-        public void InitScenes(GameManager game)
+        public void Init(GameManager game)
         {
             _battleScenes = new()
             {
@@ -51,7 +51,7 @@ namespace TEXT_RPG.Manager
             OnAllMonstersDead += () =>
             {
                 IsVictory = true;
-                GameManager.Instance.Player!.Get(Reward);
+                GameManager.Instance.Player?.Get(Reward);
                 GameManager.Instance.SceneInfo = SceneType.Result;
             };
         }

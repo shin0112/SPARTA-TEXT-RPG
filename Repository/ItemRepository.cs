@@ -8,7 +8,7 @@ namespace TEXT_RPG.Repository
             //기본장착 아이템
             new Item("게이밍 슈트", 1, ItemType.Armor, "게임에 특화된 반팔 티셔츠. 목부분이 살짝 늘어나있다.", 200),
             new Item("수학의 정석", 2, ItemType.Weapon, "먼지가 켜켜이 쌓여 있다. 중고로 팔아도 쏠쏠할 듯.", 500),
-    ];
+        ];
 
         public List<Item> ShopItem = [
             //공격 아이템
@@ -29,7 +29,7 @@ namespace TEXT_RPG.Repository
             new Item("빠워에이드", 10, ItemType.Stamina, "마시면 힘이 날 것 같은 음료수이다.", 30),
             new Item("아이스 아메리카노", 30, ItemType.Stamina, "현대인의 필수품", 80),
             new Item("핫세븐", 70, ItemType.Stamina, "오늘은 이거 마시고 죽는 거다..!", 200),
-            ];
+        ];
 
         public List<Item> MonsterItem = [
             // 제뜨스트림 볼펜    | 공격력 +5  | 부드러운 볼펜으로 필기감이 뛰어나다.       |  800 G
@@ -59,6 +59,6 @@ namespace TEXT_RPG.Repository
             new Item("바카스", 40, ItemType.Stamina, "기운이 없다면 이걸로 리필하자. 단, 과다 복용은 새벽 3시까지 잠 못 듦.", 120),
             new Item("핫세븐", 70, ItemType.Stamina, "오늘은 이거 마시고 죽는 거다..!", 200),
             new Item("쌍화탕", 100, ItemType.Stamina, "기침, 감기, 인생의 쓴맛까지 치료해주는 만능 한방 드링크.", 300)
-];
+        ];
     }
 }

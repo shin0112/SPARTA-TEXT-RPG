@@ -70,10 +70,6 @@ public class SpecScene
         WriteColoredStat("골드:", GameManager.Instance.Player?.Gold.ToString(), ConsoleColor.Yellow);
 
         Console.WriteLine("=========================================================================");
-
-
-
-
         Console.WriteLine();
         WriteMenuOption("0", "나가기", ConsoleColor.DarkCyan);
 
@@ -88,6 +84,5 @@ public class SpecScene
             Console.Clear();
             GameManager.Instance.SceneInfo = SceneType.Start;
         }
-
     }
 }

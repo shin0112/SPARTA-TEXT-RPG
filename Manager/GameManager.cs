@@ -7,15 +7,15 @@ namespace TEXT_RPG.Manager
 {
     internal class GameManager
     {
-        public Intro StartIntro = new();
         private static GameManager _instance = new();
         public static GameManager Instance => _instance;
         public Player? BeforePlayer { get; private set; } = null;
-        public Player? Player { get; set; } = new("아무개", "백수");
+        public Player? Player { get; set; } = new("아무개", "백수"); // 나중에 저장 기능을 넣을 때 null일 경우를 대비해 Player?로 선언
         public SceneType SceneInfo { get; set; } = SceneType.Start;
 
         // 모든 씬 생성하기
         // 씬이 추가될 때마다 여기에 추가해주세요.
+        public Intro StartIntro = new();
         public StartScene StartScene { get; } = new();
         public SpecScene SpecScene { get; } = new();
         public ShopScene ShopScene { get; } = new();
@@ -36,7 +36,7 @@ namespace TEXT_RPG.Manager
         // 실행 로직을 변경하고 싶다면 이 함수를 수정해주세요.
         public void Run()
         {
-            BattleManager.Instance.InitScenes(this);
+            BattleManager.Instance.Init(this);
             ShopScene.Init();
             new Intro().StartIntro();
             while (true)

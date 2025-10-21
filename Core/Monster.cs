@@ -49,6 +49,7 @@
             }
             target.TakeDamage(Stats.Atk);
         }
+
         public void TakeDamage(int damage)
         {
             if (IsDead)
