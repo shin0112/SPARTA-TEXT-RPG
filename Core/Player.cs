@@ -46,6 +46,7 @@ namespace TEXT_RPG.Core
             }
             target.TakeDamage(totalAtk);
         }
+
         public void TakeDamage(int damage)
         {
             int equippedDef = InventoryManager.Instance.EquipValue(ItemType.Armor);
@@ -56,6 +57,7 @@ namespace TEXT_RPG.Core
             Console.WriteLine($"{Name} 이(가) {actualDamage} 의 피해를 입었습니다.");
             IsDead = Stats.Hp <= 0;
         }
+
         public void GetExp(int exp)
         {
             Exp += exp;
@@ -67,6 +69,7 @@ namespace TEXT_RPG.Core
                 }
             }
         }
+
         private void LevelUp()
         {
             if (Level == MAX_LEVEL) return; // 최대 레벨
@@ -95,6 +98,7 @@ namespace TEXT_RPG.Core
                 }
             }
         }
+
         public void Get(Reward reward)
         {
             GetExp(reward.Exp);

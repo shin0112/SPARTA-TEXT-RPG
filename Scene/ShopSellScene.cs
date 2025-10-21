@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using TEXT_RPG.Core;
+﻿using TEXT_RPG.Core;
 using TEXT_RPG.Manager;
 
 namespace TEXT_RPG.Scene
@@ -18,7 +17,6 @@ namespace TEXT_RPG.Scene
 
 ""쓸만한 걸 가져왔겠지? 아무거나 사주진 않는다고~""
 "; // 아이템 리스트 변경 시 예시 체크 필요
-
 
         public void SelectSellItem(string input)   // 함수값 저장할 변수 앞에도 Item?을 붙여줘야 한다.
         {
@@ -48,7 +46,6 @@ namespace TEXT_RPG.Scene
             inputSellCheck = Console.ReadLine();
             isParsed = int.TryParse(inputSellCheck, out int inputSellCheckTryParse);
 
-
             if (isParsed == false)
             {
                 Console.WriteLine("숫자를 입력하십시오.\n");
@@ -72,7 +69,7 @@ namespace TEXT_RPG.Scene
 
             int sellItemCount = 0;
             int index = 0;
-            for (index = 0; index <= InventoryItem.Count; )
+            for (index = 0; index <= InventoryItem.Count;)
             {
                 if (sellItemCount == sellQuantity)
                 {
@@ -89,9 +86,7 @@ namespace TEXT_RPG.Scene
                     index++;
                 }
             }
-
         }
-
 
         public int SellItemQuantity_Consume()  //소비아이템 몇 개 판매할지 정하는 함수
         {
@@ -120,7 +115,6 @@ namespace TEXT_RPG.Scene
                 }
             }
         }
-
 
         public int ConsumeItemSum(int i)  //보유수량 표시 함수
         {
@@ -152,6 +146,7 @@ namespace TEXT_RPG.Scene
                 input = "0";
                 input = Console.ReadLine();
                 int.TryParse(input, out i);
+
                 if (int.TryParse(input, out i) == false)
                 {
                     Console.WriteLine("잘못된 입력입니다. 숫자를 입력해주세요.");
@@ -167,6 +162,7 @@ namespace TEXT_RPG.Scene
                 Console.WriteLine("아무 키나 입력하면 계속합니다.");
                 Console.ReadKey();
             }
+
             ToggleBuyingScene();
             GameManager.Instance.SceneInfo = SceneType.Shop;
         }

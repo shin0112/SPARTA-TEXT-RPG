@@ -61,14 +61,12 @@ namespace TEXT_RPG.Scene
 [아이템 목록]";
         }
 
-
         public bool ToggleBuyingScene()
         {
             isBuyingScene = !isBuyingScene;
             _itemNumber = 1;
             return isBuyingScene;
         }
-
 
         public void ShopItemList()
         {
@@ -218,7 +216,6 @@ namespace TEXT_RPG.Scene
                 //메인 화면으로 이동
                 GameManager.Instance.SceneInfo = SceneType.Start;
             }
-
         }
 
         public void RandomFoodRecommend()  //오늘의 추천 메뉴

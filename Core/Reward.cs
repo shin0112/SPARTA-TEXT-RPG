@@ -22,6 +22,7 @@ namespace TEXT_RPG.Core
                 }
             }
         }
+
         public void Add(Reward other)
         {
             Exp += other.Exp;

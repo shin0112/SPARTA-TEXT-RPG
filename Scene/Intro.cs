@@ -11,7 +11,6 @@ namespace TEXT_RPG.Scene
             Console.OutputEncoding = Encoding.UTF8;
             //콘솔 유니코드 깨짐 방지!
 
-
             string logo = @"⠄⠄⠄⠄⢀⢠⡠⠖⢚⣽⣋⡥⠤⠤⣀
 ⠄⠄⡀⠄⡎⠞⠄⠄⠞⠋⠁⠄⠄⠄⠈⠑⠶⠤⣄
 ⠄⠄⢓⡶⠗⠄⠄⠄⠄⠄⠄⡀⠄⠄⠄⠄⠄⠄⠄⠑⣄
@@ -28,7 +27,6 @@ namespace TEXT_RPG.Scene
 ⠄⠠⠲⠈⠉⣧⠐⠄⠹⡀⠄⠄⠄⠄⡰⢁⠌⠰⡏⠉⡶⠢⠄
 ⠄⠄⠄⠁⠄⠁⠂⠄⠄⠄⠂⠄⠄⠄⠁⠄⠄⠁⠄⠄";
 
-
             foreach (char emoticon in logo)
             {
                 Console.Write(emoticon);
@@ -37,14 +35,12 @@ namespace TEXT_RPG.Scene
 
             Thread.Sleep(500);
 
-
             Console.Clear();
             Console.WriteLine("\n\n취준하러 오셨나요?");
             Thread.Sleep(2000);
             Console.WriteLine("험난한 여정일텐데 괜찮으시겠어요?");
             Thread.Sleep(3000);
             Console.WriteLine("각오가 되었다니 좋습니다.");
-
 
             Console.WriteLine("우선 당신의 정보를 입력해주세요.");
 
@@ -61,8 +57,5 @@ namespace TEXT_RPG.Scene
 
             Console.Clear();
         }
-
     }
-
-
 }
